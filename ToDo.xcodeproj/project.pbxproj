@@ -14,6 +14,7 @@
 		C7CFC20823946BB7002FB0EB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C7CFC20623946BB7002FB0EB /* LaunchScreen.storyboard */; };
 		C7CFC21023946DF9002FB0EB /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CFC20F23946DF9002FB0EB /* TableViewController.swift */; };
 		C7CFC21223946EA0002FB0EB /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CFC21123946EA0002FB0EB /* Model.swift */; };
+		C7CFC21423958797002FB0EB /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = C7CFC21323958797002FB0EB /* .gitignore */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		C7CFC20923946BB7002FB0EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C7CFC20F23946DF9002FB0EB /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		C7CFC21123946EA0002FB0EB /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		C7CFC21323958797002FB0EB /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,6 +44,7 @@
 		C7CFC1EF23946BB6002FB0EB = {
 			isa = PBXGroup;
 			children = (
+				C7CFC21323958797002FB0EB /* .gitignore */,
 				C7CFC1FA23946BB6002FB0EB /* ToDo */,
 				C7CFC1F923946BB6002FB0EB /* Products */,
 			);
@@ -128,6 +131,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C7CFC21423958797002FB0EB /* .gitignore in Resources */,
 				C7CFC20823946BB7002FB0EB /* LaunchScreen.storyboard in Resources */,
 				C7CFC20523946BB7002FB0EB /* Assets.xcassets in Resources */,
 				C7CFC20323946BB6002FB0EB /* Main.storyboard in Resources */,
