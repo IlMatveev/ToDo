@@ -41,7 +41,19 @@ class TableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
 
+<<<<<<< Updated upstream
         cell.textLabel?.text = ToDoItems[indexPath.row]
+=======
+        let currentItem = ToDoItems[indexPath.row]
+        cell.textLabel?.text = currentItem["Name"] as? String
+        
+        if (currentItem["isCompleted"] as? Bool) == true {
+            cell.accessoryType = .checkmark
+        }
+        else {
+            cell.accessoryType = .none
+        }
+>>>>>>> Stashed changes
 
         return cell
     }
@@ -60,6 +72,17 @@ class TableViewController: UITableViewController {
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        if changeMark(at: indexPath.row) {
+            tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
+        }
+        else {
+            tableView.cellForRow(at: indexPath)?.accessoryType = .none
+        }
     }
 
     /*
