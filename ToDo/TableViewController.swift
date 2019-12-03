@@ -11,9 +11,29 @@ import UIKit
 class TableViewController: UITableViewController {
 
     @IBAction func pushAddAction(_ sender: UIBarButtonItem) {
-        addItem(nameItem: "New Item")
-        tableView.reloadData()
-    }
+        
+        let alertController = UIAlertController(title: "Create new item", message: nil, preferredStyle: .alert)
+        
+        alertController.addTextField { (textField) in
+            textField.placeholder = "New item name"
+        }
+       
+        let alertAction1 = UIAlertAction(title: "Cancel", style: .default) { (alert) in
+                
+            }
+        
+        let alertAction2 = UIAlertAction(title: "Create", style: .cancel) { (alert) in
+            let newItem = alertController.textFields![0].text
+            addItem(nameItem: newItem!)
+            self.tableView.reloadData()
+            }
+        
+            alertController.addAction(alertAction1)
+            alertController.addAction(alertAction2)
+        
+            present(alertController, animated: true, completion: nil)
+            
+        }
     
     
     override func viewDidLoad() {
