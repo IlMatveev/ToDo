@@ -8,10 +8,10 @@
 
 import Foundation
 
-var ToDoItems : [[String: Any]] = [[:]]
+var ToDoItems : [String] = []
 
-func addItem(nameItem: String, isCompleted: Bool = false) {
-    ToDoItems.append(["Name": nameItem, "isCompleted": isCompleted])
+func addItem(nameItem: String) {
+    ToDoItems.append(nameItem)
     saveData()
 }
 

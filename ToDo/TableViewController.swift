@@ -41,8 +41,7 @@ class TableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
 
-        let currentItem = ToDoItems[indexPath.row]
-        cell.textLabel?.text = currentItem["Name"] as? String
+        cell.textLabel?.text = ToDoItems[indexPath.row]
 
         return cell
     }
