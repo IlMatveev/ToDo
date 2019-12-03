@@ -35,3 +35,9 @@ func changeMark(at item: Int) -> Bool {
 func removeItem(at index: Int) {
     ToDoItems.remove(at: index)
 }
+
+func moveItem(fromIndex: Int, toIndex: Int) {
+    let from = ToDoItems[fromIndex]
+    ToDoItems.remove(at: fromIndex)
+    ToDoItems.insert(from, at: toIndex)
+}
