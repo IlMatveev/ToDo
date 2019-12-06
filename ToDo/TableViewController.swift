@@ -94,12 +94,13 @@ class TableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        if changeMark(at: indexPath.row) {
-            tableView.cellForRow(at: indexPath)?.imageView?.image = UIImage(named: "check.png")
-        }
-        else {
-            tableView.cellForRow(at: indexPath)?.imageView?.image = UIImage(named: "uncheck.png")
-        }
+        
+        //if changeMark(at: indexPath.row) {
+        //    tableView.cellForRow(at: indexPath)?.imageView?.image = UIImage(named: "check.png")
+        //}
+        //else {
+        //    tableView.cellForRow(at: indexPath)?.imageView?.image = UIImage(named: "uncheck.png")
+        //}
     }
     
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
