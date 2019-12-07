@@ -8,15 +8,17 @@
 
 import UIKit
 
-class SetDateViewController: UIViewController {
-
-    @IBOutlet weak var dateField: UITextField!
-    let datePicker = UIDatePicker()
+final class SetDateViewController: UIViewController {
+    private let todoManager: ToDoManager = .shared
+    
+    @IBOutlet private var dateField: UITextField!
+    private let datePicker: UIDatePicker = .init()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         dateField.inputView = datePicker
         datePicker.datePickerMode = .date
+        
         
         let toolBar = UIToolbar()
         toolBar.sizeToFit()
