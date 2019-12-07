@@ -8,28 +8,14 @@
 
 import Foundation
 
-var ToDoItems : [[String: Any]] {
-    set {
-        UserDefaults.standard.set(newValue, forKey: "ToDoKey")
-        UserDefaults.standard.synchronize()
-    }
-    get {
-        if let array = UserDefaults.standard.array(forKey: "ToDoKey") as? [[String: Any]] {
-              return array
-          }
-          else {
-              return []
-          }
-    }
+struct ToDoItem {
+    var title: String
+    var date: Date
 }
+var items = [ToDoItem]()
 
-func addItem(nameItem: String, isComplited: Bool = false) {
-    ToDoItems.append(["Name": nameItem, "isComplited": isComplited])
-}
-
-func changeMark(at item: Int) -> Bool {
-    ToDoItems[item]["isComplited"] = !(ToDoItems[item]["isComplited"] as! Bool)
-    return ToDoItems[item]["isComplited"] as! Bool
+func addItem( title, subtitle: String) {
+    ToDoItem.append["Name": title, "Name2": subtitle]
 }
 
 func removeItem(at index: Int) {

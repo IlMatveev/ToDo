@@ -31,7 +31,6 @@ class SetDateViewController: UIViewController {
     }
     
     @objc func doneAction(){
-        //getDateFromPicker()
         view.endEditing(true)
     }
     
@@ -43,6 +42,7 @@ class SetDateViewController: UIViewController {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd.MM.yyy"
         dateField.text = formatter.string(from: datePicker.date)
+        
     }
     /*
     // MARK: - Navigation

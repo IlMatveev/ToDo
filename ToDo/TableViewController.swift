@@ -27,7 +27,7 @@ class TableViewController: UITableViewController {
         
         let alertAction2 = UIAlertAction(title: "Create", style: .cancel) { (alert) in
             let newItem = alertController.textFields![0].text
-            addItem(nameItem: newItem!)
+            addItem(title: newItem!, subtitle: "")
             self.tableView.reloadData()
             }
         
@@ -65,14 +65,9 @@ class TableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
 
         let currentItem = ToDoItems[indexPath.row]
-        cell.textLabel?.text = currentItem["Name"] as? String
+        cell.textLabel?.text = currentItem["Name"]
+        cell.detailTextLabel?.text = currentItem["Name2"]
 
-        if (currentItem["isComplited"] as? Bool) == true {
-            cell.imageView?.image = UIImage(named: "check.png")   }
-        else {
-            cell.imageView?.image = UIImage(named: "uncheck.png")
-        }
-        
         return cell
     }
 
