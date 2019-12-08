@@ -26,8 +26,8 @@ class TableViewController: UITableViewController {
             }
         
         let alertAction2 = UIAlertAction(title: "Create", style: .cancel) { (alert) in
-            let newItem = alertController.textFields![0].text
-//            addItem(title: newItem!, subtitle: "")
+            let newItem = ToDoItem.init(title: alertController.textFields![0].text!, date: NSDate() as Date)
+            ToDoManager.shared.addItem(item: newItem)
             self.tableView.reloadData()
         }
         
@@ -64,11 +64,13 @@ class TableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-
-//        let currentItem = ToDoItems[indexPath.row]
-//        cell.textLabel?.text = currentItem["Name"]
-//        cell.detailTextLabel?.text = currentItem["Name2"]
-
+        let date = ToDoManager.shared.items[indexPath.row].date
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd.MM.yyy"
+        
+        cell.textLabel?.text = ToDoManager.shared.items[indexPath.row].title
+        cell.detailTextLabel?.text = formatter.string(from: date)
+        print ("OK")
         return cell
     }
 
@@ -101,7 +103,7 @@ class TableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
         
-//        moveItem(fromIndex: fromIndexPath.row, toIndex: to.row)
+        ToDoManager.shared.moveItem(fromIndex: fromIndexPath.row, toIndex: to.row)
         
         tableView.reloadData()
         

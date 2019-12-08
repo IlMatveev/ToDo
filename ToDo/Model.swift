@@ -22,16 +22,16 @@ final class ToDoManager {
     }
     
     func addItem(item: ToDoItem) {
-//        items
+        items.append(item)
     }
     
     func removeItem(at index: Int) {
-//        ToDoItems.remove(at: index)
+        items.remove(at: index)
     }
     
     func moveItem(fromIndex: Int, toIndex: Int) {
-//        let from = ToDoItems[fromIndex]
-//        ToDoItems.remove(at: fromIndex)
-//        ToDoItems.insert(from, at: toIndex)
+        let from = items[fromIndex]
+        items.remove(at: fromIndex)
+        items.insert(from, at: toIndex)
     }
 }
