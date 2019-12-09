@@ -10,13 +10,27 @@ import Foundation
 
 struct ToDoItem {
     var title: String
+    var uuid: String
     var date: Date
 }
 
 final class ToDoManager {
     static let shared: ToDoManager = .init()
 
-    var items: [ToDoItem] = []
+    var items: [ToDoItem] = [] {
+        set {
+            UserDefaults.standard.set(newValue, forKey: "itemsKey")
+            UserDefaults.standard.synchronize()
+        }
+        get {
+            if let array = UserDefaults.standard.array(forKey: "itemsKey") as? [ToDoItem] {
+                return array
+            }
+            else {
+                return []
+            }
+        }
+    }
     private init() {
     }
     func addItem(item: ToDoItem) {
