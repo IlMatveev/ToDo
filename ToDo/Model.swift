@@ -17,18 +17,14 @@ final class ToDoManager {
     static let shared: ToDoManager = .init()
 
     var items: [ToDoItem] = []
-    
     private init() {
     }
-    
     func addItem(item: ToDoItem) {
         items.append(item)
     }
-    
     func removeItem(at index: Int) {
         items.remove(at: index)
     }
-    
     func moveItem(fromIndex: Int, toIndex: Int) {
         let from = items[fromIndex]
         items.remove(at: fromIndex)

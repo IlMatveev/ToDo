@@ -14,31 +14,21 @@ class TableViewController: UITableViewController {
         tableView.setEditing(!tableView.isEditing, animated: true)
     }
     @IBAction func pushAddAction(_ sender: UIBarButtonItem) {
-        
         let alertController = UIAlertController(title: "Create new item", message: nil, preferredStyle: .alert)
-        
         alertController.addTextField { (textField) in
             textField.placeholder = "New item name"
         }
-       
         let alertAction1 = UIAlertAction(title: "Cancel", style: .default) { (alert) in
-                
-            }
-        
-        let alertAction2 = UIAlertAction(title: "Create", style: .cancel) { (alert) in
+        }
+        let alertAction2 = UIAlertAction(title: "Create", style: .default) { (alert) in
             let newItem = ToDoItem.init(title: alertController.textFields![0].text!, date: NSDate() as Date)
             ToDoManager.shared.addItem(item: newItem)
             self.tableView.reloadData()
         }
-        
         alertController.addAction(alertAction1)
         alertController.addAction(alertAction2)
-    
         present(alertController, animated: true, completion: nil)
-        
     }
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -58,8 +48,7 @@ class TableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-//        return ToDoItems.count
-        return 0
+        return ToDoManager.shared.items.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -67,10 +56,8 @@ class TableViewController: UITableViewController {
         let date = ToDoManager.shared.items[indexPath.row].date
         let formatter = DateFormatter()
         formatter.dateFormat = "dd.MM.yyy"
-        
         cell.textLabel?.text = ToDoManager.shared.items[indexPath.row].title
         cell.detailTextLabel?.text = formatter.string(from: date)
-        print ("OK")
         return cell
     }
 
@@ -83,16 +70,15 @@ class TableViewController: UITableViewController {
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-//            removeItem(at: indexPath.row)
+            ToDoManager.shared.removeItem(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+        }
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
         //if changeMark(at: indexPath.row) {
         //    tableView.cellForRow(at: indexPath)?.imageView?.image = UIImage(named: "check.png")
         //}
@@ -100,13 +86,9 @@ class TableViewController: UITableViewController {
         //    tableView.cellForRow(at: indexPath)?.imageView?.image = UIImage(named: "uncheck.png")
         //}
     }
-    
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-        
         ToDoManager.shared.moveItem(fromIndex: fromIndexPath.row, toIndex: to.row)
-        
         tableView.reloadData()
-        
     }
 
     /*
