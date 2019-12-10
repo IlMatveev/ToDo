@@ -80,10 +80,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C7CFC20C23946BB7002FB0EB /* Build configuration list for PBXNativeTarget "ToDo" */;
 			buildPhases = (
+				C7A42BEA239E50F00066D585 /* Lint Code */,
 				C7CFC1F423946BB6002FB0EB /* Sources */,
 				C7CFC1F523946BB6002FB0EB /* Frameworks */,
 				C7CFC1F623946BB6002FB0EB /* Resources */,
-				C7A42BEA239E50F00066D585 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -141,7 +141,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		C7A42BEA239E50F00066D585 /* ShellScript */ = {
+		C7A42BEA239E50F00066D585 /* Lint Code */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -150,6 +150,7 @@
 			);
 			inputPaths = (
 			);
+			name = "Lint Code";
 			outputFileListPaths = (
 			);
 			outputPaths = (

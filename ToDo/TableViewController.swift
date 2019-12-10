@@ -13,6 +13,7 @@ class TableViewController: UITableViewController {
     @IBAction func pushEditAction(_ sender: UIBarButtonItem) {
         tableView.setEditing(!tableView.isEditing, animated: true)
     }
+
     @IBAction func pushAddAction(_ sender: UIBarButtonItem) {
         let alertController = UIAlertController(title: "Create new item", message: nil, preferredStyle: .alert)
         alertController.addTextField { (textField) in
@@ -72,46 +73,24 @@ class TableViewController: UITableViewController {
         if editingStyle == .delete {
             ToDoManager.shared.removeItem(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        //if changeMark(at: indexPath.row) {
-        //    tableView.cellForRow(at: indexPath)?.imageView?.image = UIImage(named: "check.png")
-        //}
-        //else {
-        //    tableView.cellForRow(at: indexPath)?.imageView?.image = UIImage(named: "uncheck.png")
-        //}
     }
+
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
         ToDoManager.shared.moveItem(fromIndex: fromIndexPath.row, toIndex: to.row)
         tableView.reloadData()
     }
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let selectedCellIndexRow = tableView.indexPathForSelectedRow!.row
+        // TODO: Grab item from ToDoManager by index path
+
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: IndexPath.row)
-     
+
         (segue.destination as! SetDateViewController).currentDate = cell.detailTextLabel?.text
     }
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

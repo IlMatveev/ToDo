@@ -1,0 +1,29 @@
+disabled_rules:
+  - trailing_comma
+opt_in_rules:
+  - force_unwrapping
+  - closure_end_indentation
+  - empty_count
+  - nimble_operator
+  - vertical_parameter_alignment_on_call
+excluded:
+  - Carthage
+  - Pods
+line_length: 
+  - 140
+  - 280
+type_body_length:
+  - 600
+function_body_length:
+  - 40
+  - 120
+identifier_name:
+  min_length: 2
+  excluded:
+    - id
+    - vc
+empty_count:
+  severity: error
+
+nesting:
+  type_level: 2
