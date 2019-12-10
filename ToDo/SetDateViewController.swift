@@ -14,8 +14,7 @@ final class SetDateViewController: UIViewController {
     @IBOutlet private var dateField: UITextField!
 
     private let datePicker: UIDatePicker = .init()
-    // TODO: make it currentItem: ToDoItem? and make it private
-    var currentDate: String
+    private var currentItem: ToDoItem?
 
     // MARK: - Lifecycle
 

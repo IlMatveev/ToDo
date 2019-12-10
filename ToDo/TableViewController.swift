@@ -88,9 +88,5 @@ class TableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let selectedCellIndexRow = tableView.indexPathForSelectedRow!.row
         // TODO: Grab item from ToDoManager by index path
-
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: IndexPath.row)
-
-        (segue.destination as! SetDateViewController).currentDate = cell.detailTextLabel?.text
     }
 }
