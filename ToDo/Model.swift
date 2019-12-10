@@ -17,20 +17,21 @@ struct ToDoItem {
 final class ToDoManager {
     static let shared: ToDoManager = .init()
 
-    var items: [ToDoItem] = [] {
-        set {
-            UserDefaults.standard.set(newValue, forKey: "itemsKey")
-            UserDefaults.standard.synchronize()
-        }
-        get {
-            if let array = UserDefaults.standard.array(forKey: "itemsKey") as? [ToDoItem] {
-                return array
-            }
-            else {
-                return []
-            }
-        }
-    }
+    var items: [ToDoItem] = []
+//    {
+//        get {
+//            if let array: [ToDoItem] = UserDefaults.standard.array(forKey: "itemsKey") as? [ToDoItem] {
+//                return array
+//            }
+//            else {
+//                return []
+//            }
+//        }
+//        set {
+//            UserDefaults.standard.set(newValue, forKey: "itemsKey")
+//            UserDefaults.standard.synchronize()
+//        }
+//    }
     private init() {
     }
     func addItem(item: ToDoItem) {

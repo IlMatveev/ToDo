@@ -90,7 +90,12 @@ class TableViewController: UITableViewController {
         ToDoManager.shared.moveItem(fromIndex: fromIndexPath.row, toIndex: to.row)
         tableView.reloadData()
     }
-
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let selectedCellIndexRow = tableView.indexPathForSelectedRow!.row
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: IndexPath.row)
+     
+        (segue.destination as! SetDateViewController).currentDate = cell.detailTextLabel?.text
+    }
     /*
     // Override to support conditional rearranging of the table view.
     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {

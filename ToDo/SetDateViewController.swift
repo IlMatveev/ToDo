@@ -12,6 +12,7 @@ final class SetDateViewController: UIViewController {
     private let todoManager: ToDoManager = .shared
     @IBOutlet private var dateField: UITextField!
     private let datePicker: UIDatePicker = .init()
+    var currentDate: String
     override func viewDidLoad() {
         super.viewDidLoad()
         dateField.inputView = datePicker
