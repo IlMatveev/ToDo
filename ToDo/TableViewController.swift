@@ -22,7 +22,7 @@ class TableViewController: UITableViewController {
         let alertAction1 = UIAlertAction(title: "Cancel", style: .default) { (alert) in
         }
         let alertAction2 = UIAlertAction(title: "Create", style: .default) { (alert) in
-            let newItem = ToDoItem.init(title: alertController.textFields![0].text!, uuid: UUID().uuidString , date: NSDate() as Date)
+            let newItem = ToDoItem.init(id: UUID(), title: alertController.textFields![0].text! , date: NSDate() as Date)
             ToDoManager.shared.addItem(item: newItem)
             self.tableView.reloadData()
         }

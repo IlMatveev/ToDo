@@ -9,9 +9,8 @@
 import Foundation
 
 struct ToDoItem {
+    var id: UUID
     var title: String
-    // TODO: Use UUID type & remame to `id` & move to top
-    var uuid: String
     var date: Date
 }
 
