@@ -10,9 +10,13 @@ import UIKit
 
 final class SetDateViewController: UIViewController {
     private let todoManager: ToDoManager = .shared
+
     @IBOutlet private var dateField: UITextField!
+
     private let datePicker: UIDatePicker = .init()
+    // TODO: make it currentItem: ToDoItem? and make it private
     var currentDate: String
+
     override func viewDidLoad() {
         super.viewDidLoad()
         dateField.inputView = datePicker
