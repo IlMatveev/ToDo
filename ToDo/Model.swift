@@ -27,7 +27,11 @@ final class ToDoManager {
     }
 
     func updateItem(item: ToDoItem) {
-//        items.append(item)
+        for (i, currentItem) in items.enumerated() {
+            if item.id == currentItem.id {
+                items[i] = item
+            }
+        }
     }
 
     func removeItem(at index: Int) {
