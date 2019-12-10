@@ -87,8 +87,7 @@ class TableViewController: UITableViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let selectedCellIndexRow = tableView.indexPathForSelectedRow!.row
-        let item = ToDoManager.shared.items[selectedCellIndexRow]
 
-        (segue.destination as? SetDateViewController)?.currentItem = item
+        (segue.destination as? SetDateViewController)?.currentItem = ToDoManager.shared.items[selectedCellIndexRow]
     }
 }
