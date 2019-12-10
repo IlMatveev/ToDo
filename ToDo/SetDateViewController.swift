@@ -25,12 +25,15 @@ final class SetDateViewController: UIViewController {
         dateField.inputAccessoryView = toolBar
         datePicker.addTarget(self, action: #selector(dateChanged), for: .valueChanged)
     }
+
     @objc func doneAction(){
         view.endEditing(true)
     }
+
     @objc func dateChanged(){
         getDateFromPicker()
     }
+
     func getDateFromPicker(){
         let formatter = DateFormatter()
         formatter.dateFormat = "dd.MM.yyy"
