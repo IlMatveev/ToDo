@@ -13,6 +13,9 @@ final class SetDateViewController: UIViewController {
     @IBOutlet private var dateField: UITextField!
     private let datePicker: UIDatePicker = .init()
     var currentDate: String
+
+    // MARK: - Lifecycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
         dateField.inputView = datePicker
