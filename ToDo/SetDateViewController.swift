@@ -14,7 +14,7 @@ final class SetDateViewController: UIViewController {
     @IBOutlet private var dateField: UITextField!
 
     private let datePicker: UIDatePicker = .init()
-    private var currentItem: ToDoItem?
+    var currentItem: ToDoItem?
 
     // MARK: - Lifecycle
 
@@ -31,15 +31,15 @@ final class SetDateViewController: UIViewController {
         datePicker.addTarget(self, action: #selector(dateChanged), for: .valueChanged)
     }
 
-    @objc func doneAction(){
+    @objc func doneAction() {
         view.endEditing(true)
     }
 
-    @objc func dateChanged(){
+    @objc func dateChanged() {
         getDateFromPicker()
     }
 
-    func getDateFromPicker(){
+    func getDateFromPicker() {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd.MM.yyy"
         dateField.text = formatter.string(from: datePicker.date)
