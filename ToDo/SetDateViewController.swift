@@ -11,6 +11,7 @@ import UIKit
 final class SetDateViewController: UIViewController {
     private let todoManager: ToDoManager = .shared
 
+    @IBOutlet private var textField: UITextField!
     @IBOutlet private var dateField: UITextField!
 
     private let datePicker: UIDatePicker = .init()
@@ -33,10 +34,13 @@ final class SetDateViewController: UIViewController {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd.MM.yyyy"
         dateField.text = formatter.string(from: currentItem.date)
+
+        textField.text = currentItem.title
     }
 
     @objc func doneAction() {
         view.endEditing(true)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "update"), object: nil)
     }
 
     @objc func dateChanged() {
@@ -49,7 +53,7 @@ final class SetDateViewController: UIViewController {
         dateField.text = formatter.string(from: datePicker.date)
 
         currentItem.date = datePicker.date
-        ToDoManager.updateItem(currentItem)
+        todoManager.updateItem(item: currentItem)
     }
     /*
     // MARK: - Navigation

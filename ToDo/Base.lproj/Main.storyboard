@@ -50,27 +50,19 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="ToDo" id="IsQ-tP-Zo9">
-                        <rightBarButtonItems>
-                            <barButtonItem systemItem="add" id="aKv-j6-Bl2">
-                                <color key="tintColor" red="0.2786906958" green="0.6336824298" blue="0.47154730560000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <connections>
-                                    <action selector="pushAddAction:" destination="pjI-dH-Um0" id="Kom-HB-wCs"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem style="plain" systemItem="edit" id="idX-3M-mUj">
-                                <color key="tintColor" red="0.69695770739999996" green="0.2186288834" blue="0.20841890569999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <connections>
-                                    <action selector="pushEditAction:" destination="pjI-dH-Um0" id="VEu-qw-rbO"/>
-                                </connections>
-                            </barButtonItem>
-                        </rightBarButtonItems>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="aKv-j6-Bl2">
+                            <color key="tintColor" red="0.2786906958" green="0.6336824298" blue="0.47154730560000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="pushAddAction:" destination="pjI-dH-Um0" id="Kom-HB-wCs"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tBJ-F2-J68" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="831.88405797101461" y="121.875"/>
         </scene>
-        <!--Setting date-->
+        <!--ToDo Edit-->
         <scene sceneID="Mnn-Uf-087">
             <objects>
                 <viewController storyboardIdentifier="SetDateViewController" id="HdX-5w-0Pz" customClass="SetDateViewController" customModule="ToDo" customModuleProvider="target" sceneMemberID="viewController">
@@ -84,13 +76,39 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="c9t-Vs-sqJ">
+                                <rect key="frame" x="68" y="164" width="279" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <gestureRecognizers/>
+                                <nil key="textColor"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="textAction:" destination="HdX-5w-0Pz" eventType="editingDidEnd" id="Q2U-8k-8z0"/>
+                                </connections>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dHF-Da-CXY">
+                                <rect key="frame" x="151" y="228" width="97" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fC9-Sg-n2V">
+                                <rect key="frame" x="151" y="135" width="97" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <gestureRecognizers/>
                         <viewLayoutGuide key="safeArea" id="Cfg-3j-6tW"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Setting date" id="uIc-Fa-KVh"/>
+                    <navigationItem key="navigationItem" title="ToDo Edit" id="uIc-Fa-KVh"/>
                     <connections>
                         <outlet property="dateField" destination="5wg-TC-nWi" id="FVC-zS-SpZ"/>
+                        <outlet property="textField" destination="c9t-Vs-sqJ" id="xPb-wv-eRe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gPV-n2-v7q" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
