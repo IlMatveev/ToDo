@@ -10,26 +10,30 @@ import UIKit
 
 class TableViewController: UITableViewController {
 
+    @IBAction func add(_ sender: UIBarButtonItem) {
+        let addVC = (storyboard?.instantiateViewController(identifier: "AddViewController"))!
+        navigationController?.pushViewController(addVC, animated: true)
+    }
     @IBAction func pushEditAction(_ sender: UIBarButtonItem) {
         tableView.setEditing(!tableView.isEditing, animated: true)
     }
 
-    @IBAction func pushAddAction(_ sender: UIBarButtonItem) {
-        let alertController = UIAlertController(title: "Create new item", message: nil, preferredStyle: .alert)
-        alertController.addTextField { (textField) in
-            textField.placeholder = "New item name"
-        }
-        let alertAction1 = UIAlertAction(title: "Cancel", style: .default) { (alert) in
-        }
-        let alertAction2 = UIAlertAction(title: "Create", style: .default) { (alert) in
-            let newItem = ToDoItem.init(id: UUID(), title: alertController.textFields![0].text! , date: NSDate() as Date)
-            ToDoManager.shared.addItem(item: newItem)
-            self.tableView.reloadData()
-        }
-        alertController.addAction(alertAction1)
-        alertController.addAction(alertAction2)
-        present(alertController, animated: true, completion: nil)
-    }
+//    @IBAction func pushAddAction(_ sender: UIBarButtonItem) {
+//        let alertController = UIAlertController(title: "Create new item", message: nil, preferredStyle: .alert)
+//        alertController.addTextField { (textField) in
+//            textField.placeholder = "New item name"
+//        }
+//        let alertAction1 = UIAlertAction(title: "Cancel", style: .default) { (alert) in
+//        }
+//        let alertAction2 = UIAlertAction(title: "Create", style: .default) { (alert) in
+//            let newItem = ToDoItem.init(id: UUID(), title: alertController.textFields![0].text! , date: NSDate() as Date)
+//            ToDoManager.shared.addItem(item: newItem)
+//            self.tableView.reloadData()
+//        }
+//        alertController.addAction(alertAction1)
+//        alertController.addAction(alertAction2)
+//        present(alertController, animated: true, completion: nil)
+//    }
     override func viewDidLoad() {
         super.viewDidLoad()
 

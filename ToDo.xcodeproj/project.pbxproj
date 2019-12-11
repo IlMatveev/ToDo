@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C70FB65923A170F70009451B /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70FB65823A170F70009451B /* AddViewController.swift */; };
 		C74A6FAB239A5FA300A8311E /* SetDateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74A6FAA239A5FA300A8311E /* SetDateViewController.swift */; };
 		C7CFC1FC23946BB6002FB0EB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CFC1FB23946BB6002FB0EB /* AppDelegate.swift */; };
 		C7CFC1FE23946BB6002FB0EB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CFC1FD23946BB6002FB0EB /* SceneDelegate.swift */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C70FB65823A170F70009451B /* AddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
 		C74A6FAA239A5FA300A8311E /* SetDateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetDateViewController.swift; sourceTree = "<group>"; };
 		C7CFC1F823946BB6002FB0EB /* ToDo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7CFC1FB23946BB6002FB0EB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -69,6 +71,7 @@
 				C7CFC20F23946DF9002FB0EB /* TableViewController.swift */,
 				C7CFC21123946EA0002FB0EB /* Model.swift */,
 				C74A6FAA239A5FA300A8311E /* SetDateViewController.swift */,
+				C70FB65823A170F70009451B /* AddViewController.swift */,
 			);
 			path = ToDo;
 			sourceTree = "<group>";
@@ -168,6 +171,7 @@
 			files = (
 				C74A6FAB239A5FA300A8311E /* SetDateViewController.swift in Sources */,
 				C7CFC1FC23946BB6002FB0EB /* AppDelegate.swift in Sources */,
+				C70FB65923A170F70009451B /* AddViewController.swift in Sources */,
 				C7CFC21023946DF9002FB0EB /* TableViewController.swift in Sources */,
 				C7CFC1FE23946BB6002FB0EB /* SceneDelegate.swift in Sources */,
 				C7CFC21223946EA0002FB0EB /* Model.swift in Sources */,

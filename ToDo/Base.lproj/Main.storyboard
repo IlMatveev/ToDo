@@ -50,10 +50,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="ToDo" id="IsQ-tP-Zo9">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="aKv-j6-Bl2">
-                            <color key="tintColor" red="0.2786906958" green="0.6336824298" blue="0.47154730560000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="wrq-yI-uCc">
                             <connections>
-                                <action selector="pushAddAction:" destination="pjI-dH-Um0" id="Kom-HB-wCs"/>
+                                <action selector="add:" destination="pjI-dH-Um0" id="wMO-YT-dV9"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -61,6 +60,21 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tBJ-F2-J68" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="831.88405797101461" y="121.875"/>
+        </scene>
+        <!--Add View Controller-->
+        <scene sceneID="Lau-eZ-DVB">
+            <objects>
+                <viewController storyboardIdentifier="AddViewController" id="cIb-cb-mid" customClass="AddViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5KQ-zE-uCM">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="nB9-R3-jc2"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dTU-fV-gtt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1597" y="-529"/>
         </scene>
         <!--ToDo Edit-->
         <scene sceneID="Mnn-Uf-087">
@@ -131,7 +145,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zDd-Vz-hH4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-78.260869565217391" y="121.875"/>
+            <point key="canvasLocation" x="58" y="122"/>
         </scene>
     </scenes>
 </document>

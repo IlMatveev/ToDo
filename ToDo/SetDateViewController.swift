@@ -29,7 +29,9 @@ final class SetDateViewController: UIViewController {
         let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         toolBar.setItems([flexSpace, doneButton], animated: true)
         dateField.inputAccessoryView = toolBar
+        textField.inputAccessoryView = toolBar
         datePicker.addTarget(self, action: #selector(dateChanged), for: .valueChanged)
+        textField.addTarget(self, action: #selector(textChanged), for: .valueChanged)
 
         let formatter = DateFormatter()
         formatter.dateFormat = "dd.MM.yyyy"
@@ -53,6 +55,11 @@ final class SetDateViewController: UIViewController {
         dateField.text = formatter.string(from: datePicker.date)
 
         currentItem.date = datePicker.date
+        todoManager.updateItem(item: currentItem)
+    }
+
+    @objc func textChanged() {
+        currentItem.title = textField.text!
         todoManager.updateItem(item: currentItem)
     }
     /*
