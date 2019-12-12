@@ -10,10 +10,6 @@ import UIKit
 
 class TableViewController: UITableViewController {
 
-    @IBAction func add(_ sender: UIBarButtonItem) {
-        let addVC = (storyboard?.instantiateViewController(identifier: "AddViewController"))!
-        navigationController?.pushViewController(addVC, animated: true)
-    }
     @IBAction func pushEditAction(_ sender: UIBarButtonItem) {
         tableView.setEditing(!tableView.isEditing, animated: true)
     }
@@ -38,7 +34,6 @@ class TableViewController: UITableViewController {
         super.viewDidLoad()
 
         NotificationCenter.default.addObserver(self, selector: #selector(updateData), name: NSNotification.Name(rawValue: "update"), object: nil)
-    
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -92,9 +87,9 @@ class TableViewController: UITableViewController {
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let selectedCellIndexRow = tableView.indexPathForSelectedRow!.row
+        let selectedCellIndexRow = tableView.indexPathForSelectedRow?.row
 
-        (segue.destination as? SetDateViewController)?.currentItem = ToDoManager.shared.items[selectedCellIndexRow]
+        (segue.destination as? SetDateViewController)?.currentItem = ToDoManager.shared.items[selectedCellIndexRow!]
     }
 
     @objc func updateData () {

@@ -19,6 +19,11 @@ final class SetDateViewController: UIViewController {
 
     // MARK: - Lifecycle
 
+    @IBAction func textAction(_ sender: UITextField) {
+        currentItem.title = textField.text!
+        todoManager.updateItem(item: currentItem)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         dateField.inputView = datePicker
@@ -31,7 +36,7 @@ final class SetDateViewController: UIViewController {
         dateField.inputAccessoryView = toolBar
         textField.inputAccessoryView = toolBar
         datePicker.addTarget(self, action: #selector(dateChanged), for: .valueChanged)
-        textField.addTarget(self, action: #selector(textChanged), for: .valueChanged)
+        textField.addTarget(self, action: #selector(textAction), for: .valueChanged)
 
         let formatter = DateFormatter()
         formatter.dateFormat = "dd.MM.yyyy"
@@ -55,11 +60,6 @@ final class SetDateViewController: UIViewController {
         dateField.text = formatter.string(from: datePicker.date)
 
         currentItem.date = datePicker.date
-        todoManager.updateItem(item: currentItem)
-    }
-
-    @objc func textChanged() {
-        currentItem.title = textField.text!
         todoManager.updateItem(item: currentItem)
     }
     /*

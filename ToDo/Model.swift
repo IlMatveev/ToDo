@@ -17,7 +17,7 @@ struct ToDoItem {
 final class ToDoManager {
     static let shared: ToDoManager = .init()
 
-    var items: [ToDoItem] = []
+    var items: [ToDoItem] = [ToDoItem(id: UUID(), title: "UYDEUYTWCvyie", date: Date())]
 
     private init() {
     }
