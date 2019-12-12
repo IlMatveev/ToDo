@@ -50,13 +50,15 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="ToDo" id="IsQ-tP-Zo9">
-                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="wrq-yI-uCc">
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="waX-ep-px0">
                             <connections>
-                                <action selector="add:" destination="pjI-dH-Um0" id="wMO-YT-dV9"/>
-                                <segue destination="cIb-cb-mid" kind="show" id="AVB-Bu-Mq6"/>
+                                <action selector="toAdd:" destination="pjI-dH-Um0" id="xze-BC-Kwb"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="cIb-cb-mid" kind="show" id="eUH-Zl-X03"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tBJ-F2-J68" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -66,7 +68,7 @@
         <scene sceneID="Lau-eZ-DVB">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dTU-fV-gtt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <viewController storyboardIdentifier="AddViewController" id="cIb-cb-mid" customClass="AddViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddViewController" id="cIb-cb-mid" customClass="AddViewController" customModule="ToDo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5KQ-zE-uCM">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -77,12 +79,15 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Fto-iV-sxv">
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Fto-iV-sxv" userLabel="Text Field">
                                 <rect key="frame" x="68" y="171" width="279" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <gestureRecognizers/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="textAction:" destination="cIb-cb-mid" eventType="editingDidEnd" id="LAo-Ao-Qqy"/>
+                                </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mbQ-Jg-xnH">
                                 <rect key="frame" x="159" y="235" width="97" height="21"/>
@@ -103,12 +108,19 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="ADD"/>
+                                <connections>
+                                    <action selector="addAction:" destination="cIb-cb-mid" eventType="touchUpInside" id="LR4-Oe-kPr"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="nB9-R3-jc2"/>
                     </view>
                     <navigationItem key="navigationItem" title="Add ToDo" id="hef-M1-l4c"/>
+                    <connections>
+                        <outlet property="dateField" destination="PDr-xg-m9c" id="ChR-7k-s5T"/>
+                        <outlet property="textField" destination="Fto-iV-sxv" id="FAd-0y-xjQ"/>
+                    </connections>
                 </viewController>
             </objects>
             <point key="canvasLocation" x="1595.6521739130435" y="-529.01785714285711"/>

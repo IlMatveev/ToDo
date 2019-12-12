@@ -96,4 +96,9 @@ class TableViewController: UITableViewController {
         tableView.reloadData()
     }
 
+    @IBAction func toAdd(_ sender: UIBarButtonItem) {
+        let addVC = storyboard?.instantiateViewController(identifier: "AddViewController")
+        navigationController?.pushViewController(addVC!, animated: true)
+    }
+
 }
