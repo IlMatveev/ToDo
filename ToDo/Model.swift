@@ -24,6 +24,7 @@ final class ToDoManager {
 
     func addItem(item: ToDoItem) {
         items.append(item)
+        print("OK")
     }
 
     func updateItem(item: ToDoItem) {

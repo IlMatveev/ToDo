@@ -10,7 +10,7 @@
         <!--ToDo-->
         <scene sceneID="vIc-Md-enj">
             <objects>
-                <tableViewController id="pjI-dH-Um0" customClass="TableViewController" customModule="ToDo" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="TableViewController" id="pjI-dH-Um0" customClass="TableViewController" customModule="ToDo" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="9ZN-S6-c5e">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -67,7 +67,6 @@
         <!--Add ToDo-->
         <scene sceneID="Lau-eZ-DVB">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dTU-fV-gtt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="AddViewController" id="cIb-cb-mid" customClass="AddViewController" customModule="ToDo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5KQ-zE-uCM">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -85,9 +84,6 @@
                                 <gestureRecognizers/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <action selector="textAction:" destination="cIb-cb-mid" eventType="editingDidEnd" id="LAo-Ao-Qqy"/>
-                                </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mbQ-Jg-xnH">
                                 <rect key="frame" x="159" y="235" width="97" height="21"/>
@@ -109,7 +105,7 @@
                                 <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="ADD"/>
                                 <connections>
-                                    <action selector="addAction:" destination="cIb-cb-mid" eventType="touchUpInside" id="LR4-Oe-kPr"/>
+                                    <action selector="addAction:" destination="cIb-cb-mid" eventType="touchUpInside" id="ZBh-wL-Rxo"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -122,6 +118,7 @@
                         <outlet property="textField" destination="Fto-iV-sxv" id="FAd-0y-xjQ"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dTU-fV-gtt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1595.6521739130435" y="-529.01785714285711"/>
         </scene>

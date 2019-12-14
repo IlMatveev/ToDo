@@ -22,11 +22,17 @@ final class AddViewController: UIViewController {
         newTitle = textField.text
         }
     }
+   
     @IBAction func addAction(_ sender: UIButton) {
+        print("TEST_1")
         if (newTitle != nil) && (newDate != nil) {
-            let newItem = ToDoItem(id: UUID(), title: newTitle!, date: newDate!)
+            print("TEST_2")
+            let newItem = ToDoItem(id: UUID(), title: newTitle ?? "", date: newDate ?? Date())
+            todoManager.addItem(item: newItem)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "update"), object: nil)
         }
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         dateField.inputView = datePicker
