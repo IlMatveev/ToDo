@@ -18,25 +18,25 @@ final class AddViewController: UIViewController {
     private var newDate: Date?
 
     @IBAction func textAction(_ sender: UITextField) {
-        if textField.text != nil {
         newTitle = textField.text
-        }
     }
    
     @IBAction func addAction(_ sender: UIButton) {
-        print("TEST_1")
-        if (newTitle != nil) && (newDate != nil) {
-            print("TEST_2")
-            let newItem = ToDoItem(id: UUID(), title: newTitle ?? "", date: newDate ?? Date())
-            todoManager.addItem(item: newItem)
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "update"), object: nil)
+        guard let title = newTitle, let date = newDate else {
+            return
         }
+
+        let newItem = ToDoItem(id: UUID(), title: title, date: date)
+        todoManager.addItem(item: newItem)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "update"), object: nil)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        dateField.inputView = datePicker
         datePicker.datePickerMode = .date
+
+        dateField.inputView = datePicker
+
         let toolBar = UIToolbar()
         toolBar.sizeToFit()
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneAction))
@@ -44,9 +44,8 @@ final class AddViewController: UIViewController {
         toolBar.setItems([flexSpace, doneButton], animated: true)
         dateField.inputAccessoryView = toolBar
         textField.inputAccessoryView = toolBar
-        datePicker.addTarget(self, action: #selector(dateChanged), for: .valueChanged)
-        textField.addTarget(self, action: #selector(textAction), for: .valueChanged)
 
+        datePicker.addTarget(self, action: #selector(dateChanged), for: .valueChanged)
     }
 
     @objc func doneAction() {
