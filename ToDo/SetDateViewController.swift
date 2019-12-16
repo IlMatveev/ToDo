@@ -28,6 +28,8 @@ final class SetDateViewController: UIViewController {
         super.viewDidLoad()
         dateField.inputView = datePicker
         datePicker.datePickerMode = .date
+        let localeID = Locale.preferredLanguages.first
+        datePicker.locale = Locale(identifier: localeID!)
         let toolBar = UIToolbar()
         toolBar.sizeToFit()
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneAction))

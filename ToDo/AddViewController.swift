@@ -34,6 +34,8 @@ final class AddViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         datePicker.datePickerMode = .date
+        let localeID = Locale.preferredLanguages.first
+        datePicker.locale = Locale(identifier: localeID!)
 
         dateField.inputView = datePicker
 
