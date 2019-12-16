@@ -26,7 +26,7 @@ final class AddViewController: UIViewController {
             return
         }
 
-        let newItem = ToDoItem(id: UUID(), title: title, date: date)
+        let newItem = ToDoItem(id: UUID(), title: title, date: date, state: false)
         todoManager.addItem(item: newItem)
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "update"), object: nil)
     }

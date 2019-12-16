@@ -21,6 +21,7 @@ final class SetDateViewController: UIViewController {
 
     @IBAction func textAction(_ sender: UITextField) {
         currentItem.title = textField.text!
+        currentItem.state = false
         todoManager.updateItem(item: currentItem)
     }
 

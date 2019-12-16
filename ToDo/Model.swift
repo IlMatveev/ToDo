@@ -12,12 +12,13 @@ struct ToDoItem {
     var id: UUID
     var title: String
     var date: Date
+    var state: Bool
 }
 
 final class ToDoManager {
     static let shared: ToDoManager = .init()
 
-    var items: [ToDoItem] = [ToDoItem(id: UUID(), title: "UYDEUYTWCvyie", date: Date())]
+    var items: [ToDoItem] = []
 
     private init() {
     }

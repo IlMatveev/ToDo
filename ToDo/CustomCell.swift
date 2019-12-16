@@ -9,16 +9,26 @@
 import UIKit
 
 class CustomCell: UITableViewCell {
-
+    private let todoManager: ToDoManager = .shared
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
+    var switchState: Bool!
+
+    @IBAction func switchAction(_ sender: UISwitch) {
+        if sender.isOn == true {
+            switchState = true
+        }
+        else {
+            switchState = false
+        }
+    }
 
     func setCell(item: ToDoItem) {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd.MM.yyyy"
-
         titleLabel.text = item.title
         dateLabel.text = formatter.string(from: item.date)
+
     }
 
 }

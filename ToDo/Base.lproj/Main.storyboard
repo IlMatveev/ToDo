@@ -16,7 +16,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="54" id="vud-Kz-wyM" customClass="CustomCell" customModule="ToDo" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CustomCell" rowHeight="54" id="vud-Kz-wyM" customClass="CustomCell" customModule="ToDo">
                                 <rect key="frame" x="0.0" y="28" width="414" height="54"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="vud-Kz-wyM" id="KHJ-B7-h8T">
@@ -24,27 +24,40 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LdB-Gi-hJk">
-                                            <rect key="frame" x="20" y="28.5" width="374" height="18"/>
+                                            <rect key="frame" x="20" y="28.5" width="314" height="18"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="whz-QB-b3y">
+                                            <rect key="frame" x="345" y="11" width="51" height="31"/>
+                                            <connections>
+                                                <action selector="switchAction:" destination="vud-Kz-wyM" eventType="valueChanged" id="M6H-xl-9Nh"/>
+                                            </connections>
+                                        </switch>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZYq-fc-YKa">
-                                            <rect key="frame" x="20" y="8" width="374" height="20.5"/>
+                                            <rect key="frame" x="20" y="8" width="314" height="20.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="trailing" secondItem="LdB-Gi-hJk" secondAttribute="trailing" constant="20" id="4zr-PR-D8w"/>
+                                        <constraint firstAttribute="trailing" secondItem="LdB-Gi-hJk" secondAttribute="trailing" constant="80" id="4zr-PR-D8w"/>
                                         <constraint firstItem="ZYq-fc-YKa" firstAttribute="leading" secondItem="KHJ-B7-h8T" secondAttribute="leading" constant="20" id="SYK-ed-1xH"/>
                                         <constraint firstItem="LdB-Gi-hJk" firstAttribute="leading" secondItem="KHJ-B7-h8T" secondAttribute="leading" constant="20" id="VVF-SH-KkL"/>
                                         <constraint firstItem="LdB-Gi-hJk" firstAttribute="top" secondItem="ZYq-fc-YKa" secondAttribute="bottom" id="VqK-wg-GyZ"/>
                                         <constraint firstItem="ZYq-fc-YKa" firstAttribute="top" secondItem="KHJ-B7-h8T" secondAttribute="top" constant="8" id="gVq-sc-zKd"/>
-                                        <constraint firstAttribute="trailing" secondItem="ZYq-fc-YKa" secondAttribute="trailing" constant="20" id="xle-8q-mhh"/>
+                                        <constraint firstAttribute="trailing" secondItem="ZYq-fc-YKa" secondAttribute="trailing" constant="80" id="xle-8q-mhh"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="whz-QB-b3y" secondAttribute="bottom" constant="12" id="KGX-3b-tmz"/>
+                                    <constraint firstAttribute="bottom" secondItem="LdB-Gi-hJk" secondAttribute="bottom" constant="7.5" id="QeZ-B6-bZf"/>
+                                    <constraint firstItem="whz-QB-b3y" firstAttribute="leading" secondItem="vud-Kz-wyM" secondAttribute="leading" constant="345" id="Qnj-ew-qXc"/>
+                                    <constraint firstAttribute="trailing" secondItem="whz-QB-b3y" secondAttribute="trailing" constant="20" id="Z4N-Hm-kxA"/>
+                                    <constraint firstItem="whz-QB-b3y" firstAttribute="top" secondItem="vud-Kz-wyM" secondAttribute="top" constant="11" id="uJd-Gi-NW9"/>
+                                </constraints>
                                 <connections>
                                     <outlet property="dateLabel" destination="LdB-Gi-hJk" id="FTk-I3-LfA"/>
                                     <outlet property="titleLabel" destination="ZYq-fc-YKa" id="Erl-8a-lH1"/>

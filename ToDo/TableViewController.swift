@@ -18,6 +18,7 @@ class TableViewController: UITableViewController {
         super.viewDidLoad()
 
         NotificationCenter.default.addObserver(self, selector: #selector(updateData), name: NSNotification.Name(rawValue: "update"), object: nil)
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -37,19 +38,15 @@ class TableViewController: UITableViewController {
         return ToDoManager.shared.items.count
     }
 
-    func registerCells() {
-        let customCell = UINib(nibName: "CustomCell", bundle: nil)
-        self.tableView.register(customCell, forCellReuseIdentifier: "CustomCell")
-    }
-
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let item = ToDoManager.shared.items[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CustomCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CustomCell", for: indexPath) as? CustomCell
 
-        cell.setCell(item: item)
+        cell?.setCell(item: item)
 
-        return cell
+        return cell!
     }
+
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
@@ -79,12 +76,11 @@ class TableViewController: UITableViewController {
         (segue.destination as? SetDateViewController)?.currentItem = ToDoManager.shared.items[selectedCellIndexRow!]
     }
 
-    @objc func updateData () {
+    @objc func updateData() {
         tableView.reloadData()
     }
 
     @IBAction func toAdd(_ sender: UIBarButtonItem) {
         performSegue(withIdentifier: "toAdd", sender: nil)
     }
-
 }
