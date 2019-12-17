@@ -18,7 +18,9 @@ final class SetDateViewController: UIViewController {
     var currentItem: ToDoItem!
 
     // MARK: - Lifecycle
-
+    @IBAction func editAction(_ sender: UIBarButtonItem) {
+    }
+    
     @IBAction func textAction(_ sender: UITextField) {
         currentItem.title = textField.text!
         currentItem.state = false
@@ -27,19 +29,6 @@ final class SetDateViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        dateField.inputView = datePicker
-        datePicker.datePickerMode = .date
-        let localeID = Locale.preferredLanguages.first
-        datePicker.locale = Locale(identifier: localeID!)
-        let toolBar = UIToolbar()
-        toolBar.sizeToFit()
-        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneAction))
-        let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        toolBar.setItems([flexSpace, doneButton], animated: true)
-        dateField.inputAccessoryView = toolBar
-        textField.inputAccessoryView = toolBar
-        datePicker.addTarget(self, action: #selector(dateChanged), for: .valueChanged)
-        textField.addTarget(self, action: #selector(textAction), for: .valueChanged)
 
         let formatter = DateFormatter()
         formatter.dateFormat = "dd.MM.yyyy"

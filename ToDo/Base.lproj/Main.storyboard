@@ -123,20 +123,22 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="chI-Xq-2r2">
-                                <rect key="frame" x="68" y="354" width="279" height="52"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="ADD"/>
-                                <connections>
-                                    <action selector="addAction:" destination="cIb-cb-mid" eventType="touchUpInside" id="ZBh-wL-Rxo"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="nB9-R3-jc2"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Add ToDo" id="hef-M1-l4c"/>
+                    <navigationItem key="navigationItem" title="Add ToDo" id="hef-M1-l4c">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="gNf-hB-pA6">
+                            <connections>
+                                <action selector="cancelAction:" destination="cIb-cb-mid" id="Zqu-FA-CiV"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="ryX-Ep-COd">
+                            <connections>
+                                <action selector="saveAction:" destination="cIb-cb-mid" id="kVm-JU-nWp"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="dateField" destination="PDr-xg-m9c" id="ChR-7k-s5T"/>
                         <outlet property="textField" destination="Fto-iV-sxv" id="FAd-0y-xjQ"/>
@@ -146,7 +148,7 @@
             </objects>
             <point key="canvasLocation" x="2322" y="-532"/>
         </scene>
-        <!--ToDo Edit-->
+        <!--Details-->
         <scene sceneID="Mnn-Uf-087">
             <objects>
                 <viewController storyboardIdentifier="SetDateViewController" id="HdX-5w-0Pz" customClass="SetDateViewController" customModule="ToDo" customModuleProvider="target" sceneMemberID="viewController">
@@ -154,15 +156,23 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5wg-TC-nWi">
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5wg-TC-nWi">
                                 <rect key="frame" x="68" y="257" width="279" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" notEnabled="YES"/>
+                                    <bool key="isElement" value="NO"/>
+                                </accessibility>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="c9t-Vs-sqJ">
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="c9t-Vs-sqJ">
                                 <rect key="frame" x="68" y="164" width="279" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" notEnabled="YES"/>
+                                    <bool key="isElement" value="NO"/>
+                                </accessibility>
                                 <gestureRecognizers/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -184,12 +194,22 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8XA-4o-ORt">
+                                <rect key="frame" x="183" y="333" width="49" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </switch>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <gestureRecognizers/>
                         <viewLayoutGuide key="safeArea" id="Cfg-3j-6tW"/>
                     </view>
-                    <navigationItem key="navigationItem" title="ToDo Edit" id="uIc-Fa-KVh"/>
+                    <navigationItem key="navigationItem" title="Details" id="uIc-Fa-KVh">
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="edit" id="Mmz-pV-Jpt">
+                            <connections>
+                                <action selector="editAction:" destination="HdX-5w-0Pz" id="jVo-uc-X3x"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="dateField" destination="5wg-TC-nWi" id="FVC-zS-SpZ"/>
                         <outlet property="textField" destination="c9t-Vs-sqJ" id="xPb-wv-eRe"/>

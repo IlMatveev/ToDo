@@ -20,8 +20,14 @@ final class AddViewController: UIViewController {
     @IBAction func textAction(_ sender: UITextField) {
         newTitle = textField.text
     }
-   
-    @IBAction func addAction(_ sender: UIButton) {
+
+    @IBAction func cancelAction(_ sender: UIBarButtonItem) {
+        navigationController?.popViewController(animated: true)
+
+        dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func saveAction(_ sender: UIBarButtonItem) {
         guard let title = newTitle, let date = newDate else {
             return
         }
@@ -29,6 +35,10 @@ final class AddViewController: UIViewController {
         let newItem = ToDoItem(id: UUID(), title: title, date: date, state: false)
         todoManager.addItem(item: newItem)
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "update"), object: nil)
+
+        navigationController?.popViewController(animated: true)
+
+        dismiss(animated: true, completion: nil)
     }
     
     override func viewDidLoad() {
