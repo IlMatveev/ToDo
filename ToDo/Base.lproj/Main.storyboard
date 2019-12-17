@@ -197,6 +197,9 @@
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8XA-4o-ORt">
                                 <rect key="frame" x="183" y="333" width="49" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="stateAction:" destination="HdX-5w-0Pz" eventType="valueChanged" id="1Uo-iR-yD8"/>
+                                </connections>
                             </switch>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -207,11 +210,13 @@
                         <barButtonItem key="rightBarButtonItem" style="plain" systemItem="edit" id="Mmz-pV-Jpt">
                             <connections>
                                 <action selector="editAction:" destination="HdX-5w-0Pz" id="jVo-uc-X3x"/>
+                                <segue destination="cIb-cb-mid" kind="show" identifier="toEdit" id="JRl-lc-GO2"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="dateField" destination="5wg-TC-nWi" id="FVC-zS-SpZ"/>
+                        <outlet property="stateOutlet" destination="8XA-4o-ORt" id="KdN-r9-bbV"/>
                         <outlet property="textField" destination="c9t-Vs-sqJ" id="xPb-wv-eRe"/>
                     </connections>
                 </viewController>
@@ -260,4 +265,7 @@
             <point key="canvasLocation" x="1595.6521739130435" y="-532.36607142857144"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="JRl-lc-GO2"/>
+    </inferredMetricsTieBreakers>
 </document>

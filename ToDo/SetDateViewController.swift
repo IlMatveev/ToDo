@@ -13,18 +13,28 @@ final class SetDateViewController: UIViewController {
 
     @IBOutlet private var textField: UITextField!
     @IBOutlet private var dateField: UITextField!
+    @IBOutlet private var stateOutlet: UISwitch!
 
-    private let datePicker: UIDatePicker = .init()
     var currentItem: ToDoItem!
 
     // MARK: - Lifecycle
     @IBAction func editAction(_ sender: UIBarButtonItem) {
+        performSegue(withIdentifier: "toEdit", sender: nil)
     }
-    
-    @IBAction func textAction(_ sender: UITextField) {
-        currentItem.title = textField.text!
-        currentItem.state = false
+
+    @IBAction func stateAction(_ sender: UISwitch) {
+        stateOutlet.addTarget(self, action: #selector(stateChange), for: .valueChanged)
+    }
+
+    @objc func stateChange() {
+        if stateOutlet.isOn == true {
+            currentItem.state = true
+        }
+        else {
+            currentItem.state = false
+        }
         todoManager.updateItem(item: currentItem)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "update"), object: nil)
     }
 
     override func viewDidLoad() {
@@ -35,24 +45,13 @@ final class SetDateViewController: UIViewController {
         dateField.text = formatter.string(from: currentItem.date)
 
         textField.text = currentItem.title
-    }
 
-    @objc func doneAction() {
-        view.endEditing(true)
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "update"), object: nil)
-    }
-
-    @objc func dateChanged() {
-        getDateFromPicker()
-    }
-
-    func getDateFromPicker() {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "dd.MM.yyyy"
-        dateField.text = formatter.string(from: datePicker.date)
-
-        currentItem.date = datePicker.date
-        todoManager.updateItem(item: currentItem)
+        if currentItem.state == true {
+            stateOutlet.isOn = true
+        }
+        else {
+            stateOutlet.isOn = false
+        }
     }
     /*
     // MARK: - Navigation
