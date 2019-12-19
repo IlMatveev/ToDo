@@ -13,51 +13,72 @@ final class AddViewController: UIViewController {
 
     @IBOutlet private var textField: UITextField!
     @IBOutlet private var dateField: UITextField!
+
     private let datePicker: UIDatePicker = .init()
+
     private var newTitle: String?
     private var newDate: Date?
+
+    var newItem: ToDoItem?
 
     @IBAction func textAction(_ sender: UITextField) {
         newTitle = textField.text
     }
 
     @IBAction func cancelAction(_ sender: UIBarButtonItem) {
-        navigationController?.popViewController(animated: true)
-
         dismiss(animated: true, completion: nil)
     }
     
     @IBAction func saveAction(_ sender: UIBarButtonItem) {
+
         guard let title = newTitle, let date = newDate else {
             return
         }
 
-        let newItem = ToDoItem(id: UUID(), title: title, date: date, state: false)
-        todoManager.addItem(item: newItem)
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "update"), object: nil)
+        if newItem == nil {
 
-        navigationController?.popViewController(animated: true)
+            let newItem = ToDoItem(id: UUID(), title: title, date: date, state: false)
+
+            todoManager.addItem(item: newItem)
+        } else {
+            newItem?.title = title
+            newItem?.date = date
+
+            todoManager.updateItem(item: newItem!)
+            
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "updateItem"), object: nil)
+        }
+
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "update"), object: nil)
 
         dismiss(animated: true, completion: nil)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        if newItem != nil {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "dd.MM.yyyy"
+            textField.text = newItem?.title
+            dateField.text = formatter.string(from: newItem!.date)
+        }
+
         datePicker.datePickerMode = .date
-        let localeID = Locale.preferredLanguages.first
-        datePicker.locale = Locale(identifier: localeID!)
 
         dateField.inputView = datePicker
 
         let toolBar = UIToolbar()
         toolBar.sizeToFit()
+
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneAction))
         let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+
         toolBar.setItems([flexSpace, doneButton], animated: true)
         dateField.inputAccessoryView = toolBar
         textField.inputAccessoryView = toolBar
 
-        datePicker.addTarget(self, action: #selector(dateChanged), for: .valueChanged)
+            datePicker.addTarget(self, action: #selector(dateChanged), for: .valueChanged)
     }
 
     @objc func doneAction() {
@@ -74,15 +95,4 @@ final class AddViewController: UIViewController {
         dateField.text = formatter.string(from: datePicker.date)
         newDate = datePicker.date
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

@@ -60,6 +60,7 @@
                                 </constraints>
                                 <connections>
                                     <outlet property="dateLabel" destination="LdB-Gi-hJk" id="FTk-I3-LfA"/>
+                                    <outlet property="switchState" destination="whz-QB-b3y" id="sV8-v6-iAi"/>
                                     <outlet property="titleLabel" destination="ZYq-fc-YKa" id="Erl-8a-lH1"/>
                                     <segue destination="HdX-5w-0Pz" kind="show" id="57Z-Ct-pXc"/>
                                 </connections>
@@ -210,7 +211,7 @@
                         <barButtonItem key="rightBarButtonItem" style="plain" systemItem="edit" id="Mmz-pV-Jpt">
                             <connections>
                                 <action selector="editAction:" destination="HdX-5w-0Pz" id="jVo-uc-X3x"/>
-                                <segue destination="cIb-cb-mid" kind="show" identifier="toEdit" id="JRl-lc-GO2"/>
+                                <segue destination="Ysx-uR-ptJ" kind="show" id="nsq-bg-TAb"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -266,6 +267,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="JRl-lc-GO2"/>
+        <segue reference="nsq-bg-TAb"/>
     </inferredMetricsTieBreakers>
 </document>

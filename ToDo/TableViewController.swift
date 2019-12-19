@@ -41,8 +41,13 @@ class TableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let item = ToDoManager.shared.items[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "CustomCell", for: indexPath) as? CustomCell
-
+        
         cell?.setCell(item: item)
+
+//        let state = cell?.currentItem.state
+//        ToDoManager.shared.items[indexPath.row].state = state ?? false
+//        let newItem = ToDoManager.shared.items[indexPath.row]
+//        ToDoManager.shared.updateItem(item: newItem)
 
         return cell!
     }
@@ -71,9 +76,12 @@ class TableViewController: UITableViewController {
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let selectedCellIndexRow = tableView.indexPathForSelectedRow?.row
+        guard
+            let selectedCellIndexRow = tableView.indexPathForSelectedRow?.row,
+            let setDateController = segue.destination as? SetDateViewController
+        else { return }
 
-        (segue.destination as? SetDateViewController)?.currentItem = ToDoManager.shared.items[selectedCellIndexRow!]
+        setDateController.currentItem = ToDoManager.shared.items[selectedCellIndexRow]
     }
 
     @objc func updateData() {
