@@ -41,10 +41,13 @@ final class AddViewController: UIViewController {
 
             todoManager.addItem(item: newItem)
         } else {
+
             newItem?.title = title
             newItem?.date = date
 
-            todoManager.updateItem(item: newItem!)
+            guard let item = newItem else {return}
+
+            todoManager.updateItem(item: item)
             
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "updateItem"), object: nil)
         }
@@ -58,10 +61,14 @@ final class AddViewController: UIViewController {
         super.viewDidLoad()
 
         if newItem != nil {
+            self.title = "Edit ToDo"
+        }
+
+        if let item = newItem {
             let formatter = DateFormatter()
             formatter.dateFormat = "dd.MM.yyyy"
-            textField.text = newItem?.title
-            dateField.text = formatter.string(from: newItem!.date)
+            textField.text = item.title
+            dateField.text = formatter.string(from: item.date)
         }
 
         datePicker.datePickerMode = .date

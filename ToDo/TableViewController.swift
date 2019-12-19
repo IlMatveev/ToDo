@@ -8,7 +8,12 @@
 
 import UIKit
 
+extension NSNotification.Name {
+    static let update: NSNotification.Name = .init("update")
+}
+
 class TableViewController: UITableViewController {
+    private let notificationCenter: NotificationCenter = .default
     
     @IBAction func pushEditAction(_ sender: UIBarButtonItem) {
         tableView.setEditing(!tableView.isEditing, animated: true)
@@ -17,7 +22,7 @@ class TableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        NotificationCenter.default.addObserver(self, selector: #selector(updateData), name: NSNotification.Name(rawValue: "update"), object: nil)
+        notificationCenter.addObserver(self, selector: #selector(updateData), name: .update, object: nil)
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -40,16 +45,18 @@ class TableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let item = ToDoManager.shared.items[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CustomCell", for: indexPath) as? CustomCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "CustomCell", for: indexPath) as? CustomCell else {
+            fatalError("Failed to dequeue custom cell")
+        }
         
-        cell?.setCell(item: item)
+        cell.setCell(item: item)
 
 //        let state = cell?.currentItem.state
 //        ToDoManager.shared.items[indexPath.row].state = state ?? false
 //        let newItem = ToDoManager.shared.items[indexPath.row]
 //        ToDoManager.shared.updateItem(item: newItem)
 
-        return cell!
+        return cell
     }
 
     // Override to support conditional editing of the table view.

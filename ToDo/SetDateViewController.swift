@@ -11,10 +11,10 @@ import UIKit
 final class SetDateViewController: UIViewController {
     private let todoManager: ToDoManager = .shared
 
-    @IBOutlet private var textField: UITextField!
-    @IBOutlet private var dateField: UITextField!
     @IBOutlet private var stateOutlet: UISwitch!
-
+    @IBOutlet private var titleOutlet: UILabel!
+    @IBOutlet private var dateOutlet: UILabel!
+    
     var currentItem: ToDoItem!
 
     // MARK: - Lifecycle
@@ -36,14 +36,13 @@ final class SetDateViewController: UIViewController {
 
         let formatter = DateFormatter()
         formatter.dateFormat = "dd.MM.yyyy"
-        dateField.text = formatter.string(from: currentItem.date)
+        dateOutlet.text = "Due date: \(formatter.string(from: currentItem.date))"
 
-        textField.text = currentItem.title
+        titleOutlet.text = "Title: \(currentItem.title)"
         
         if currentItem.state == true {
             stateOutlet.isOn = true
-        }
-        else {
+        } else {
             stateOutlet.isOn = false
         }
     }
@@ -64,8 +63,8 @@ final class SetDateViewController: UIViewController {
 
         let formatter = DateFormatter()
         formatter.dateFormat = "dd.MM.yyyy"
-        dateField.text = formatter.string(from: currentItem.date)
-        textField.text = currentItem.title
+        dateOutlet.text = "Due date: \(formatter.string(from: currentItem.date))"
+        titleOutlet.text = "Title: \(currentItem.title)"
     }
 
 }
