@@ -1,5 +1,5 @@
 //
-//  TableViewController.swift
+//  TodoListViewController.swift
 //  ToDo
 //
 //  Created by Ilya Matveev on 02.12.2019.
@@ -12,9 +12,17 @@ extension NSNotification.Name {
     static let update: NSNotification.Name = .init("update")
 }
 
-class TableViewController: UITableViewController {
+class TodoListViewController: UITableViewController {
+    // MARK: - Dependencies
     private let notificationCenter: NotificationCenter = .default
-    
+
+    // MARK: - Outlets
+    // MARK: - Local Variables
+    // MARK: - Lifecycle
+    // MARK: - Actions
+    // MARK: - Methods
+    // MARK: - Rest думай сам
+
     @IBAction func pushEditAction(_ sender: UIBarButtonItem) {
         tableView.setEditing(!tableView.isEditing, animated: true)
     }
@@ -23,12 +31,6 @@ class TableViewController: UITableViewController {
         super.viewDidLoad()
 
         notificationCenter.addObserver(self, selector: #selector(updateData), name: .update, object: nil)
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
     // MARK: - Table view data source
@@ -40,21 +42,17 @@ class TableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return ToDoManager.shared.items.count
+        return TodoService.shared.getItems().count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let item = ToDoManager.shared.items[indexPath.row]
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "CustomCell", for: indexPath) as? CustomCell else {
             fatalError("Failed to dequeue custom cell")
         }
-        
-        cell.setCell(item: item)
 
-//        let state = cell?.currentItem.state
-//        ToDoManager.shared.items[indexPath.row].state = state ?? false
-//        let newItem = ToDoManager.shared.items[indexPath.row]
-//        ToDoManager.shared.updateItem(item: newItem)
+        let item = TodoService.shared.getItems()[indexPath.row]
+
+        cell.setCell(item: item)
 
         return cell
     }
@@ -68,7 +66,7 @@ class TableViewController: UITableViewController {
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            ToDoManager.shared.removeItem(at: indexPath.row)
+            TodoService.shared.removeItem(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
@@ -78,17 +76,18 @@ class TableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-        ToDoManager.shared.moveItem(fromIndex: fromIndexPath.row, toIndex: to.row)
+        TodoService.shared.moveItem(fromIndex: fromIndexPath.row, toIndex: to.row)
         tableView.reloadData()
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard
             let selectedCellIndexRow = tableView.indexPathForSelectedRow?.row,
-            let setDateController = segue.destination as? SetDateViewController
+            let detailsController = segue.destination as? TodoDetailsViewController
         else { return }
 
-        setDateController.currentItem = ToDoManager.shared.items[selectedCellIndexRow]
+        // FIXME: Extract dependency
+        detailsController.currentItem = TodoService.shared.getItems()[selectedCellIndexRow]
     }
 
     @objc func updateData() {

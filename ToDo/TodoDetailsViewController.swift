@@ -1,5 +1,5 @@
 //
-//  SetDateViewController.swift
+//  TodoDetailsViewController.swift
 //  ToDo
 //
 //  Created by Ilya Matveev on 06.12.2019.
@@ -8,14 +8,15 @@
 
 import UIKit
 
-final class SetDateViewController: UIViewController {
-    private let todoManager: ToDoManager = .shared
+final class TodoDetailsViewController: UIViewController {
+    private let todoManager: TodoService = .shared
 
     @IBOutlet private var stateOutlet: UISwitch!
     @IBOutlet private var titleOutlet: UILabel!
     @IBOutlet private var dateOutlet: UILabel!
-    
-    var currentItem: ToDoItem!
+
+    // FIXME: force unwrap
+    var currentItem: Todo!
 
     // MARK: - Lifecycle
     @IBAction func editAction(_ sender: UIBarButtonItem) {
@@ -24,9 +25,8 @@ final class SetDateViewController: UIViewController {
     }
 
     @IBAction func stateAction(_ sender: UISwitch) {
-        currentItem?.state = stateOutlet.isOn
+        currentItem?.isDone = stateOutlet.isOn
         todoManager.updateItem(item: currentItem)
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "update"), object: nil)
     }
 
     override func viewDidLoad() {
@@ -34,36 +34,29 @@ final class SetDateViewController: UIViewController {
 
         NotificationCenter.default.addObserver(self, selector: #selector(updateItem), name: NSNotification.Name(rawValue: "updateItem"), object: nil)
 
-        let formatter = DateFormatter()
-        formatter.dateFormat = "dd.MM.yyyy"
-        dateOutlet.text = "Due date: \(formatter.string(from: currentItem.date))"
-
+        dateOutlet.text = "Due date: \(todoManager.longDate(item: currentItem))"
         titleOutlet.text = "Title: \(currentItem.title)"
-        
-        if currentItem.state == true {
-            stateOutlet.isOn = true
-        } else {
-            stateOutlet.isOn = false
-        }
+        stateOutlet.isOn = currentItem.isDone
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard
             let addNavigationController = segue.destination as? UINavigationController,
-            let addController = addNavigationController.viewControllers.first as? AddViewController
+            let addController = addNavigationController.viewControllers.first as? AddTodoViewController
         else { return }
 
         addController.newItem = currentItem
     }
 
     @objc func updateItem() {
-        for item in todoManager.items where currentItem.id == item.id {
+        for item in todoManager.getItems() where currentItem.id == item.id {
             currentItem = item
         }
 
         let formatter = DateFormatter()
         formatter.dateFormat = "dd.MM.yyyy"
-        dateOutlet.text = "Due date: \(formatter.string(from: currentItem.date))"
+
+        dateOutlet.text = "Due date: \(todoManager.longDate(item: currentItem))"
         titleOutlet.text = "Title: \(currentItem.title)"
     }
 

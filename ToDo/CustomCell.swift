@@ -9,28 +9,26 @@
 import UIKit
 
 class CustomCell: UITableViewCell {
-    private let todoManager: ToDoManager = .shared
+    private let todoManager: TodoService = .shared
 
     @IBOutlet private var titleLabel: UILabel!
     @IBOutlet private var dateLabel: UILabel!
     @IBOutlet private var switchState: UISwitch!
 
-    private var currentItem: ToDoItem?
+    private var currentItem: Todo?
 
     @IBAction func switchAction(_ sender: UISwitch) {
-        currentItem?.state = sender.isOn
+        currentItem?.isDone = sender.isOn
 
         if let item = currentItem {
             todoManager.updateItem(item: item)
         }
     }
 
-    func setCell(item: ToDoItem) {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "dd.MM.yyyy"
+    func setCell(item: Todo) {
         titleLabel.text = item.title
-        dateLabel.text = formatter.string(from: item.date)
-        switchState.isOn = item.state
+        dateLabel.text = todoManager.shortDate(item: item)
+        switchState.isOn = item.isDone
         currentItem = item
     }
 }

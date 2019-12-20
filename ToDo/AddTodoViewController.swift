@@ -1,5 +1,5 @@
 //
-//  AddViewController.swift
+//  AddTodoViewController.swift
 //  ToDo
 //
 //  Created by Ilya Matveev on 12.12.2019.
@@ -8,8 +8,8 @@
 
 import UIKit
 
-final class AddViewController: UIViewController {
-    private let todoManager: ToDoManager = .shared
+final class AddTodoViewController: UIViewController {
+    private let todoManager: TodoService = .shared
 
     @IBOutlet private var textField: UITextField!
     @IBOutlet private var dateField: UITextField!
@@ -19,7 +19,7 @@ final class AddViewController: UIViewController {
     private var newTitle: String?
     private var newDate: Date?
 
-    var newItem: ToDoItem?
+    var newItem: Todo?
 
     @IBAction func textAction(_ sender: UITextField) {
         newTitle = textField.text
@@ -31,29 +31,18 @@ final class AddViewController: UIViewController {
     
     @IBAction func saveAction(_ sender: UIBarButtonItem) {
 
-        guard let title = newTitle, let date = newDate else {
-            return
-        }
+        guard let title = newTitle else {return}
 
         if newItem == nil {
-
-            let newItem = ToDoItem(id: UUID(), title: title, date: date, state: false)
-
-            todoManager.addItem(item: newItem)
+            let newItem = Todo(id: UUID(), title: title, date: newDate, isDone: false)
+            todoManager.updateItem(item: newItem)
         } else {
-
             newItem?.title = title
-            newItem?.date = date
-
+            newItem?.date = newDate
             guard let item = newItem else {return}
-
             todoManager.updateItem(item: item)
-            
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "updateItem"), object: nil)
         }
-
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "update"), object: nil)
-
         dismiss(animated: true, completion: nil)
     }
     
@@ -65,16 +54,15 @@ final class AddViewController: UIViewController {
         }
 
         if let item = newItem {
-            let formatter = DateFormatter()
-            formatter.dateFormat = "dd.MM.yyyy"
             textField.text = item.title
-            dateField.text = formatter.string(from: item.date)
+            dateField.text = todoManager.longDate(item: item)
         }
 
         datePicker.datePickerMode = .date
 
         dateField.inputView = datePicker
 
+        // TODO: Configure in storyboard
         let toolBar = UIToolbar()
         toolBar.sizeToFit()
 
@@ -85,7 +73,7 @@ final class AddViewController: UIViewController {
         dateField.inputAccessoryView = toolBar
         textField.inputAccessoryView = toolBar
 
-            datePicker.addTarget(self, action: #selector(dateChanged), for: .valueChanged)
+        datePicker.addTarget(self, action: #selector(dateChanged), for: .valueChanged)
     }
 
     @objc func doneAction() {
