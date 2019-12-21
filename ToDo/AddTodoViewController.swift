@@ -13,8 +13,8 @@ final class AddTodoViewController: UIViewController {
 
     @IBOutlet private var textField: UITextField!
     @IBOutlet private var dateField: UITextField!
-
-    private let datePicker: UIDatePicker = .init()
+    @IBOutlet var datePicker: UIDatePicker!
+    @IBOutlet var toolBar: UIToolbar!
 
     private var newTitle: String?
     private var newDate: Date?
@@ -62,8 +62,6 @@ final class AddTodoViewController: UIViewController {
 
         dateField.inputView = datePicker
 
-        // TODO: Configure in storyboard
-        let toolBar = UIToolbar()
         toolBar.sizeToFit()
 
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneAction))
