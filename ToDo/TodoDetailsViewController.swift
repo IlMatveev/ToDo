@@ -15,8 +15,7 @@ final class TodoDetailsViewController: UIViewController {
     @IBOutlet private var titleOutlet: UILabel!
     @IBOutlet private var dateOutlet: UILabel!
 
-    // FIXME: force unwrap
-    var currentItem: Todo!
+    var currentItem: Todo?
 
     // MARK: - Lifecycle
     @IBAction func editAction(_ sender: UIBarButtonItem) {
@@ -26,7 +25,8 @@ final class TodoDetailsViewController: UIViewController {
 
     @IBAction func stateAction(_ sender: UISwitch) {
         currentItem?.isDone = stateOutlet.isOn
-        todoManager.updateItem(item: currentItem)
+        guard let item = currentItem else {return}
+        todoManager.updateItem(item: item)
     }
 
     override func viewDidLoad() {
@@ -34,9 +34,7 @@ final class TodoDetailsViewController: UIViewController {
 
         NotificationCenter.default.addObserver(self, selector: #selector(updateItem), name: NSNotification.Name(rawValue: "updateItem"), object: nil)
 
-        dateOutlet.text = "Due date: \(todoManager.longDate(item: currentItem))"
-        titleOutlet.text = "Title: \(currentItem.title)"
-        stateOutlet.isOn = currentItem.isDone
+        updateItem()
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -49,15 +47,14 @@ final class TodoDetailsViewController: UIViewController {
     }
 
     @objc func updateItem() {
-        for item in todoManager.getItems() where currentItem.id == item.id {
+        let currentId = currentItem?.id
+        for item in todoManager.getItems() where currentId == item.id {
             currentItem = item
         }
-
-        let formatter = DateFormatter()
-        formatter.dateFormat = "dd.MM.yyyy"
-
-        dateOutlet.text = "Due date: \(todoManager.longDate(item: currentItem))"
-        titleOutlet.text = "Title: \(currentItem.title)"
+        guard let item = currentItem else {return}
+        titleOutlet.text = "Title: \(item.title)"
+        dateOutlet.text = "Due date: \(todoManager.longDate(item: item))"
+        stateOutlet.isOn = item.isDone
     }
 
 }
