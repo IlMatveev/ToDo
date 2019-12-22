@@ -18,12 +18,13 @@ final class UserService {
 
     func addUser (user: User) {
         users.append(user)
+        print("YES")
     }
 
     func checkUser (user: User) -> Bool {
         var index = false
 
-        for (_, currentUser) in users.enumerated() where (user.login == currentUser.login) && (user.password == currentUser.password) {
+        for currentUser in users where (user.login == currentUser.login) && (user.password == currentUser.password) {
             index = true
         }
         if index == true {

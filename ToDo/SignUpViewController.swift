@@ -11,6 +11,9 @@ import UIKit
 class SignUpViewController: UIViewController {
     private let userManager: UserService = .shared
 
+    private var newLogin: String?
+    private var newPassword: String?
+    private var newRePassword: String?
     var currentUser: User?
 
     @IBOutlet var signUpOutlet: UIButton!
@@ -18,8 +21,38 @@ class SignUpViewController: UIViewController {
     @IBOutlet var loginOutlet: UITextField!
     @IBOutlet var passwordOutlet: UITextField!
     @IBOutlet var rePasswordOutlet: UITextField!
-    @IBAction func signUpAction(_ sender: UIButton) {
+    @IBOutlet var checkOutlet: UILabel!
+    
+    @IBAction func loginAction(_ sender: UITextField) {
+        newLogin = loginOutlet.text
+    }
 
+    @IBAction func passwordAction(_ sender: UITextField) {
+        newPassword = passwordOutlet.text
+    }
+
+    @IBAction func rePasswordAction(_ sender: Any) {
+        newRePassword = rePasswordOutlet.text
+    }
+
+    @IBAction func signUpAction(_ sender: UIButton) {
+        if (newPassword == newRePassword) && (newLogin != nil) && (newPassword != nil) {
+            guard
+                let login = newLogin,
+                let password = newPassword
+            else { return }
+
+            currentUser?.login = login
+            currentUser?.password = password
+
+            guard let user = currentUser else { return }
+
+            userManager.addUser(user: user)
+
+            dismiss(animated: true, completion: nil)
+        } else {
+            checkOutlet.text = "Error, check the data!"
+        }
     }
 
     override func viewDidLoad() {
@@ -36,7 +69,6 @@ class SignUpViewController: UIViewController {
         loginOutlet.inputAccessoryView = toolBarOutlet
         passwordOutlet.inputAccessoryView = toolBarOutlet
         rePasswordOutlet.inputAccessoryView = toolBarOutlet
-        
 
     }
 

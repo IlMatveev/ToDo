@@ -14,6 +14,7 @@
 		C76CD4D323AF740F00CE6F8C /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76CD4D223AF740F00CE6F8C /* SignInViewController.swift */; };
 		C76CD4D523AF742000CE6F8C /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76CD4D423AF742000CE6F8C /* SignUpViewController.swift */; };
 		C76CD4D723AFEABE00CE6F8C /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76CD4D623AFEABE00CE6F8C /* UserService.swift */; };
+		C76CD4D923B0126B00CE6F8C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76CD4D823B0126B00CE6F8C /* User.swift */; };
 		C796534F23ACCF6600288168 /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C796534E23ACCF6600288168 /* Todo.swift */; };
 		C7CFC1FC23946BB6002FB0EB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CFC1FB23946BB6002FB0EB /* AppDelegate.swift */; };
 		C7CFC1FE23946BB6002FB0EB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CFC1FD23946BB6002FB0EB /* SceneDelegate.swift */; };
@@ -32,6 +33,7 @@
 		C76CD4D223AF740F00CE6F8C /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		C76CD4D423AF742000CE6F8C /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		C76CD4D623AFEABE00CE6F8C /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		C76CD4D823B0126B00CE6F8C /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		C796534E23ACCF6600288168 /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
 		C7CFC1F823946BB6002FB0EB /* ToDo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7CFC1FB23946BB6002FB0EB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -88,6 +90,7 @@
 			isa = PBXGroup;
 			children = (
 				C796534E23ACCF6600288168 /* Todo.swift */,
+				C76CD4D823B0126B00CE6F8C /* User.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -235,6 +238,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C76CD4D923B0126B00CE6F8C /* User.swift in Sources */,
 				C76CD4D523AF742000CE6F8C /* SignUpViewController.swift in Sources */,
 				C74A6FAB239A5FA300A8311E /* TodoDetailsViewController.swift in Sources */,
 				C7CFC1FC23946BB6002FB0EB /* AppDelegate.swift in Sources */,
