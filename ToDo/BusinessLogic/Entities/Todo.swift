@@ -14,3 +14,8 @@ struct Todo {
     var date: Date?
     var isDone: Bool
 }
+
+struct User {
+    var login: String
+    var password: String
+}
