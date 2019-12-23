@@ -12,9 +12,8 @@ class SignInViewController: UIViewController {
     private let userManager: UserService = .shared
     private var newLogin: String?
     private var newPassword: String?
-
-    var currentUser: User?
     
+    @IBOutlet var toolBarOutlet: UIToolbar!
     @IBOutlet var checkOutlet: UILabel!
     @IBOutlet var loginOutlet: UITextField!
     @IBOutlet var passwordOutlet: UITextField!
@@ -34,10 +33,7 @@ class SignInViewController: UIViewController {
             let password = newPassword
             else { return }
 
-        currentUser?.login = login
-        currentUser?.password = password
-
-        guard let user = currentUser else { return }
+        let user = User(login: login, password: password)
 
         let check = userManager.checkUser(user: user)
 
@@ -52,7 +48,18 @@ class SignInViewController: UIViewController {
         super.viewDidLoad()
 
         signInOutlet.layer.cornerRadius = 6
-       
+
+        toolBarOutlet.sizeToFit()
+
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneAction))
+        let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+
+        toolBarOutlet.setItems([flexSpace, doneButton], animated: true)
+        loginOutlet.inputAccessoryView = toolBarOutlet
+        passwordOutlet.inputAccessoryView = toolBarOutlet
     }
-    
+
+    @objc func doneAction() {
+           view.endEditing(true)
+       }
 }
