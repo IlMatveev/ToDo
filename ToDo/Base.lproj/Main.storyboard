@@ -243,7 +243,7 @@
                                     <color key="titleColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 </state>
                                 <connections>
-                                    <segue destination="xPb-B8-AJp" kind="show" id="C6v-R0-bHV"/>
+                                    <segue destination="xPb-B8-AJp" kind="show" id="ngf-Fe-MXl"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y31-wO-Duq">
@@ -553,6 +553,7 @@
         <!--Navigation Controller-->
         <scene sceneID="qDA-NI-U2t">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iuN-mv-9Ma" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="xPb-B8-AJp" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="sHd-Wy-VjA"/>
@@ -565,7 +566,6 @@
                         <segue destination="qR4-wH-CvM" kind="relationship" relationship="rootViewController" id="m1E-3V-lWs"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="iuN-mv-9Ma" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1127.536231884058" y="121.875"/>
         </scene>

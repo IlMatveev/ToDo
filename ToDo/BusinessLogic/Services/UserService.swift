@@ -18,7 +18,6 @@ final class UserService {
 
     func addUser (user: User) {
         users.append(user)
-        print("YES")
     }
 
     func checkUser (user: User) -> Bool {

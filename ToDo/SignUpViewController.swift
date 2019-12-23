@@ -14,7 +14,6 @@ class SignUpViewController: UIViewController {
     private var newLogin: String?
     private var newPassword: String?
     private var newRePassword: String?
-    var currentUser: User?
 
     @IBOutlet var signUpOutlet: UIButton!
     @IBOutlet var toolBarOutlet: UIToolbar!
@@ -42,10 +41,7 @@ class SignUpViewController: UIViewController {
                 let password = newPassword
             else { return }
 
-            currentUser?.login = login
-            currentUser?.password = password
-
-            guard let user = currentUser else { return }
+            let user = User(login: login, password: password)
 
             userManager.addUser(user: user)
 
