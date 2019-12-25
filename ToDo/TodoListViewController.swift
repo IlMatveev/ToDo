@@ -30,6 +30,8 @@ class TodoListViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.navigationItem.hidesBackButton = true
+
         notificationCenter.addObserver(self, selector: #selector(updateData), name: .update, object: nil)
     }
 

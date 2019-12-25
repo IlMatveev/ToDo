@@ -47,6 +47,8 @@ class SignInViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        navigationController?.setNavigationBarHidden(false, animated: false)
+
         signInOutlet.layer.cornerRadius = 6
 
         toolBarOutlet.sizeToFit()

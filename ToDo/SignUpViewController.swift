@@ -45,6 +45,7 @@ class SignUpViewController: UIViewController {
 
             userManager.addUser(user: user)
 
+            self.navigationController?.popViewController(animated: true)
             dismiss(animated: true, completion: nil)
         } else {
             checkOutlet.text = "Error, check the data!"
@@ -53,6 +54,8 @@ class SignUpViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        navigationController?.setNavigationBarHidden(false, animated: false)
 
         signUpOutlet.layer.cornerRadius = 6
 
