@@ -56,28 +56,26 @@ final class TodoService {
         items.insert(from, at: toIndex)
     }
 
-    func shortDate (item: Todo) -> String {
-        if item.date != nil {
-            let formatter = DateFormatter()
-            guard let date = item.date else {
-                fatalError("Failed to dequeue date")
-            }
-            formatter.dateFormat = "dd.MM.yyyy"
-            return formatter.string(from: date)} else {
+    // TODO: Move to todo extension
+    func shortDate(item: Todo) -> String {
+        if let date = item.date {
+            return DateFormatter.short.string(from: date)
+        } else {
             return ""
-            }
+        }
     }
 
-    func longDate (item: Todo) -> String {
-        if item.date != nil {
-           let formatter = DateFormatter()
-           guard let date = item.date else {
-               fatalError("Failed to dequeue date")
-           }
-           formatter.dateFormat = "dd MMMM yyyy"
-            return formatter.string(from: date)} else {
-            return ""
-            }
+    func longDate(item: Todo) -> String {
+        return item.date.map { DateFormatter.short.string(from: $0) } ?? ""
     }
 
+}
+
+extension DateFormatter {
+    static let short: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.timeStyle = .none
+        formatter.dateStyle = .short
+        return formatter
+    }()
 }

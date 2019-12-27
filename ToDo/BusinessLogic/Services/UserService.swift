@@ -16,21 +16,12 @@ final class UserService {
     private init() {
     }
 
-    func addUser (user: User) {
+    func addUser(user: User) {
         users.append(user)
     }
 
-    func checkUser (user: User) -> Bool {
-        var index = false
-
-        for currentUser in users where (user.login == currentUser.login) && (user.password == currentUser.password) {
-            index = true
-        }
-        if index == true {
-            return true
-              } else {
-            return false
-              }
+    func checkUser(user: User) -> Bool {
+      return users.contains { (user.login == $0.login) && (user.password == $0.password) }
     }
 
 }

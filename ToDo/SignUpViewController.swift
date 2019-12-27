@@ -11,6 +11,7 @@ import UIKit
 class SignUpViewController: UIViewController {
     private let userManager: UserService = .shared
 
+    // TODO: Избавиться от этого
     private var newLogin: String?
     private var newPassword: String?
     private var newRePassword: String?
@@ -22,7 +23,8 @@ class SignUpViewController: UIViewController {
     @IBOutlet var passwordOutlet: UITextField!
     @IBOutlet var rePasswordOutlet: UITextField!
     @IBOutlet var checkOutlet: UILabel!
-    
+
+    // TODO: Избавиться от этого
     @IBAction func loginAction(_ sender: UITextField) {
         newLogin = loginOutlet.text
     }
@@ -56,8 +58,7 @@ class SignUpViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(viewChange), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
 
         navigationController?.setNavigationBarHidden(false, animated: false)
 
@@ -79,17 +80,11 @@ class SignUpViewController: UIViewController {
         view.endEditing(true)
     }
 
-    @objc func keyboardWillShow(notification: NSNotification) {
+    @objc func viewChange(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
             if self.view.frame.origin.y == 0 {
                 self.view.frame.origin.y -= keyboardSize.height
-            }
-        }
-    }
-
-    @objc func keyboardWillHide(notification: NSNotification) {
-        if self.view.frame.origin.y != 0 {
-            self.view.frame.origin.y = 0
+            } else {self.view.frame.origin.y = 0}
         }
     }
 

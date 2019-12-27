@@ -43,7 +43,8 @@ class TodoListViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
+        // FIXME: вынести зависимость
+        // TODO: храни состояние в переменной, а не бери каждый раз из сервиса
         return TodoService.shared.getItems().count
     }
 
