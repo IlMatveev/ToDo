@@ -18,16 +18,6 @@ final class TodoDetailsViewController: UIViewController {
     var currentItem: Todo?
 
     // MARK: - Lifecycle
-    @IBAction func editAction(_ sender: UIBarButtonItem) {
-        performSegue(withIdentifier: "toEdit", sender: nil)
-        
-    }
-
-    @IBAction func stateAction(_ sender: UISwitch) {
-        currentItem?.isDone = stateOutlet.isOn
-        guard let item = currentItem else {return}
-        todoManager.updateItem(item: item)
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +25,17 @@ final class TodoDetailsViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(updateItem), name: NSNotification.Name(rawValue: "updateItem"), object: nil)
 
         updateItem()
+    }
+
+    @IBAction func editAction(_ sender: UIBarButtonItem) {
+        performSegue(withIdentifier: "toEdit", sender: nil)
+
+    }
+
+    @IBAction func stateAction(_ sender: UISwitch) {
+        currentItem?.isDone = stateOutlet.isOn
+        guard let item = currentItem else {return}
+        todoManager.updateItem(item: item)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

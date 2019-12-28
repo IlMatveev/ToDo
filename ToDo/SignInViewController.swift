@@ -10,27 +10,17 @@ import UIKit
 
 class SignInViewController: UIViewController {
     private let userManager: UserService = .shared
-    private var newLogin: String?
-    private var newPassword: String?
-    
+
     @IBOutlet var toolBarOutlet: UIToolbar!
     @IBOutlet var checkOutlet: UILabel!
     @IBOutlet var loginOutlet: UITextField!
     @IBOutlet var passwordOutlet: UITextField!
     @IBOutlet var signInOutlet: UIButton!
-    
-    @IBAction func loginAction(_ sender: UITextField) {
-        newLogin = loginOutlet.text
-    }
 
-    @IBAction func passwordAction(_ sender: UITextField) {
-        newPassword = passwordOutlet.text
-    }
-    
     @IBAction func signInAction(_ sender: UIButton) {
         guard
-            let login = newLogin,
-            let password = newPassword
+            let login = loginOutlet.text,
+            let password = passwordOutlet.text
             else { return }
 
         let user = User(login: login, password: password)

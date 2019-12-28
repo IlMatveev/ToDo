@@ -15,6 +15,7 @@ extension NSNotification.Name {
 class TodoListViewController: UITableViewController {
     // MARK: - Dependencies
     private let notificationCenter: NotificationCenter = .default
+    private let items = TodoService.shared.getItems()
 
     // MARK: - Outlets
     // MARK: - Local Variables
@@ -22,10 +23,6 @@ class TodoListViewController: UITableViewController {
     // MARK: - Actions
     // MARK: - Methods
     // MARK: - Rest думай сам
-
-    @IBAction func pushEditAction(_ sender: UIBarButtonItem) {
-        tableView.setEditing(!tableView.isEditing, animated: true)
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,17 +32,22 @@ class TodoListViewController: UITableViewController {
         notificationCenter.addObserver(self, selector: #selector(updateData), name: .update, object: nil)
     }
 
+    @IBAction func pushEditAction(_ sender: UIBarButtonItem) {
+        tableView.setEditing(!tableView.isEditing, animated: true)
+    }
+
+    @IBAction func toAdd(_ sender: UIBarButtonItem) {
+        performSegue(withIdentifier: "toAdd", sender: nil)
+    }
+
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // FIXME: вынести зависимость
-        // TODO: храни состояние в переменной, а не бери каждый раз из сервиса
-        return TodoService.shared.getItems().count
+        return items.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -53,20 +55,17 @@ class TodoListViewController: UITableViewController {
             fatalError("Failed to dequeue custom cell")
         }
 
-        let item = TodoService.shared.getItems()[indexPath.row]
+        let item = items[indexPath.row]
 
         cell.setCell(item: item)
 
         return cell
     }
 
-    // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
         return true
     }
 
-    // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             TodoService.shared.removeItem(at: indexPath.row)
@@ -80,7 +79,7 @@ class TodoListViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
         TodoService.shared.moveItem(fromIndex: fromIndexPath.row, toIndex: to.row)
-        tableView.reloadData()
+        updateData()
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -90,14 +89,11 @@ class TodoListViewController: UITableViewController {
         else { return }
 
         // FIXME: Extract dependency
-        detailsController.currentItem = TodoService.shared.getItems()[selectedCellIndexRow]
+        detailsController.currentItem = items[selectedCellIndexRow]
     }
 
     @objc func updateData() {
         tableView.reloadData()
     }
 
-    @IBAction func toAdd(_ sender: UIBarButtonItem) {
-        performSegue(withIdentifier: "toAdd", sender: nil)
-    }
 }

@@ -11,11 +11,6 @@ import UIKit
 class SignUpViewController: UIViewController {
     private let userManager: UserService = .shared
 
-    // TODO: Избавиться от этого
-    private var newLogin: String?
-    private var newPassword: String?
-    private var newRePassword: String?
-
     @IBOutlet var scrollView: UIScrollView!
     @IBOutlet var signUpOutlet: UIButton!
     @IBOutlet var toolBarOutlet: UIToolbar!
@@ -24,24 +19,11 @@ class SignUpViewController: UIViewController {
     @IBOutlet var rePasswordOutlet: UITextField!
     @IBOutlet var checkOutlet: UILabel!
 
-    // TODO: Избавиться от этого
-    @IBAction func loginAction(_ sender: UITextField) {
-        newLogin = loginOutlet.text
-    }
-
-    @IBAction func passwordAction(_ sender: UITextField) {
-        newPassword = passwordOutlet.text
-    }
-
-    @IBAction func rePasswordAction(_ sender: Any) {
-        newRePassword = rePasswordOutlet.text
-    }
-
     @IBAction func signUpAction(_ sender: UIButton) {
-        if (newPassword == newRePassword) && (newLogin != nil) && (newPassword != nil) {
+        if passwordOutlet.text == rePasswordOutlet.text {
             guard
-                let login = newLogin,
-                let password = newPassword
+                let login = loginOutlet.text,
+                let password = passwordOutlet.text
             else { return }
 
             let user = User(login: login, password: password)
