@@ -56,26 +56,4 @@ final class TodoService {
         items.insert(from, at: toIndex)
     }
 
-    // TODO: Move to todo extension
-    func shortDate(item: Todo) -> String {
-        if let date = item.date {
-            return DateFormatter.short.string(from: date)
-        } else {
-            return ""
-        }
-    }
-
-    func longDate(item: Todo) -> String {
-        return item.date.map { DateFormatter.short.string(from: $0) } ?? ""
-    }
-
-}
-
-extension DateFormatter {
-    static let short: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.timeStyle = .none
-        formatter.dateStyle = .short
-        return formatter
-    }()
 }

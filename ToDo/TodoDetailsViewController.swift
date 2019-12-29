@@ -54,7 +54,7 @@ final class TodoDetailsViewController: UIViewController {
         }
         guard let item = currentItem else {return}
         titleOutlet.text = "Title: \(item.title)"
-        dateOutlet.text = "Due date: \(todoManager.longDate(item: item))"
+        dateOutlet.text = "Due date: \(item.itemLongDate())"
         stateOutlet.isOn = item.isDone
     }
 

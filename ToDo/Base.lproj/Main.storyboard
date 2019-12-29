@@ -436,7 +436,6 @@
                     <navigationItem key="navigationItem" title="Registration" id="B1o-bF-Jyw"/>
                     <connections>
                         <outlet property="checkOutlet" destination="3my-kU-nHM" id="DMh-2e-8BG"/>
-                        <outlet property="doneButton" destination="wTJ-Je-FWL" id="LDG-r2-Icw"/>
                         <outlet property="loginOutlet" destination="fAv-qS-XEQ" id="V8W-kz-Q6u"/>
                         <outlet property="passwordOutlet" destination="wx0-4J-pV8" id="tyK-xA-v3S"/>
                         <outlet property="rePasswordOutlet" destination="FrC-LT-u6F" id="kG0-9O-vYq"/>

@@ -27,7 +27,7 @@ class CustomCell: UITableViewCell {
 
     func setCell(item: Todo) {
         titleLabel.text = item.title
-        dateLabel.text = todoManager.shortDate(item: item)
+        dateLabel.text = item.itemShortDate()
         switchState.isOn = item.isDone
         currentItem = item
     }

@@ -30,7 +30,7 @@ final class AddTodoViewController: UIViewController {
 
         if let item = newItem {
             textField.text = item.title
-            dateField.text = todoManager.longDate(item: item)
+            dateField.text = item.itemLongDate()
         }
 
         dateField.inputView = datePicker
@@ -44,9 +44,7 @@ final class AddTodoViewController: UIViewController {
     }
 
     @IBAction func datePickerAction(_ sender: UIDatePicker) {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "dd.MM.yyyy"
-        dateField.text = formatter.string(from: datePicker.date)
+        dateField.text = DateFormatter.long.string(from: datePicker.date)
         newDate = datePicker.date
     }
 
