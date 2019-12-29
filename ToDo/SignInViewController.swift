@@ -17,6 +17,21 @@ class SignInViewController: UIViewController {
     @IBOutlet var passwordOutlet: UITextField!
     @IBOutlet var signInOutlet: UIButton!
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        navigationController?.setNavigationBarHidden(false, animated: false)
+
+        signInOutlet.layer.cornerRadius = 6
+
+        loginOutlet.inputAccessoryView = toolBarOutlet
+        passwordOutlet.inputAccessoryView = toolBarOutlet
+    }
+
+    @IBAction func doneAction(_ sender: UIBarButtonItem) {
+        view.endEditing(true)
+    }
+
     @IBAction func signInAction(_ sender: UIButton) {
         guard
             let login = loginOutlet.text,
@@ -34,24 +49,4 @@ class SignInViewController: UIViewController {
         }
     }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        navigationController?.setNavigationBarHidden(false, animated: false)
-
-        signInOutlet.layer.cornerRadius = 6
-
-        toolBarOutlet.sizeToFit()
-
-        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneAction))
-        let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-
-        toolBarOutlet.setItems([flexSpace, doneButton], animated: true)
-        loginOutlet.inputAccessoryView = toolBarOutlet
-        passwordOutlet.inputAccessoryView = toolBarOutlet
-    }
-
-    @objc func doneAction() {
-           view.endEditing(true)
-       }
 }

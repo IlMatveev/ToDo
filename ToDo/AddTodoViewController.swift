@@ -13,13 +13,42 @@ final class AddTodoViewController: UIViewController {
 
     @IBOutlet private var textField: UITextField!
     @IBOutlet private var dateField: UITextField!
-    @IBOutlet var datePicker: UIDatePicker!
     @IBOutlet var toolBar: UIToolbar!
-
+    @IBOutlet var datePicker: UIDatePicker!
+    
     private var newTitle: String?
     private var newDate: Date?
 
     var newItem: Todo?
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        if newItem != nil {
+            self.title = "Edit ToDo"
+        }
+
+        if let item = newItem {
+            textField.text = item.title
+            dateField.text = todoManager.longDate(item: item)
+        }
+
+        dateField.inputView = datePicker
+        dateField.inputAccessoryView = toolBar
+        textField.inputAccessoryView = toolBar
+
+    }
+
+    @IBAction func doneAction(_ sender: UIBarButtonItem) {
+        view.endEditing(true)
+    }
+
+    @IBAction func datePickerAction(_ sender: UIDatePicker) {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd.MM.yyyy"
+        dateField.text = formatter.string(from: datePicker.date)
+        newDate = datePicker.date
+    }
 
     @IBAction func textAction(_ sender: UITextField) {
         newTitle = textField.text
@@ -28,7 +57,7 @@ final class AddTodoViewController: UIViewController {
     @IBAction func cancelAction(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
     }
-    
+
     @IBAction func saveAction(_ sender: UIBarButtonItem) {
 
         guard let title = newTitle else {return}
@@ -45,47 +74,5 @@ final class AddTodoViewController: UIViewController {
         }
         dismiss(animated: true, completion: nil)
     }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
 
-        if newItem != nil {
-            self.title = "Edit ToDo"
-        }
-
-        if let item = newItem {
-            textField.text = item.title
-            dateField.text = todoManager.longDate(item: item)
-        }
-
-        datePicker.datePickerMode = .date
-
-        dateField.inputView = datePicker
-
-        toolBar.sizeToFit()
-
-        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneAction))
-        let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-
-        toolBar.setItems([flexSpace, doneButton], animated: true)
-        dateField.inputAccessoryView = toolBar
-        textField.inputAccessoryView = toolBar
-
-        datePicker.addTarget(self, action: #selector(dateChanged), for: .valueChanged)
-    }
-
-    @objc func doneAction() {
-        view.endEditing(true)
-    }
-
-    @objc func dateChanged() {
-        getDateFromPicker()
-    }
-
-    @objc func getDateFromPicker() {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "dd.MM.yyyy"
-        dateField.text = formatter.string(from: datePicker.date)
-        newDate = datePicker.date
-    }
 }
