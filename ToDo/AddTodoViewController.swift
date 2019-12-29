@@ -10,6 +10,7 @@ import UIKit
 
 final class AddTodoViewController: UIViewController {
     private let todoManager: TodoService = .shared
+    private let notificationCenter: NotificationCenter = .default
 
     @IBOutlet private var textField: UITextField!
     @IBOutlet private var dateField: UITextField!
@@ -68,7 +69,7 @@ final class AddTodoViewController: UIViewController {
             newItem?.date = newDate
             guard let item = newItem else {return}
             todoManager.updateItem(item: item)
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "updateItem"), object: nil)
+            notificationCenter.post(name: .updateItem, object: nil)
         }
         dismiss(animated: true, completion: nil)
     }

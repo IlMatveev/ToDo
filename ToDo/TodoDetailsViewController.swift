@@ -10,6 +10,7 @@ import UIKit
 
 final class TodoDetailsViewController: UIViewController {
     private let todoManager: TodoService = .shared
+    private let notificationCenter: NotificationCenter = .default
 
     @IBOutlet private var stateOutlet: UISwitch!
     @IBOutlet private var titleOutlet: UILabel!
@@ -22,7 +23,7 @@ final class TodoDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        NotificationCenter.default.addObserver(self, selector: #selector(updateItem), name: NSNotification.Name(rawValue: "updateItem"), object: nil)
+        notificationCenter.addObserver(self, selector: #selector(updateItem), name: .updateItem, object: nil)
 
         updateItem()
     }

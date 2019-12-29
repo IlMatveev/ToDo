@@ -10,6 +10,7 @@ import UIKit
 
 class SignUpViewController: UIViewController {
     private let userManager: UserService = .shared
+    private let notificationCenter: NotificationCenter = .default
 
     @IBOutlet var signUpOutlet: UIButton!
     @IBOutlet var toolBarOutlet: UIToolbar!
@@ -21,9 +22,9 @@ class SignUpViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        NotificationCenter.default.addObserver(self, selector: #selector(viewChange), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(viewChange), name: UIResponder.keyboardWillHideNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(viewChange), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(viewChange), name: .kbWillShow, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(viewChange), name: .kbWillHide, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(viewChange), name: .kbWillChangeFrame, object: nil)
 
         navigationController?.setNavigationBarHidden(false, animated: false)
 
@@ -36,9 +37,9 @@ class SignUpViewController: UIViewController {
     }
 
     deinit {
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+        notificationCenter.removeObserver(self, name: .kbWillShow, object: nil)
+        notificationCenter.removeObserver(self, name: .kbWillHide, object: nil)
+        notificationCenter.removeObserver(self, name: .kbWillChangeFrame, object: nil)
     }
 
     @IBAction func signUpAction(_ sender: UIButton) {
@@ -66,8 +67,8 @@ class SignUpViewController: UIViewController {
     @objc func viewChange(notification: NSNotification) {
         guard let keyboardRect = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {return}
 
-        if notification.name == UIResponder.keyboardWillShowNotification &&
-        notification.name == UIResponder.keyboardWillChangeFrameNotification {
+        if notification.name == .kbWillShow &&
+        notification.name == .kbWillChangeFrame {
         view.frame.origin.y = -keyboardRect.height
         } else {
             view.frame.origin.y = 0

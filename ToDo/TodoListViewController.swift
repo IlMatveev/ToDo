@@ -10,6 +10,10 @@ import UIKit
 
 extension NSNotification.Name {
     static let update: NSNotification.Name = .init("update")
+    static let updateItem: NSNotification.Name = .init("updateItem")
+    static let kbWillShow = UIResponder.keyboardWillShowNotification
+    static let kbWillHide = UIResponder.keyboardWillHideNotification
+    static let kbWillChangeFrame = UIResponder.keyboardWillChangeFrameNotification
 }
 
 class TodoListViewController: UITableViewController {
@@ -88,7 +92,6 @@ class TodoListViewController: UITableViewController {
             let detailsController = segue.destination as? TodoDetailsViewController
         else { return }
 
-        // FIXME: Extract dependency
         detailsController.currentItem = items[selectedCellIndexRow]
     }
 
