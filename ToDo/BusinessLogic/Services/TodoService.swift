@@ -43,7 +43,7 @@ final class TodoService {
             if index == false {
                 items.append(item)
             }
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "update"), object: nil)
+        NotificationCenter.default.post(name: .update, object: nil)
     }
 
     func removeItem(at index: Int) {

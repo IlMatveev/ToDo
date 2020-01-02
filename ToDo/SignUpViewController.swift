@@ -11,6 +11,7 @@ import UIKit
 class SignUpViewController: UIViewController {
     private let userManager: UserService = .shared
     private let notificationCenter: NotificationCenter = .default
+    private let scrollView = UIScrollView()
 
     @IBOutlet var signUpOutlet: UIButton!
     @IBOutlet var toolBarOutlet: UIToolbar!
@@ -22,8 +23,8 @@ class SignUpViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        notificationCenter.addObserver(self, selector: #selector(viewChange), name: .kbWillShow, object: nil)
-        notificationCenter.addObserver(self, selector: #selector(viewChange), name: .kbWillHide, object: nil)
+        scrollView.isScrollEnabled = true
+
         notificationCenter.addObserver(self, selector: #selector(viewChange), name: .kbWillChangeFrame, object: nil)
 
         navigationController?.setNavigationBarHidden(false, animated: false)
@@ -37,8 +38,6 @@ class SignUpViewController: UIViewController {
     }
 
     deinit {
-        notificationCenter.removeObserver(self, name: .kbWillShow, object: nil)
-        notificationCenter.removeObserver(self, name: .kbWillHide, object: nil)
         notificationCenter.removeObserver(self, name: .kbWillChangeFrame, object: nil)
     }
 
@@ -65,14 +64,15 @@ class SignUpViewController: UIViewController {
     }
 
     @objc func viewChange(notification: NSNotification) {
-        guard let keyboardRect = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {return}
+        guard
+            let keyboardRect = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue,
+            let window = view.window
+        else { return }
 
-        if notification.name == .kbWillShow &&
-        notification.name == .kbWillChangeFrame {
-        view.frame.origin.y = -keyboardRect.height
-        } else {
-            view.frame.origin.y = 0
-        }
+        let intersection = window.frame.intersection(keyboardRect)
+
+        additionalSafeAreaInsets = UIEdgeInsets(top: 0, left: 0, bottom: intersection.height, right: 0)
+        view.layoutIfNeeded()
     }
 
 }
