@@ -10,22 +10,35 @@ import UIKit
 
 class SignInViewController: UIViewController {
     private let userManager: UserService = .shared
-
+    private let notificationCenter: NotificationCenter = .default
+    
     @IBOutlet var toolBarOutlet: UIToolbar!
     @IBOutlet var checkOutlet: UILabel!
     @IBOutlet var loginOutlet: UITextField!
     @IBOutlet var passwordOutlet: UITextField!
     @IBOutlet var signInOutlet: UIButton!
-
+    @IBOutlet var image: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        notificationCenter.addObserver(self, selector: #selector(viewChange), name: .kbWillChangeFrame, object: nil)
 
         navigationController?.setNavigationBarHidden(false, animated: false)
 
         signInOutlet.layer.cornerRadius = 6
+        
+        image.layer.cornerRadius = 20
+        image.layer.shadowRadius = 13.0
+        image.layer.shadowOpacity = 0.9
+        image.layer.shadowOffset = CGSize.zero
 
         loginOutlet.inputAccessoryView = toolBarOutlet
         passwordOutlet.inputAccessoryView = toolBarOutlet
+    }
+
+    deinit {
+        notificationCenter.removeObserver(self, name: .kbWillChangeFrame, object: nil)
     }
 
     @IBAction func doneAction(_ sender: UIBarButtonItem) {
@@ -47,6 +60,19 @@ class SignInViewController: UIViewController {
         } else {
             checkOutlet.text = "Incorrect login or password!"
         }
+    }
+
+    @objc func viewChange(notification: NSNotification) {
+        guard
+            let keyboardRect = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
+        else { return }
+
+        let keyboardFrameInView = view.convert(keyboardRect, from: nil)
+        let safeAreaFrame = view.safeAreaLayoutGuide.layoutFrame.insetBy(dx: 0, dy: -additionalSafeAreaInsets.bottom)
+        let intersection = safeAreaFrame.intersection(keyboardFrameInView)
+
+        additionalSafeAreaInsets.bottom = intersection.height
+        view.layoutIfNeeded()
     }
 
 }
