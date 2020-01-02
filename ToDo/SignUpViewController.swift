@@ -23,8 +23,6 @@ class SignUpViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        scrollView.isScrollEnabled = true
-
         notificationCenter.addObserver(self, selector: #selector(viewChange), name: .kbWillChangeFrame, object: nil)
 
         navigationController?.setNavigationBarHidden(false, animated: false)
@@ -65,13 +63,14 @@ class SignUpViewController: UIViewController {
 
     @objc func viewChange(notification: NSNotification) {
         guard
-            let keyboardRect = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue,
-            let window = view.window
+            let keyboardRect = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
         else { return }
 
-        let intersection = window.frame.intersection(keyboardRect)
+        let keyboardFrameInView = view.convert(keyboardRect, from: nil)
+        let safeAreaFrame = view.safeAreaLayoutGuide.layoutFrame.insetBy(dx: 0, dy: -additionalSafeAreaInsets.bottom)
+        let intersection = safeAreaFrame.intersection(keyboardFrameInView)
 
-        additionalSafeAreaInsets = UIEdgeInsets(top: 0, left: 0, bottom: intersection.height, right: 0)
+        additionalSafeAreaInsets.bottom = intersection.height
         view.layoutIfNeeded()
     }
 
