@@ -11,7 +11,9 @@ import Foundation
 final class UserService {
     static let shared: UserService = .init()
 
-    private var users: [User] = []
+    private var users: [User] = [
+        User(login: "1", password: "1")
+    ]
 
     private init() {
     }

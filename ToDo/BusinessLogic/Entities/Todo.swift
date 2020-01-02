@@ -9,15 +9,29 @@
 import Foundation
 
 struct Todo {
-    var id: UUID
-    var title: String
+    var id: UUID = .init()
+    var title: String = ""
     var date: Date?
-    var isDone: Bool
+    var isDone: Bool = false
 }
 
 extension Todo {
-    func itemShortDate() -> String {
-        return self.date.map { DateFormatter.short.string(from: $0) } ?? ""
+    enum DateFormat {
+        case short
+        case long
+    }
+
+    func formattedDate(format: DateFormat) -> String? {
+        switch format {
+        case .short:
+            return date.map(DateFormatter.short.string)
+        case .long:
+            return date.map(DateFormatter.long.string)
+        }
+    }
+    
+    func formattedShortDate() -> String? {
+        return date.map(DateFormatter.short.string)
     }
 
     func itemLongDate() -> String {

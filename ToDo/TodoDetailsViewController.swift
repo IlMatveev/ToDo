@@ -23,7 +23,7 @@ final class TodoDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        notificationCenter.addObserver(self, selector: #selector(updateItem), name: .updateItem, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(updateItem), name: .update, object: nil)
 
         updateItem()
     }
@@ -36,7 +36,7 @@ final class TodoDetailsViewController: UIViewController {
     @IBAction func stateAction(_ sender: UISwitch) {
         currentItem?.isDone = stateOutlet.isOn
         guard let item = currentItem else {return}
-        todoManager.updateItem(item: item)
+        todoManager.save(item: item)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -45,7 +45,7 @@ final class TodoDetailsViewController: UIViewController {
             let addController = addNavigationController.viewControllers.first as? AddTodoViewController
         else { return }
 
-        addController.newItem = currentItem
+        addController.currentItem = currentItem
     }
 
     @objc func updateItem() {

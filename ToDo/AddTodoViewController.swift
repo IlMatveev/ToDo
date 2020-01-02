@@ -8,6 +8,15 @@
 
 import UIKit
 
+extension Optional {
+    var isNone: Bool {
+        return self == nil
+    }
+    var isSome: Bool {
+        return self != nil
+    }
+}
+
 final class AddTodoViewController: UIViewController {
     private let todoManager: TodoService = .shared
     private let notificationCenter: NotificationCenter = .default
@@ -16,28 +25,22 @@ final class AddTodoViewController: UIViewController {
     @IBOutlet private var dateField: UITextField!
     @IBOutlet var toolBar: UIToolbar!
     @IBOutlet var datePicker: UIDatePicker!
-    
-    private var newTitle: String?
-    private var newDate: Date?
 
-    var newItem: Todo?
+    var currentItem: Todo?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if newItem != nil {
-            self.title = "Edit ToDo"
-        }
+        title = currentItem.isNone
+            ? "Add ToDo"
+            : "Edit ToDo"
 
-        if let item = newItem {
-            textField.text = item.title
-            dateField.text = item.itemLongDate()
-        }
+        textField.text = currentItem?.title
+        dateField.text = currentItem?.itemLongDate()
 
         dateField.inputView = datePicker
         dateField.inputAccessoryView = toolBar
         textField.inputAccessoryView = toolBar
-
     }
 
     @IBAction func doneAction(_ sender: UIBarButtonItem) {
@@ -46,11 +49,9 @@ final class AddTodoViewController: UIViewController {
 
     @IBAction func datePickerAction(_ sender: UIDatePicker) {
         dateField.text = DateFormatter.long.string(from: datePicker.date)
-        newDate = datePicker.date
     }
 
     @IBAction func textAction(_ sender: UITextField) {
-        newTitle = textField.text
     }
 
     @IBAction func cancelAction(_ sender: UIBarButtonItem) {
@@ -58,19 +59,13 @@ final class AddTodoViewController: UIViewController {
     }
 
     @IBAction func saveAction(_ sender: UIBarButtonItem) {
+        guard let title = textField.text else { return }
 
-        guard let title = newTitle else {return}
+        var item = currentItem ?? Todo()
+        item.title = title
+        item.date = datePicker.date
+        todoManager.save(item: item)
 
-        if newItem == nil {
-            let newItem = Todo(id: UUID(), title: title, date: newDate, isDone: false)
-            todoManager.updateItem(item: newItem)
-        } else {
-            newItem?.title = title
-            newItem?.date = newDate
-            guard let item = newItem else {return}
-            todoManager.updateItem(item: item)
-            notificationCenter.post(name: .updateItem, object: nil)
-        }
         dismiss(animated: true, completion: nil)
     }
 

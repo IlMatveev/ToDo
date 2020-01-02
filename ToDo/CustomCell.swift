@@ -21,13 +21,13 @@ class CustomCell: UITableViewCell {
         currentItem?.isDone = sender.isOn
 
         if let item = currentItem {
-            todoManager.updateItem(item: item)
+            todoManager.save(item: item)
         }
     }
 
-    func setCell(item: Todo) {
+    func fill(with item: Todo) {
         titleLabel.text = item.title
-        dateLabel.text = item.itemShortDate()
+        dateLabel.text = item.formattedDate(format: .short)
         switchState.isOn = item.isDone
         currentItem = item
     }

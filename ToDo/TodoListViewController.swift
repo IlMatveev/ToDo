@@ -10,16 +10,14 @@ import UIKit
 
 extension NSNotification.Name {
     static let update: NSNotification.Name = .init("update")
-    static let updateItem: NSNotification.Name = .init("updateItem")
-    static let kbWillShow = UIResponder.keyboardWillShowNotification
-    static let kbWillHide = UIResponder.keyboardWillHideNotification
     static let kbWillChangeFrame = UIResponder.keyboardWillChangeFrameNotification
 }
 
 class TodoListViewController: UITableViewController {
     // MARK: - Dependencies
     private let notificationCenter: NotificationCenter = .default
-    private let items = TodoService.shared.getItems()
+    private let todosSvc: TodoService = .shared
+    private var items: [Todo] = []
 
     // MARK: - Outlets
     // MARK: - Local Variables
@@ -32,6 +30,8 @@ class TodoListViewController: UITableViewController {
         super.viewDidLoad()
 
         self.navigationItem.hidesBackButton = true
+
+        items = todosSvc.getItems()
 
         notificationCenter.addObserver(self, selector: #selector(updateData), name: .update, object: nil)
     }
@@ -59,9 +59,7 @@ class TodoListViewController: UITableViewController {
             fatalError("Failed to dequeue custom cell")
         }
 
-        let item = items[indexPath.row]
-
-        cell.setCell(item: item)
+        cell.fill(with: items[indexPath.row])
 
         return cell
     }
@@ -72,8 +70,7 @@ class TodoListViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            TodoService.shared.removeItem(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            todosSvc.removeItem(at: indexPath.row)
         }
     }
 
@@ -82,8 +79,7 @@ class TodoListViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-        TodoService.shared.moveItem(fromIndex: fromIndexPath.row, toIndex: to.row)
-        updateData()
+        todosSvc.moveItem(fromIndex: fromIndexPath.row, toIndex: to.row)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -96,7 +92,7 @@ class TodoListViewController: UITableViewController {
     }
 
     @objc func updateData() {
+        items = todosSvc.getItems()
         tableView.reloadData()
     }
-
 }
