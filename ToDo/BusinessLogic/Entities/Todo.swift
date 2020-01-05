@@ -15,6 +15,33 @@ struct Todo {
     var isDone: Bool = false
 }
 
+struct cTodo: Codable {
+    var cId: String
+    var cTitle: String
+    var cDate: String
+    var cIsDone: String
+}
+
+func toCodable (item: Todo) -> cTodo {
+    let newId = item.id.uuidString
+    let newDate = item.formattedShortDate() ?? ""
+    let newIsDone = String(item.isDone)
+    let newTodo = cTodo(cId: newId, cTitle: item.title, cDate: newDate, cIsDone: newIsDone)
+    return newTodo
+}
+
+func encode(to item: Todo) -> Data? {
+    let newItem = toCodable(item: item)
+    let encodedItem = try? JSONEncoder().encode(newItem)
+    return encodedItem
+}
+
+func decode(from data: Data) -> cTodo {
+    let newItem = try! JSONDecoder().decode(cTodo.self, from: data)
+    return newItem
+}
+
+
 extension Todo {
     enum DateFormat {
         case short
