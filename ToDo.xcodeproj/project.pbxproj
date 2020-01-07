@@ -16,6 +16,7 @@
 		C76CD4D723AFEABE00CE6F8C /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76CD4D623AFEABE00CE6F8C /* UserService.swift */; };
 		C76CD4D923B0126B00CE6F8C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76CD4D823B0126B00CE6F8C /* User.swift */; };
 		C796534F23ACCF6600288168 /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C796534E23ACCF6600288168 /* Todo.swift */; };
+		C7C16C9723C526D8004C6F74 /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C16C9623C526D8004C6F74 /* APIRequest.swift */; };
 		C7CFC1FC23946BB6002FB0EB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CFC1FB23946BB6002FB0EB /* AppDelegate.swift */; };
 		C7CFC1FE23946BB6002FB0EB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CFC1FD23946BB6002FB0EB /* SceneDelegate.swift */; };
 		C7CFC20323946BB6002FB0EB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C7CFC20123946BB6002FB0EB /* Main.storyboard */; };
@@ -35,6 +36,7 @@
 		C76CD4D623AFEABE00CE6F8C /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		C76CD4D823B0126B00CE6F8C /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		C796534E23ACCF6600288168 /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
+		C7C16C9623C526D8004C6F74 /* APIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequest.swift; sourceTree = "<group>"; };
 		C7CFC1F823946BB6002FB0EB /* ToDo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7CFC1FB23946BB6002FB0EB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C7CFC1FD23946BB6002FB0EB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 			children = (
 				C7CFC21123946EA0002FB0EB /* TodoService.swift */,
 				C76CD4D623AFEABE00CE6F8C /* UserService.swift */,
+				C7C16C9623C526D8004C6F74 /* APIRequest.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -246,6 +249,7 @@
 				C796534F23ACCF6600288168 /* Todo.swift in Sources */,
 				C7CFC21023946DF9002FB0EB /* TodoListViewController.swift in Sources */,
 				C7CFC1FE23946BB6002FB0EB /* SceneDelegate.swift in Sources */,
+				C7C16C9723C526D8004C6F74 /* APIRequest.swift in Sources */,
 				C72F64A123A7824E005859A5 /* CustomCell.swift in Sources */,
 				C76CD4D723AFEABE00CE6F8C /* UserService.swift in Sources */,
 				C76CD4D123AF73F900CE6F8C /* LoginViewController.swift in Sources */,
