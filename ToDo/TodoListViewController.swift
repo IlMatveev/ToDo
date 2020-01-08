@@ -31,7 +31,7 @@ class TodoListViewController: UITableViewController {
 
         self.navigationItem.hidesBackButton = true
 
-        items = todosSvc.getItems()
+        updateData()
 
         notificationCenter.addObserver(self, selector: #selector(updateData), name: .update, object: nil)
     }
@@ -92,7 +92,14 @@ class TodoListViewController: UITableViewController {
     }
 
     @objc func updateData() {
-        items = todosSvc.getItems()
-        tableView.reloadData()
+        todosSvc.getItems { result in
+            switch result {
+            case .success(let newItems):
+                self.items = newItems
+                self.tableView.reloadData()
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
 }

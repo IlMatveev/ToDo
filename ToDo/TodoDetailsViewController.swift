@@ -49,14 +49,14 @@ final class TodoDetailsViewController: UIViewController {
     }
 
     @objc func updateItem() {
-        let currentId = currentItem?.id
-        for item in todoManager.getItems() where currentId == item.id {
-            currentItem = item
-        }
-        guard let item = currentItem else {return}
-        titleOutlet.text = "Title: \(item.title)"
-        dateOutlet.text = "Due date: \(item.itemLongDate())"
-        stateOutlet.isOn = item.isDone
+//        let currentId = currentItem?.id
+//        for item in todoManager.getItems() where currentId == item.id {
+//            currentItem = item
+//        }
+//        guard let item = currentItem else {return}
+//        titleOutlet.text = "Title: \(item.title)"
+//        dateOutlet.text = "Due date: \(item.itemLongDate())"
+//        stateOutlet.isOn = item.isDone
     }
 
 }

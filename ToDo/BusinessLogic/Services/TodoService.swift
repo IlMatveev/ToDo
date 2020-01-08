@@ -8,6 +8,10 @@
 
 import Foundation
 
+enum ServiceError: Error {
+    case searchProblem
+}
+
 final class TodoService {
     static let shared: TodoService = .init()
 
@@ -19,23 +23,20 @@ final class TodoService {
     private init() {
     }
 
-    func getItems() -> [Todo] {
-        return items
+    func getItems(completion: @escaping (Result<[Todo], Error>) -> Void) {
+        DispatchQueue.main.asyncAfter(deadline: .now()+2) {
+            completion(.success(self.items))
+        }
     }
 
-    // TODO: Return optional
-    func getItem(id: UUID) -> Todo {
-        var index = false
-        var item: Todo?
-        for (counter, currentItem) in items.enumerated() where id == currentItem.id {
-            item = items[counter]
-            index = true
-        }
-        if index == true {
-            guard let newItem = item else { fatalError("Failed") }
-            return newItem
-        } else {
-            fatalError("Failed to search item")
+    func getItem(id: UUID, completion: @escaping (Result<Todo, ServiceError>) -> Void) {
+        DispatchQueue.main.asyncAfter(deadline: .now()+1) {
+            var item: Todo
+            for (counter, currentItem) in self.items.enumerated() where id == currentItem.id {
+                item = self.items[counter]
+                return completion(.success(item))
+            }
+            return completion(.failure(.searchProblem))
         }
     }
 

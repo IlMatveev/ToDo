@@ -1,5 +1,5 @@
 //
-//  APIRequest.swift
+//  TodoRepository.swift
 //  ToDo
 //
 //  Created by Ilya Matveev on 07.01.2020.
@@ -14,31 +14,30 @@ enum APIError: Error {
     case encodingProblem
 }
 
-struct APIRequest {
-    let resourceURL: URL
+final class TodoRepository {
 
-    init(endpoint: String) {
-        let resourceString = "http://localhost:3000/items/\(endpoint)"
-        guard let resourceURL = URL(string: resourceString) else { fatalError() }
-
-        self.resourceURL = resourceURL
-    }
-
-    func save(_ toSave: cTodo, completion: @escaping(Result<cTodo, APIError>) -> Void) {
+    func save(_ toSave: Todo, completion: @escaping (Result<Todo, APIError>) -> Void) {
         do {
+            let resourceString = "http://localhost:3000/items/"
+            guard let resourceURL = URL(string: resourceString) else { fatalError() }
+
             var urlRequest = URLRequest(url: resourceURL)
             urlRequest.httpMethod = "POST"
             urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
             urlRequest.httpBody = try JSONEncoder().encode(toSave)
 
             let dataTask = URLSession.shared.dataTask(with: urlRequest) { data, response, _ in
-                guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200, let jsonData = data else {
+                guard
+                    let httpResponse = response as? HTTPURLResponse,
+                    httpResponse.statusCode == 200,
+                    let jsonData = data
+                else {
                     completion(.failure(.responseProblem))
                     return
                 }
 
                 do {
-                    let todoData = try JSONDecoder().decode(cTodo.self, from: jsonData)
+                    let todoData = try JSONDecoder().decode(Todo.self, from: jsonData)
                     completion(.success(todoData))
                 } catch {
                     completion(.failure(.decodingProblem))
