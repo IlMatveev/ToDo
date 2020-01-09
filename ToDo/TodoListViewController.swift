@@ -70,7 +70,7 @@ class TodoListViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            todosSvc.removeItem(at: indexPath.row) {}
+            todosSvc.removeItem(at: indexPath.row) {_ in }
         }
     }
 
@@ -79,7 +79,7 @@ class TodoListViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-        todosSvc.moveItem(fromIndex: fromIndexPath.row, toIndex: to.row) {}
+        todosSvc.moveItem(fromIndex: fromIndexPath.row, toIndex: to.row) {_ in }
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
