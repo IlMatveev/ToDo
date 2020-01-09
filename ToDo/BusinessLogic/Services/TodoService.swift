@@ -43,32 +43,34 @@ final class TodoService {
         }
     }
 
-    func save(item: Todo, completion: @escaping () -> Void) {
+    func save(item: Todo, completion: @escaping (Result<Void, Error>) -> Void) {
         DispatchQueue.main.asyncAfter(deadline: .now()+3) {
             if let index = self.items.firstIndex(where: { item.id == $0.id }) {
                 self.items[index] = item
-                completion()
+                completion(.success(()))
             } else {
                 self.items.append(item)
-                completion()
+                completion(.success(()))
             }
             NotificationCenter.default.post(name: .update, object: nil)
         }
     }
 
-    func removeItem(at index: Int, completion: @escaping () -> Void) {
+    func removeItem(at index: Int, completion: @escaping (Result<Void, Error>) -> Void) {
         DispatchQueue.main.asyncAfter(deadline: .now()+1) {
             self.items.remove(at: index)
             NotificationCenter.default.post(name: .update, object: nil)
+            completion(.success(()))
         }
     }
 
-    func moveItem(fromIndex: Int, toIndex: Int, completion: @escaping () -> Void) {
+    func moveItem(fromIndex: Int, toIndex: Int, completion: @escaping (Result<Void, Error>) -> Void) {
         DispatchQueue.main.asyncAfter(deadline: .now()+1) {
             let from = self.items[fromIndex]
             self.items.remove(at: fromIndex)
             self.items.insert(from, at: toIndex)
-        NotificationCenter.default.post(name: .update, object: nil)
+            NotificationCenter.default.post(name: .update, object: nil)
+            completion(.success(()))
         }
     }
 
