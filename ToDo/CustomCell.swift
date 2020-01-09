@@ -21,7 +21,7 @@ class CustomCell: UITableViewCell {
         currentItem?.isDone = sender.isOn
 
         if let item = currentItem {
-            todoManager.save(item: item)
+            todoManager.save(item: item) {}
         }
     }
 

@@ -36,7 +36,7 @@ final class TodoDetailsViewController: UIViewController {
     @IBAction func stateAction(_ sender: UISwitch) {
         currentItem?.isDone = stateOutlet.isOn
         guard let item = currentItem else {return}
-        todoManager.save(item: item)
+        todoManager.save(item: item) {}
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

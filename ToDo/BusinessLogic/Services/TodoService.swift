@@ -30,35 +30,42 @@ final class TodoService {
     }
 
     func getItem(id: UUID, completion: @escaping (Result<Todo, ServiceError>) -> Void) {
-        DispatchQueue.main.asyncAfter(deadline: .now()+1) {
-            var item: Todo
-            for (counter, currentItem) in self.items.enumerated() where id == currentItem.id {
-                item = self.items[counter]
-                return completion(.success(item))
+        DispatchQueue.global().async {
+            if let item = self.items.first(where: { id == $0.id }) {
+                DispatchQueue.main.async {
+                    completion(.success(item))
+                }
+            } else {
+                completion(.failure(.searchProblem))
             }
-            return completion(.failure(.searchProblem))
         }
     }
 
-    func save(item: Todo) {
-        if let index = items.firstIndex(where: { item.id == $0.id }) {
-            items[index] = item
-        } else {
-            items.append(item)
+    func save(item: Todo, completion: @escaping () -> Void) {
+        DispatchQueue.main.asyncAfter(deadline: .now()+3) {
+            if let index = self.items.firstIndex(where: { item.id == $0.id }) {
+                self.items[index] = item
+            } else {
+                self.items.append(item)
+            }
+            NotificationCenter.default.post(name: .update, object: nil)
         }
-        NotificationCenter.default.post(name: .update, object: nil)
     }
 
-    func removeItem(at index: Int) {
-        items.remove(at: index)
-        NotificationCenter.default.post(name: .update, object: nil)
+    func removeItem(at index: Int, completion: @escaping () -> Void) {
+        DispatchQueue.main.asyncAfter(deadline: .now()+1) {
+            self.items.remove(at: index)
+            NotificationCenter.default.post(name: .update, object: nil)
+        }
     }
 
-    func moveItem(fromIndex: Int, toIndex: Int) {
-        let from = items[fromIndex]
-        items.remove(at: fromIndex)
-        items.insert(from, at: toIndex)
+    func moveItem(fromIndex: Int, toIndex: Int, completion: @escaping () -> Void) {
+        DispatchQueue.main.asyncAfter(deadline: .now()+1) {
+            let from = self.items[fromIndex]
+            self.items.remove(at: fromIndex)
+            self.items.insert(from, at: toIndex)
         NotificationCenter.default.post(name: .update, object: nil)
+        }
     }
 
 }
