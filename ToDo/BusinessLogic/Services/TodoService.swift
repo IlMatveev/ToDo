@@ -47,8 +47,10 @@ final class TodoService {
         DispatchQueue.main.asyncAfter(deadline: .now()+3) {
             if let index = self.items.firstIndex(where: { item.id == $0.id }) {
                 self.items[index] = item
+                completion()
             } else {
                 self.items.append(item)
+                completion()
             }
             NotificationCenter.default.post(name: .update, object: nil)
         }

@@ -16,16 +16,27 @@ final class TodoDetailsViewController: UIViewController {
     @IBOutlet private var titleOutlet: UILabel!
     @IBOutlet private var dateOutlet: UILabel!
 
-    var currentItem: Todo?
+    var currentItem: Todo? {
+        didSet {
+            renderItem()
+        }
+    }
 
     // MARK: - Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        renderItem()
 
         notificationCenter.addObserver(self, selector: #selector(updateItem), name: .update, object: nil)
+    }
 
-        updateItem()
+    private func renderItem () {
+        guard let item = currentItem, isViewLoaded else { return }
+
+        titleOutlet.text = "Title: \(item.title)"
+        dateOutlet.text = "Due date: \(item.itemLongDate())"
+        stateOutlet.isOn = item.isDone
     }
 
     @IBAction func editAction(_ sender: UIBarButtonItem) {
@@ -55,9 +66,6 @@ final class TodoDetailsViewController: UIViewController {
             switch result {
             case .success(let item):
                 self.currentItem = item
-                self.stateOutlet.isOn = item.isDone
-                self.titleOutlet.text = "Title: \(item.title)"
-                self.dateOutlet.text = "Due date: \(item.itemLongDate())"
             case .failure(let error):
                 print(error)
             }
