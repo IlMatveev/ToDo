@@ -30,13 +30,15 @@ final class TodoService {
     }
 
     func getItem(id: UUID, completion: @escaping (Result<Todo, ServiceError>) -> Void) {
-        DispatchQueue.global().async {
+        DispatchQueue.global().asyncAfter(deadline: .now()+5) {
             if let item = self.items.first(where: { id == $0.id }) {
                 DispatchQueue.main.async {
                     completion(.success(item))
                 }
             } else {
-                completion(.failure(.searchProblem))
+                DispatchQueue.main.async {
+                    completion(.failure(.searchProblem))
+                }
             }
         }
     }

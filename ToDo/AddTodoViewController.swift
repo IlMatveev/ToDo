@@ -64,19 +64,9 @@ final class AddTodoViewController: UIViewController {
         var item = currentItem ?? Todo()
         item.title = title
         item.date = datePicker.date
-        todoManager.save(item: item) {}
-
-        dismiss(animated: true, completion: nil)
+        todoManager.save(item: item) {
+            self.dismiss(animated: true, completion: nil)
+        }
     }
-
-//    todosSvc.getItems { result in
-//        switch result {
-//        case .success(let newItems):
-//            self.items = newItems
-//            self.tableView.reloadData()
-//        case .failure(let error):
-//            print(error)
-//        }
-//    }
-
+    
 }
