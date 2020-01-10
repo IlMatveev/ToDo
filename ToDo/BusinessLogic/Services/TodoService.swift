@@ -50,6 +50,14 @@ final class TodoService {
                 completion(.success(()))
             } else {
                 self.items.append(item)
+                TodoRepository.shared.save(toSave: item) { result in
+                    switch result {
+                    case .success:
+                        print("OK")
+                    case .failure(let error):
+                        print(error)
+                    }
+                }
                 completion(.success(()))
             }
             NotificationCenter.default.post(name: .update, object: nil)

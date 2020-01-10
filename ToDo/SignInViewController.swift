@@ -27,7 +27,8 @@ class SignInViewController: UIViewController {
         navigationController?.setNavigationBarHidden(false, animated: false)
 
         signInOutlet.layer.cornerRadius = 6
-        
+
+//        image.layer.shadowPath = 
         image.layer.cornerRadius = 20
         image.layer.shadowRadius = 13.0
         image.layer.shadowOpacity = 0.9

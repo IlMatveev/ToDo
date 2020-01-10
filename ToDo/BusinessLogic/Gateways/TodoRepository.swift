@@ -15,16 +15,19 @@ enum APIError: Error {
 }
 
 final class TodoRepository {
+    static let shared: TodoRepository = .init()
 
-    func save(_ toSave: Todo, completion: @escaping (Result<Todo, APIError>) -> Void) {
+    private init() {
+    }
+
+    func save(toSave item: Todo, completion: @escaping (Result<Todo, APIError>) -> Void) {
         do {
-            let resourceString = "http://localhost:3000/items/"
-            guard let resourceURL = URL(string: resourceString) else { fatalError() }
-
+            guard let resourceURL = URL(string: "http://localhost:3000/items/") else { fatalError() }
+            //http://192.168.1.100/items/
             var urlRequest = URLRequest(url: resourceURL)
             urlRequest.httpMethod = "POST"
             urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
-            urlRequest.httpBody = try JSONEncoder().encode(toSave)
+            urlRequest.httpBody = try JSONEncoder().encode(item)
 
             let dataTask = URLSession.shared.dataTask(with: urlRequest) { data, response, _ in
                 guard
