@@ -60,4 +60,31 @@ final class TodoRepository {
         completion(.success(()))
     }
 
+    func getItems(_ completion: @escaping (Result<[Todo], APIError>) -> Void) {
+        guard let resourceURL = URL(string: "http://localhost:3000/items/") else { fatalError() }
+
+        var urlRequest = URLRequest(url: resourceURL)
+        urlRequest.httpMethod = "GET"
+        urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
+
+        let dataTask = URLSession.shared.dataTask(with: urlRequest) { data, response, _ in
+            guard
+                let httpResponse = response as? HTTPURLResponse,
+                httpResponse.statusCode == 200,
+                let jsonData = data
+                else {
+                    completion(.failure(.responseProblem))
+                    return
+            }
+            do {
+                let todoData = try JSONDecoder().decode([Todo].self, from: jsonData)
+                completion(.success(todoData))
+            } catch {
+                completion(.failure(.decodingProblem))
+            }
+        }
+        dataTask.resume()
+
+    }
+
 }

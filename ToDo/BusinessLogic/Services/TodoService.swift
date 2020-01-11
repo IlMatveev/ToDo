@@ -24,8 +24,15 @@ final class TodoService {
     }
 
     func getItems(completion: @escaping (Result<[Todo], Error>) -> Void) {
-        DispatchQueue.main.asyncAfter(deadline: .now()+2) {
-            completion(.success(self.items))
+        DispatchQueue.main.async {
+            TodoRepository.shared.getItems { result in
+                switch result {
+                case .success(let items):
+                    completion(.success(items))
+                case .failure(let error):
+                    print(error)
+                }
+            }
         }
     }
 
@@ -64,10 +71,8 @@ final class TodoService {
         }
     }
 
-    func removeItem(at index: Int, completion: @escaping (Result<Void, Error>) -> Void) {
+    func removeItem(id: UUID, completion: @escaping (Result<Void, Error>) -> Void) {
         DispatchQueue.main.asyncAfter(deadline: .now()+1) {
-            let id = self.items[index].id
-            self.items.remove(at: index)
             TodoRepository.shared.remove(id: id) {_ in }
             NotificationCenter.default.post(name: .update, object: nil)
             completion(.success(()))

@@ -70,7 +70,8 @@ class TodoListViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            todosSvc.removeItem(at: indexPath.row) {_ in }
+            let currentId = items[indexPath.row].id
+            todosSvc.removeItem(id: currentId) {_ in }
         }
     }
 

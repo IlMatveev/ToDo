@@ -28,7 +28,7 @@ class SignInViewController: UIViewController {
 
         signInOutlet.layer.cornerRadius = 6
 
-        image.layer.cornerRadius = 20
+        image.layer.cornerRadius = 8
         image.layer.shadowPath = UIBezierPath(rect: image.bounds).cgPath
         image.layer.shadowRadius = 5
         image.layer.shadowOffset = .zero
