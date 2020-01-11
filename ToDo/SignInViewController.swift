@@ -28,11 +28,11 @@ class SignInViewController: UIViewController {
 
         signInOutlet.layer.cornerRadius = 6
 
-//        image.layer.shadowPath = 
         image.layer.cornerRadius = 20
-        image.layer.shadowRadius = 13.0
-        image.layer.shadowOpacity = 0.9
-        image.layer.shadowOffset = CGSize.zero
+        image.layer.shadowPath = UIBezierPath(rect: image.bounds).cgPath
+        image.layer.shadowRadius = 5
+        image.layer.shadowOffset = .zero
+        image.layer.shadowOpacity = 1
 
         loginOutlet.inputAccessoryView = toolBarOutlet
         passwordOutlet.inputAccessoryView = toolBarOutlet

@@ -66,7 +66,9 @@ final class TodoService {
 
     func removeItem(at index: Int, completion: @escaping (Result<Void, Error>) -> Void) {
         DispatchQueue.main.asyncAfter(deadline: .now()+1) {
+            let id = self.items[index].id
             self.items.remove(at: index)
+            TodoRepository.shared.remove(id: id) {_ in }
             NotificationCenter.default.post(name: .update, object: nil)
             completion(.success(()))
         }

@@ -23,7 +23,7 @@ final class TodoRepository {
     func save(toSave item: Todo, completion: @escaping (Result<Todo, APIError>) -> Void) {
         do {
             guard let resourceURL = URL(string: "http://localhost:3000/items/") else { fatalError() }
-            //http://192.168.1.100/items/
+
             var urlRequest = URLRequest(url: resourceURL)
             urlRequest.httpMethod = "POST"
             urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -50,6 +50,14 @@ final class TodoRepository {
         } catch {
             completion(.failure(.encodingProblem))
         }
+    }
+
+    func remove(id: UUID, completion: @escaping (Result<Void, APIError>) -> Void) {
+        guard let resourceURL = URL(string: "http://localhost:3000/items/\(id)") else { fatalError() }
+        var urlRequest = URLRequest(url: resourceURL)
+        urlRequest.httpMethod = "DELETE"
+        urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        completion(.success(()))
     }
 
 }
