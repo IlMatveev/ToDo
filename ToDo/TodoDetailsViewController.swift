@@ -9,7 +9,7 @@
 import UIKit
 
 final class TodoDetailsViewController: UIViewController {
-    private let todoManager: TodoService = .shared
+    private let todoRps: TodoRepository = .shared
     private let notificationCenter: NotificationCenter = .default
 
     @IBOutlet private var stateOutlet: UISwitch!
@@ -62,7 +62,7 @@ final class TodoDetailsViewController: UIViewController {
     @objc func updateItem() {
         guard let currentId = currentItem?.id else { return }
 
-        todoManager.getItem(id: currentId) { result in
+        todoRps.getItem(id: currentId) { result in
             switch result {
             case .success(let item):
                 self.currentItem = item

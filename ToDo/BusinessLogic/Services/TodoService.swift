@@ -23,33 +23,6 @@ final class TodoService {
     private init() {
     }
 
-    func getItems(completion: @escaping (Result<[Todo], Error>) -> Void) {
-        DispatchQueue.main.async {
-            TodoRepository.shared.getItems { result in
-                switch result {
-                case .success(let items):
-                    completion(.success(items))
-                case .failure(let error):
-                    print(error)
-                }
-            }
-        }
-    }
-
-    func getItem(id: UUID, completion: @escaping (Result<Todo, ServiceError>) -> Void) {
-        DispatchQueue.global().async {
-            if let item = self.items.first(where: { id == $0.id }) {
-                DispatchQueue.main.async {
-                    completion(.success(item))
-                }
-            } else {
-                DispatchQueue.main.async {
-                    completion(.failure(.searchProblem))
-                }
-            }
-        }
-    }
-
     func moveItem(fromIndex: Int, toIndex: Int, completion: @escaping (Result<Void, Error>) -> Void) {
         DispatchQueue.main.async {
             let from = self.items[fromIndex]

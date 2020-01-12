@@ -16,7 +16,7 @@ extension NSNotification.Name {
 class TodoListViewController: UITableViewController {
     // MARK: - Dependencies
     private let notificationCenter: NotificationCenter = .default
-    private let todosSvc: TodoService = .shared
+    private let todoRps: TodoRepository = .shared
     private var items: [Todo] = []
 
     // MARK: - Outlets
@@ -71,7 +71,7 @@ class TodoListViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let currentId = items[indexPath.row].id
-            TodoRepository.shared.remove(id: currentId) {_ in }
+            todoRps.remove(id: currentId) {_ in }
         }
     }
 
@@ -80,7 +80,7 @@ class TodoListViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-        todosSvc.moveItem(fromIndex: fromIndexPath.row, toIndex: to.row) {_ in }
+        TodoService.shared.moveItem(fromIndex: fromIndexPath.row, toIndex: to.row) {_ in }
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -93,14 +93,14 @@ class TodoListViewController: UITableViewController {
     }
 
     @objc func updateData() {
-        todosSvc.getItems { result in
+        todoRps.getItems { result in
             switch result {
             case .success(let newItems):
                 self.items = newItems
-                self.tableView.reloadData()
             case .failure(let error):
                 print(error)
             }
         }
+        tableView.reloadData()
     }
 }
