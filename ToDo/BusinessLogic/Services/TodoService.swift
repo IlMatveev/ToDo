@@ -37,7 +37,7 @@ final class TodoService {
     }
 
     func getItem(id: UUID, completion: @escaping (Result<Todo, ServiceError>) -> Void) {
-        DispatchQueue.global().asyncAfter(deadline: .now()+5) {
+        DispatchQueue.global().async {
             if let item = self.items.first(where: { id == $0.id }) {
                 DispatchQueue.main.async {
                     completion(.success(item))
@@ -50,43 +50,14 @@ final class TodoService {
         }
     }
 
-    func save(item: Todo, completion: @escaping (Result<Void, Error>) -> Void) {
-        DispatchQueue.main.asyncAfter(deadline: .now()+3) {
-            if let index = self.items.firstIndex(where: { item.id == $0.id }) {
-                self.items[index] = item
-                completion(.success(()))
-            } else {
-                self.items.append(item)
-                TodoRepository.shared.save(toSave: item) { result in
-                    switch result {
-                    case .success:
-                        print("OK")
-                    case .failure(let error):
-                        print(error)
-                    }
-                }
-                completion(.success(()))
-            }
-            NotificationCenter.default.post(name: .update, object: nil)
-        }
-    }
-
-    func removeItem(id: UUID, completion: @escaping (Result<Void, Error>) -> Void) {
-        DispatchQueue.main.asyncAfter(deadline: .now()+1) {
-            TodoRepository.shared.remove(id: id) {_ in }
-            NotificationCenter.default.post(name: .update, object: nil)
-            completion(.success(()))
-        }
-    }
-
     func moveItem(fromIndex: Int, toIndex: Int, completion: @escaping (Result<Void, Error>) -> Void) {
-        DispatchQueue.main.asyncAfter(deadline: .now()+1) {
+        DispatchQueue.main.async {
             let from = self.items[fromIndex]
             self.items.remove(at: fromIndex)
             self.items.insert(from, at: toIndex)
-            NotificationCenter.default.post(name: .update, object: nil)
             completion(.success(()))
         }
+        NotificationCenter.default.post(name: .update, object: nil)
     }
 
 }

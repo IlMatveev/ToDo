@@ -64,9 +64,8 @@ final class AddTodoViewController: UIViewController {
         var item = currentItem ?? Todo()
         item.title = title
         item.date = datePicker.date
-        todoManager.save(item: item) {_ in 
+        TodoRepository.shared.save(toSave: item) {_ in
             self.dismiss(animated: true, completion: nil)
         }
     }
-    
 }
