@@ -20,39 +20,6 @@ final class TodoRepository {
     private init() {
     }
 
-//    func save(toSave item: Todo, completion: @escaping (Result<Todo, APIError>) -> Void) {
-//        do {
-//            guard let resourceURL = URL(string: "http://localhost:3000/items/") else { fatalError() }
-//
-//            var urlRequest = URLRequest(url: resourceURL)
-//            urlRequest.httpMethod = "POST"
-//            urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
-//
-//            urlRequest.httpBody = try JSONEncoder().encode(item)
-//
-//            let dataTask = URLSession.shared.dataTask(with: urlRequest) { data, response, _ in
-//                guard
-//                    let httpResponse = response as? HTTPURLResponse,
-//                    httpResponse.statusCode == 200,
-//                    let jsonData = data
-//                else {
-//                    completion(.failure(.responseProblem))
-//                    return
-//                }
-//
-//                do {
-//                    let todoData = try JSONDecoder().decode(Todo.self, from: jsonData)
-//                    completion(.success(todoData))
-//                } catch {
-//                    completion(.failure(.decodingProblem))
-//                }
-//            }
-//            dataTask.resume()
-//        } catch {
-//            completion(.failure(.encodingProblem))
-//        }
-//    }
-
     func save(toSave item: Todo, completion: @escaping (Result<Void, APIError>) -> Void) {
         do {
             if let itemURL = URL(string: "http://localhost:3000/items/\(item.id)") {
@@ -106,7 +73,34 @@ final class TodoRepository {
             }
         }
         dataTask.resume()
+    }
 
+    func getItem(id: UUID, completion: @escaping (Result<Todo, APIError>) -> Void) {
+
+        if let resourceURL = URL(string: "http://localhost:3000/items/\(id)") {
+            var urlRequest = URLRequest(url: resourceURL)
+            urlRequest.httpMethod = "GET"
+            urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
+
+            let dataTask = URLSession.shared.dataTask(with: urlRequest) { data, response, _ in
+                guard
+                    let httpResponse = response as? HTTPURLResponse,
+                    httpResponse.statusCode == 200,
+                    let jsonData = data
+                    else {
+                        completion(.failure(.responseProblem))
+                        return
+                }
+                do {
+                    let todoData = try JSONDecoder().decode(Todo.self, from: jsonData)
+                    completion(.success(todoData))
+                } catch {
+                    completion(.failure(.decodingProblem))
+                }
+            }
+            dataTask.resume()
+        } else { return }
+        NotificationCenter.default.post(name: .update, object: nil)
     }
 
 }
