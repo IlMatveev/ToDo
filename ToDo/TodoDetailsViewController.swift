@@ -62,7 +62,7 @@ final class TodoDetailsViewController: UIViewController {
     @objc func updateItem() {
         guard let currentId = currentItem?.id else { return }
 
-        todoRps.getItem(id: currentId) { result in
+        todoSrv.getItem(id: currentId) { result in
             switch result {
             case .success(let item):
                 self.currentItem = item

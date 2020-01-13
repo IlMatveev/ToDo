@@ -93,8 +93,15 @@ class TodoListViewController: UITableViewController {
     }
 
     @objc func updateData() {
-        items = todoSrv.getItems()
-        tableView.reloadData()
+        todoSrv.getItems { result in
+            switch result {
+            case .success(let items):
+                self.items = items
+                self.tableView.reloadData()
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
 
 }

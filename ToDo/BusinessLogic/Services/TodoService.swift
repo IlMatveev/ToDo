@@ -25,36 +25,38 @@ final class TodoService {
 
     func save(item: Todo) {
         if item.id != nil {
-            TodoRepository.shared.update(toUpdate: item) {_ in }
+            TodoRepository.shared.update(toUpdate: item) {_ in
+                NotificationCenter.default.post(name: .update, object: nil)
+            }
         } else {
-            TodoRepository.shared.save(toSave: item) {_ in }
+            TodoRepository.shared.save(toSave: item) {_ in
+                NotificationCenter.default.post(name: .update, object: nil)
+            }
         }
-        NotificationCenter.default.post(name: .update, object: nil)
     }
 
-    func getItem(id: String) -> Todo {
+    func getItem(id: String, completion: @escaping (Result<Todo, Error>) -> Void) {
         TodoRepository.shared.getItem(id: id) { result in
             switch result {
             case .success(let newItem):
-                return newItem
-                NotificationCenter.default.post(name: .update, object: nil)
+                completion(.success(newItem))
+              //  NotificationCenter.default.post(name: .update, object: nil)
             case .failure(let error):
-                print(error)
+                completion(.failure(error))
             }
         }
     }
 
-    func getItems() -> [Todo] {
+    func getItems(_ completion: @escaping (Result<[Todo], Error>) -> Void) {
         TodoRepository.shared.getItems { result in
             switch result {
             case .success(let newItems):
-                self.items = newItems
+                completion(.success(newItems))
+                //NotificationCenter.default.post(name: .update, object: nil)
             case .failure(let error):
-                print(error)
+                completion(.failure(error))
             }
         }
-        NotificationCenter.default.post(name: .update, object: nil)
-        return items
     }
 
     func remove(id: String) {
