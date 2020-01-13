@@ -16,7 +16,7 @@ extension NSNotification.Name {
 class TodoListViewController: UITableViewController {
     // MARK: - Dependencies
     private let notificationCenter: NotificationCenter = .default
-    private let todoRps: TodoRepository = .shared
+    private let todoSrv: TodoService = .shared
     private var items: [Todo] = []
 
     // MARK: - Outlets
@@ -70,8 +70,8 @@ class TodoListViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let currentId = items[indexPath.row].id
-            todoRps.remove(id: currentId) {_ in }
+            guard let currentId = items[indexPath.row].id else { return }
+            todoSrv.remove(id: currentId)
         }
     }
 
@@ -80,7 +80,7 @@ class TodoListViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-        TodoService.shared.moveItem(fromIndex: fromIndexPath.row, toIndex: to.row) {_ in }
+        todoSrv.moveItem(fromIndex: fromIndexPath.row, toIndex: to.row)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -93,14 +93,8 @@ class TodoListViewController: UITableViewController {
     }
 
     @objc func updateData() {
-        todoRps.getItems { result in
-            switch result {
-            case .success(let newItems):
-                self.items = newItems
-            case .failure(let error):
-                print(error)
-            }
-        }
+        items = todoSrv.getItems()
         tableView.reloadData()
     }
+
 }

@@ -9,7 +9,7 @@
 import UIKit
 
 final class TodoDetailsViewController: UIViewController {
-    private let todoRps: TodoRepository = .shared
+    private let todoSrv: TodoService = .shared
     private let notificationCenter: NotificationCenter = .default
 
     @IBOutlet private var stateOutlet: UISwitch!
@@ -47,7 +47,7 @@ final class TodoDetailsViewController: UIViewController {
     @IBAction func stateAction(_ sender: UISwitch) {
         currentItem?.isDone = stateOutlet.isOn
         guard let item = currentItem else {return}
-        TodoRepository.shared.save(toSave: item) {_ in }
+        todoSrv.save(item: item)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

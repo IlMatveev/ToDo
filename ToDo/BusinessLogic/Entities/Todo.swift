@@ -9,7 +9,7 @@
 import Foundation
 
 struct Todo: Codable {
-    var id: UUID = .init()
+    var id: String?
     var title: String = ""
     var date: Date?
     var isDone: Bool = false

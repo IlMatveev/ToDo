@@ -23,13 +23,49 @@ final class TodoService {
     private init() {
     }
 
-    func moveItem(fromIndex: Int, toIndex: Int, completion: @escaping (Result<Void, Error>) -> Void) {
-        DispatchQueue.main.async {
-            let from = self.items[fromIndex]
-            self.items.remove(at: fromIndex)
-            self.items.insert(from, at: toIndex)
-            completion(.success(()))
+    func save(item: Todo) {
+        if item.id != nil {
+            TodoRepository.shared.update(toUpdate: item) {_ in }
+        } else {
+            TodoRepository.shared.save(toSave: item) {_ in }
         }
+        NotificationCenter.default.post(name: .update, object: nil)
+    }
+
+    func getItem(id: String) -> Todo {
+        TodoRepository.shared.getItem(id: id) { result in
+            switch result {
+            case .success(let newItem):
+                return newItem
+                NotificationCenter.default.post(name: .update, object: nil)
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+
+    func getItems() -> [Todo] {
+        TodoRepository.shared.getItems { result in
+            switch result {
+            case .success(let newItems):
+                self.items = newItems
+            case .failure(let error):
+                print(error)
+            }
+        }
+        NotificationCenter.default.post(name: .update, object: nil)
+        return items
+    }
+
+    func remove(id: String) {
+        TodoRepository.shared.remove(id: id) {_ in }
+        NotificationCenter.default.post(name: .update, object: nil)
+    }
+
+    func moveItem(fromIndex: Int, toIndex: Int) {
+        let from = self.items[fromIndex]
+        self.items.remove(at: fromIndex)
+        self.items.insert(from, at: toIndex)
         NotificationCenter.default.post(name: .update, object: nil)
     }
 
