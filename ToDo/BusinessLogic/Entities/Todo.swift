@@ -9,7 +9,7 @@
 import Foundation
 
 struct Todo: Codable {
-    var id: String?
+    var id: Int?
     var title: String = ""
     var date: Date?
     var isDone: Bool = false

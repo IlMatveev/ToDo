@@ -18,7 +18,7 @@ extension Optional {
 }
 
 final class AddTodoViewController: UIViewController {
-    private let todoRps: TodoRepository = .shared
+    private let todoSrv: TodoService = .shared
     private let notificationCenter: NotificationCenter = .default
 
     @IBOutlet private var textField: UITextField!
@@ -64,8 +64,7 @@ final class AddTodoViewController: UIViewController {
         var item = currentItem ?? Todo()
         item.title = title
         item.date = datePicker.date
-        todoRps.save(toSave: item) {_ in
-            self.dismiss(animated: true, completion: nil)
-        }
+        todoSrv.save(item: item) { _ in }
+        dismiss(animated: true, completion: nil)
     }
 }

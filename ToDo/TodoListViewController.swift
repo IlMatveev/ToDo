@@ -71,7 +71,7 @@ class TodoListViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             guard let currentId = items[indexPath.row].id else { return }
-            todoSrv.remove(id: currentId)
+            todoSrv.remove(id: currentId) { _ in }
         }
     }
 
@@ -79,9 +79,9 @@ class TodoListViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
     }
 
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-        todoSrv.moveItem(fromIndex: fromIndexPath.row, toIndex: to.row)
-    }
+//    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
+//        todoSrv.moveItem(fromIndex: fromIndexPath.row, toIndex: to.row)
+//    }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard

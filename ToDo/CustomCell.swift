@@ -9,7 +9,7 @@
 import UIKit
 
 class CustomCell: UITableViewCell {
-    private let todoRps: TodoRepository = .shared
+    private let todoSrv: TodoService = .shared
 
     @IBOutlet private var titleLabel: UILabel!
     @IBOutlet private var dateLabel: UILabel!
@@ -21,7 +21,7 @@ class CustomCell: UITableViewCell {
         currentItem?.isDone = sender.isOn
 
         if let item = currentItem {
-            todoRps.save(toSave: item) {_ in }
+            todoSrv.save(item: item) { _ in }
         }
     }
 
