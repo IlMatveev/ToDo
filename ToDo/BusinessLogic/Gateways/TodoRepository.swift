@@ -21,28 +21,26 @@ final class TodoRepository {
     }
 
     func save(toSave item: Todo, completion: @escaping (Result<Void, APIError>) -> Void) {
+        guard let resourceURL = URL(string: "http://localhost:3000/items/") else { return }
+        var urlRequest = URLRequest(url: resourceURL)
+        urlRequest.httpMethod = "POST"
+        urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        urlRequest.httpBody = try? JSONEncoder().encode(item)
 
-            guard let resourceURL = URL(string: "http://localhost:3000/items/") else { return }
-            var urlRequest = URLRequest(url: resourceURL)
-            urlRequest.httpMethod = "POST"
-            urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
-            urlRequest.httpBody = try? JSONEncoder().encode(item)
-
-            let dataTask = URLSession.shared.dataTask(with: urlRequest) { _, response, _ in
-                guard
-                    let httpResponse = response as? HTTPURLResponse,
-                    httpResponse.statusCode == 200
-                else {
-                    completion(.failure(.responseProblem))
-                    return
-                }
-                completion(.success(()))
+        let dataTask = URLSession.shared.dataTask(with: urlRequest) { _, response, _ in
+            guard
+                let httpResponse = response as? HTTPURLResponse,
+                httpResponse.statusCode == 200
+            else {
+                completion(.failure(.responseProblem))
+                return
             }
-            dataTask.resume()
+            completion(.success(()))
+        }
+        dataTask.resume()
     }
 
     func update(toUpdate item: Todo, completion: @escaping (Result<Void, APIError>) -> Void) {
-
         guard
             let id = item.id,
             let resourceURL = URL(string: "http://localhost:3000/items/\(id)")
@@ -70,7 +68,18 @@ final class TodoRepository {
         var urlRequest = URLRequest(url: resourceURL)
         urlRequest.httpMethod = "DELETE"
         urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        completion(.success(()))
+
+        let dataTask = URLSession.shared.dataTask(with: urlRequest) { _, response, _ in
+            guard
+                let httpResponse = response as? HTTPURLResponse,
+                httpResponse.statusCode == 200
+            else {
+                completion(.failure(.responseProblem))
+                return
+            }
+            completion(.success(()))
+        }
+        dataTask.resume()
     }
 
     func getItems(_ completion: @escaping (Result<[Todo], APIError>) -> Void) {
