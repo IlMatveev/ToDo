@@ -21,20 +21,26 @@ final class TodoService {
     func save(item: Todo, completion: @escaping (Result<Void, Error>) -> Void) {
         if item.id != nil {
             TodoRepository.shared.update(toUpdate: item) { result in
-                NotificationCenter.default.post(name: .update, object: nil)
-                completion(result.mapError { $0 })
+                DispatchQueue.main.async {
+                    NotificationCenter.default.post(name: .update, object: nil)
+                    completion(result.mapError { $0 })
+                }
             }
         } else {
             TodoRepository.shared.save(toSave: item) { result in
-                NotificationCenter.default.post(name: .update, object: nil)
-                completion(result.mapError { $0 })
+                DispatchQueue.main.async {
+                    NotificationCenter.default.post(name: .update, object: nil)
+                    completion(result.mapError { $0 })
+                }
             }
         }
     }
 
     func getItem(id: Int, completion: @escaping (Result<Todo, Error>) -> Void) {
         TodoRepository.shared.getItem(id: id) { result in
-            completion(result.mapError { $0 })
+            DispatchQueue.main.async {
+                completion(result.mapError { $0 })
+            }
         }
     }
 
@@ -48,8 +54,10 @@ final class TodoService {
 
     func remove(id: Int, completion: @escaping (Result<Void, Error>) -> Void) {
         TodoRepository.shared.remove(id: id) { result in
-            NotificationCenter.default.post(name: .update, object: nil)
-            completion(result.mapError { $0 })
+            DispatchQueue.main.async {
+                NotificationCenter.default.post(name: .update, object: nil)
+                completion(result.mapError { $0 })
+            }
         }
     }
 

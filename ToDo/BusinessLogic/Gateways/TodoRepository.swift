@@ -28,7 +28,7 @@ final class TodoRepository {
             urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
             urlRequest.httpBody = try? JSONEncoder().encode(item)
 
-            let dataTask = URLSession.shared.dataTask(with: urlRequest) { item, response, _ in
+            let dataTask = URLSession.shared.dataTask(with: urlRequest) { _, response, _ in
                 guard
                     let httpResponse = response as? HTTPURLResponse,
                     httpResponse.statusCode == 200
@@ -42,18 +42,27 @@ final class TodoRepository {
     }
 
     func update(toUpdate item: Todo, completion: @escaping (Result<Void, APIError>) -> Void) {
-        do {
-            guard
-                let id = item.id,
-                let resourceURL = URL(string: "http://localhost:3000/items/\(id)")
+
+        guard
+            let id = item.id,
+            let resourceURL = URL(string: "http://localhost:3000/items/\(id)")
             else { return }
-            var urlRequest = URLRequest(url: resourceURL)
-            urlRequest.httpMethod = "PUT"
-            urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
-            urlRequest.httpBody = try JSONEncoder().encode(item)
-        } catch {
-            completion(.failure(.encodingProblem))
+        var urlRequest = URLRequest(url: resourceURL)
+        urlRequest.httpMethod = "PUT"
+        urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        urlRequest.httpBody = try? JSONEncoder().encode(item)
+
+        let dataTask = URLSession.shared.dataTask(with: urlRequest) { _, response, _ in
+            guard
+                let httpResponse = response as? HTTPURLResponse,
+                httpResponse.statusCode == 200
+            else {
+                completion(.failure(.responseProblem))
+                return
+            }
+            completion(.success(()))
         }
+        dataTask.resume()
     }
 
     func remove(id: Int, completion: @escaping (Result<Void, APIError>) -> Void) {
