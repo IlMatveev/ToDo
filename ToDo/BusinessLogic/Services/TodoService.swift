@@ -18,16 +18,16 @@ final class TodoService {
     private init() {
     }
 
-    func save(item: Todo, completion: @escaping (Result<Void, Error>) -> Void) {
+    func save(inFolder idF: Int, item: Todo, completion: @escaping (Result<Void, Error>) -> Void) {
         if item.id != nil {
-            TodoRepository.shared.update(toUpdate: item) { result in
+            TodoRepository.shared.update(toUpdate: item, inFolder: idF) { result in
                 DispatchQueue.main.async {
                     NotificationCenter.default.post(name: .update, object: nil)
                     completion(result.mapError { $0 })
                 }
             }
         } else {
-            TodoRepository.shared.save(toSave: item) { result in
+            TodoRepository.shared.save(toSave: item, inFolder: idF) { result in
                 DispatchQueue.main.async {
                     NotificationCenter.default.post(name: .update, object: nil)
                     completion(result.mapError { $0 })
@@ -36,24 +36,24 @@ final class TodoService {
         }
     }
 
-    func getItem(id: Int, completion: @escaping (Result<Todo, Error>) -> Void) {
-        TodoRepository.shared.getItem(id: id) { result in
+    func getItem(inFolder idF: Int, id: Int, completion: @escaping (Result<Todo, Error>) -> Void) {
+        TodoRepository.shared.getItem(inFolder: idF, id: id) { result in
             DispatchQueue.main.async {
                 completion(result.mapError { $0 })
             }
         }
     }
 
-    func getItems(_ completion: @escaping (Result<[Todo], Error>) -> Void) {
-        TodoRepository.shared.getItems { result in
+    func getItems(inFolder idF: Int, completion: @escaping (Result<[Todo], Error>) -> Void) {
+        TodoRepository.shared.getItems(inFolder: idF) { result in
             DispatchQueue.main.async {
                 completion(result.mapError { $0 })
             }
         }
     }
 
-    func remove(id: Int, completion: @escaping (Result<Void, Error>) -> Void) {
-        TodoRepository.shared.remove(id: id) { result in
+    func remove(inFolder idF: Int, id: Int, completion: @escaping (Result<Void, Error>) -> Void) {
+        TodoRepository.shared.remove(inFolder: idF, id: id) { result in
             DispatchQueue.main.async {
                 NotificationCenter.default.post(name: .update, object: nil)
                 completion(result.mapError { $0 })

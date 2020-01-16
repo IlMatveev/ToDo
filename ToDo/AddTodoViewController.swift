@@ -51,9 +51,6 @@ final class AddTodoViewController: UIViewController {
         dateField.text = DateFormatter.long.string(from: datePicker.date)
     }
 
-    @IBAction func textAction(_ sender: UITextField) {
-    }
-
     @IBAction func cancelAction(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
     }

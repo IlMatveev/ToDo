@@ -36,8 +36,8 @@ final class FolderRepository {
 
     func update(toUpdate folder: Folder, completion: @escaping (Result<Void, APIError>) -> Void) {
         guard
-            let id = folder.id,
-            let resourceURL = URL(string: "http://localhost:3000/folders/\(id)")
+            let idF = folder.id,
+            let resourceURL = URL(string: "http://localhost:3000/folders/\(idF)")
             else { return }
         var urlRequest = URLRequest(url: resourceURL)
         urlRequest.httpMethod = "PUT"
@@ -57,8 +57,8 @@ final class FolderRepository {
         dataTask.resume()
     }
 
-    func remove(id: Int, completion: @escaping (Result<Void, APIError>) -> Void) {
-        guard let resourceURL = URL(string: "http://localhost:3000/folders/\(id)") else { fatalError() }
+    func remove(idF: Int, completion: @escaping (Result<Void, APIError>) -> Void) {
+        guard let resourceURL = URL(string: "http://localhost:3000/folders/\(idF)") else { fatalError() }
         var urlRequest = URLRequest(url: resourceURL)
         urlRequest.httpMethod = "DELETE"
         urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -103,9 +103,9 @@ final class FolderRepository {
         dataTask.resume()
     }
 
-    func getFolder(id: Int, completion: @escaping (Result<Folder, APIError>) -> Void) {
+    func getFolder(idF: Int, completion: @escaping (Result<Folder, APIError>) -> Void) {
 
-        if let resourceURL = URL(string: "http://localhost:3000/folders/\(id)") {
+        if let resourceURL = URL(string: "http://localhost:3000/folders/\(idF)") {
             var urlRequest = URLRequest(url: resourceURL)
             urlRequest.httpMethod = "GET"
             urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")

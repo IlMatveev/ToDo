@@ -123,8 +123,8 @@
 		C796534D23ABC0AB00288168 /* Gateways */ = {
 			isa = PBXGroup;
 			children = (
-				C7C16C9623C526D8004C6F74 /* TodoRepository.swift */,
 				C796402223D08D30001E723B /* FolderRepository.swift */,
+				C7C16C9623C526D8004C6F74 /* TodoRepository.swift */,
 			);
 			path = Gateways;
 			sourceTree = "<group>";

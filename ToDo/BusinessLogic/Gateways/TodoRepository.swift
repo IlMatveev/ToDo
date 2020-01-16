@@ -20,8 +20,8 @@ final class TodoRepository {
     private init() {
     }
 
-    func save(toSave item: Todo, completion: @escaping (Result<Void, APIError>) -> Void) {
-        guard let resourceURL = URL(string: "http://localhost:3000/items/") else { return }
+    func save(toSave item: Todo, inFolder idF: Int, completion: @escaping (Result<Void, APIError>) -> Void) {
+        guard let resourceURL = URL(string: "http://localhost:3000/folders/\(idF)/items/") else { return }
         var urlRequest = URLRequest(url: resourceURL)
         urlRequest.httpMethod = "POST"
         urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -40,10 +40,10 @@ final class TodoRepository {
         dataTask.resume()
     }
 
-    func update(toUpdate item: Todo, completion: @escaping (Result<Void, APIError>) -> Void) {
+    func update(toUpdate item: Todo, inFolder idF: Int, completion: @escaping (Result<Void, APIError>) -> Void) {
         guard
             let id = item.id,
-            let resourceURL = URL(string: "http://localhost:3000/items/\(id)")
+            let resourceURL = URL(string: "http://localhost:3000/folders/\(idF)/items/\(id)")
             else { return }
         var urlRequest = URLRequest(url: resourceURL)
         urlRequest.httpMethod = "PUT"
@@ -63,8 +63,8 @@ final class TodoRepository {
         dataTask.resume()
     }
 
-    func remove(id: Int, completion: @escaping (Result<Void, APIError>) -> Void) {
-        guard let resourceURL = URL(string: "http://localhost:3000/items/\(id)") else { fatalError() }
+    func remove(inFolder idF: Int, id: Int, completion: @escaping (Result<Void, APIError>) -> Void) {
+        guard let resourceURL = URL(string: "http://localhost:3000/folders/\(idF)/items/\(id)") else { fatalError() }
         var urlRequest = URLRequest(url: resourceURL)
         urlRequest.httpMethod = "DELETE"
         urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -82,8 +82,8 @@ final class TodoRepository {
         dataTask.resume()
     }
 
-    func getItems(_ completion: @escaping (Result<[Todo], APIError>) -> Void) {
-        guard let resourceURL = URL(string: "http://localhost:3000/items/") else { fatalError() }
+    func getItems(inFolder idF: Int, completion: @escaping (Result<[Todo], APIError>) -> Void) {
+        guard let resourceURL = URL(string: "http://localhost:3000/folders/\(idF)/items/") else { fatalError() }
 
         var urlRequest = URLRequest(url: resourceURL)
         urlRequest.httpMethod = "GET"
@@ -109,9 +109,9 @@ final class TodoRepository {
         dataTask.resume()
     }
 
-    func getItem(id: Int, completion: @escaping (Result<Todo, APIError>) -> Void) {
+    func getItem(inFolder idF: Int, id: Int, completion: @escaping (Result<Todo, APIError>) -> Void) {
 
-        if let resourceURL = URL(string: "http://localhost:3000/items/\(id)") {
+        if let resourceURL = URL(string: "http://localhost:3000/folders/\(idF)/items/\(id)") {
             var urlRequest = URLRequest(url: resourceURL)
             urlRequest.httpMethod = "GET"
             urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")

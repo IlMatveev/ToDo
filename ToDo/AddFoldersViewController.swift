@@ -38,9 +38,9 @@ class AddFoldersViewController: UIViewController {
     @IBAction func saveAction(_ sender: UIBarButtonItem) {
         guard let title = folderTitle.text else { return }
 
-        var folder = currentFolder
-        folder?.name = title
-
+        var folder = currentFolder ?? Folder()
+        folder.name = title
+        FolderRepository.shared.save(toSave: folder) { _ in }
         dismiss(animated: true, completion: nil)
     }
     
