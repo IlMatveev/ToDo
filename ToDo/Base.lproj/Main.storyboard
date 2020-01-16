@@ -7,6 +7,45 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Add Folder-->
+        <scene sceneID="ueb-lX-OGp">
+            <objects>
+                <viewController id="nai-82-800" customClass="AddFoldersViewController" customModule="ToDo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="EOs-NW-XQ5">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pqO-r4-PM0">
+                                <rect key="frame" x="20" y="64" width="38" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iEX-ZC-aPV">
+                                <rect key="frame" x="20" y="93" width="251.5" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="iEX-ZC-aPV" firstAttribute="top" secondItem="pqO-r4-PM0" secondAttribute="bottom" constant="8" id="0L1-FK-yym"/>
+                            <constraint firstItem="pqO-r4-PM0" firstAttribute="top" secondItem="IxM-AH-XQ0" secondAttribute="top" constant="20" id="BPm-E9-OGH"/>
+                            <constraint firstItem="pqO-r4-PM0" firstAttribute="leading" secondItem="iEX-ZC-aPV" secondAttribute="leading" id="Jef-DC-LZm"/>
+                            <constraint firstItem="iEX-ZC-aPV" firstAttribute="leading" secondItem="IxM-AH-XQ0" secondAttribute="leading" constant="20" id="RTE-du-haR"/>
+                            <constraint firstItem="iEX-ZC-aPV" firstAttribute="width" secondItem="IxM-AH-XQ0" secondAttribute="width" multiplier="0.67" id="aXe-uv-6WK"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="IxM-AH-XQ0"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Add Folder" id="RP3-f9-KeX">
+                        <barButtonItem key="leftBarButtonItem" style="plain" systemItem="cancel" id="dfn-Ka-pVv"/>
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="save" id="QTD-x8-Rgp"/>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pyM-Qt-nBC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5502" y="-585"/>
+        </scene>
         <!--ToDo-->
         <scene sceneID="vIc-Md-enj">
             <objects>
@@ -83,7 +122,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tBJ-F2-J68" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3676.811594202899" y="121.875"/>
+            <point key="canvasLocation" x="5046" y="122"/>
         </scene>
         <!--Add ToDo-->
         <scene sceneID="Lau-eZ-DVB">
@@ -175,7 +214,7 @@
                     </connections>
                 </datePicker>
             </objects>
-            <point key="canvasLocation" x="6568.115942028986" y="383.70535714285711"/>
+            <point key="canvasLocation" x="6684" y="384"/>
         </scene>
         <!--Details-->
         <scene sceneID="Mnn-Uf-087">
@@ -234,7 +273,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gPV-n2-v7q" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3676.811594202899" y="918.75"/>
+            <point key="canvasLocation" x="5046" y="884"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="yWd-97-jUl">
@@ -604,7 +643,7 @@
                         <outlet property="passwordOutlet" destination="j9T-Dr-wf0" id="8G1-eG-7en"/>
                         <outlet property="signInOutlet" destination="7SV-Z4-P8J" id="Jqd-T6-fq7"/>
                         <outlet property="toolBarOutlet" destination="qfe-6Q-NhG" id="4UU-5R-d8h"/>
-                        <segue destination="pjI-dH-Um0" kind="show" identifier="toToDo" id="pSU-Mv-QEG"/>
+                        <segue destination="E3i-G0-n5v" kind="show" identifier="toToDo" id="YHo-68-3RS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F7R-PW-ROA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -621,7 +660,70 @@
                     </items>
                 </toolbar>
             </objects>
-            <point key="canvasLocation" x="2888.8000000000002" y="120.98950524737631"/>
+            <point key="canvasLocation" x="2894" y="122"/>
+        </scene>
+        <!--Folders-->
+        <scene sceneID="6uE-yQ-Chf">
+            <objects>
+                <tableViewController id="E3i-G0-n5v" customClass="FoldersViewController" customModule="ToDo" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="0Jo-lI-hbr">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="EiJ-BM-lCI" customClass="FoldersCell" customModule="ToDo" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="37"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="EiJ-BM-lCI" id="fLP-nG-BEX">
+                                    <rect key="frame" x="0.0" y="0.0" width="348" height="37"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FVK-qx-qbH">
+                                            <rect key="frame" x="20" y="8" width="312" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1g9-hm-3Al">
+                                            <rect key="frame" x="332" y="8" width="8" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="FVK-qx-qbH" secondAttribute="bottom" constant="8" id="1KM-oG-2qO"/>
+                                        <constraint firstItem="1g9-hm-3Al" firstAttribute="leading" secondItem="FVK-qx-qbH" secondAttribute="trailing" id="8fo-5x-ieY"/>
+                                        <constraint firstAttribute="bottom" secondItem="1g9-hm-3Al" secondAttribute="bottom" constant="8" id="Dgk-RL-dZw"/>
+                                        <constraint firstItem="FVK-qx-qbH" firstAttribute="leading" secondItem="fLP-nG-BEX" secondAttribute="leading" constant="20" id="EcJ-pV-YbO"/>
+                                        <constraint firstItem="1g9-hm-3Al" firstAttribute="width" secondItem="fLP-nG-BEX" secondAttribute="width" multiplier="0.0229885" id="Ryj-s2-NuI"/>
+                                        <constraint firstItem="1g9-hm-3Al" firstAttribute="top" secondItem="fLP-nG-BEX" secondAttribute="top" constant="8" id="WsM-QL-SXV"/>
+                                        <constraint firstItem="FVK-qx-qbH" firstAttribute="top" secondItem="fLP-nG-BEX" secondAttribute="top" constant="8" id="waL-qG-XYq"/>
+                                        <constraint firstAttribute="trailing" secondItem="1g9-hm-3Al" secondAttribute="trailing" constant="8" id="y5v-ru-vrt"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="pjI-dH-Um0" kind="show" id="Iea-T8-AqS"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="E3i-G0-n5v" id="6KT-GN-VSH"/>
+                            <outlet property="delegate" destination="E3i-G0-n5v" id="fyT-Wh-xW5"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Folders" id="oHo-1N-P9O">
+                        <barButtonItem key="rightBarButtonItem" title="New Folder" style="plain" id="cna-U1-frn">
+                            <connections>
+                                <action selector="toAddFolder:" destination="E3i-G0-n5v" id="zpn-MK-vxM"/>
+                                <segue destination="Dui-ar-ApK" kind="show" id="WfO-2e-zLk"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wbi-fe-DfZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3950" y="122"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="DBH-OE-g1g">
@@ -640,7 +742,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ta6-35-Kyd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5768.115942028986" y="383.70535714285711"/>
+            <point key="canvasLocation" x="5918" y="384"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Z8o-q3-2c8">
@@ -663,11 +765,33 @@
             </objects>
             <point key="canvasLocation" x="1278" y="122"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="nRB-a1-o3y">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Dui-ar-ApK" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="IOs-2I-SvJ"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="LkY-mC-nq3">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="HPj-0L-b1R">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
+                    <connections>
+                        <segue destination="nai-82-800" kind="relationship" relationship="rootViewController" id="uj4-fB-eYr"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QVm-ix-by1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4774" y="-585"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Todo" width="200" height="200"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="nsq-bg-TAb"/>
+        <segue reference="eUH-Zl-X03"/>
     </inferredMetricsTieBreakers>
 </document>
