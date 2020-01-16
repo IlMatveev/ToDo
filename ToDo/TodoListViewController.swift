@@ -81,15 +81,6 @@ class TodoListViewController: UITableViewController {
 //        todoSrv.moveItem(fromIndex: fromIndexPath.row, toIndex: to.row)
 //    }
 
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard
-            let selectedCellIndexRow = tableView.indexPathForSelectedRow?.row,
-            let detailsController = segue.destination as? TodoDetailsViewController
-        else { return }
-
-        detailsController.currentItem = items[selectedCellIndexRow]
-    }
-
     @objc func updateData() {
         todoSrv.getItems { result in
             switch result {
@@ -102,4 +93,15 @@ class TodoListViewController: UITableViewController {
         }
     }
 
+    // MARK: - Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard
+            let selectedCellIndexRow = tableView.indexPathForSelectedRow?.row,
+            let detailsController = segue.destination as? TodoDetailsViewController
+        else { return }
+
+        detailsController.currentItem = items[selectedCellIndexRow]
+    }
+    
 }

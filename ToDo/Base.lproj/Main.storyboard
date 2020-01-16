@@ -38,9 +38,20 @@
                         <viewLayoutGuide key="safeArea" id="IxM-AH-XQ0"/>
                     </view>
                     <navigationItem key="navigationItem" title="Add Folder" id="RP3-f9-KeX">
-                        <barButtonItem key="leftBarButtonItem" style="plain" systemItem="cancel" id="dfn-Ka-pVv"/>
-                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="save" id="QTD-x8-Rgp"/>
+                        <barButtonItem key="leftBarButtonItem" style="plain" systemItem="cancel" id="dfn-Ka-pVv">
+                            <connections>
+                                <action selector="cancelAction:" destination="nai-82-800" id="RZ3-Pw-AOO"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="save" id="QTD-x8-Rgp">
+                            <connections>
+                                <action selector="saveAction:" destination="nai-82-800" id="Tfk-MJ-ZJD"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="folderTitle" destination="iEX-ZC-aPV" id="E4T-Md-lon"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pyM-Qt-nBC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -703,6 +714,8 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="folderAmount" destination="1g9-hm-3Al" id="vJj-bh-hTA"/>
+                                    <outlet property="folderTitle" destination="FVK-qx-qbH" id="hsv-yC-tPB"/>
                                     <segue destination="pjI-dH-Um0" kind="show" id="Iea-T8-AqS"/>
                                 </connections>
                             </tableViewCell>
