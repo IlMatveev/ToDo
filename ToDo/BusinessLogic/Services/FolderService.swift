@@ -31,7 +31,7 @@ final class FolderService {
     }
 
     func getFolder(id: Int, completion: @escaping (Result<Folder, Error>) -> Void) {
-        FolderRepository.shared.getFolder(id: id) { result in
+        FolderRepository.shared.getFolder(idF: id) { result in
             DispatchQueue.main.async {
                 completion(result.mapError { $0 })
             }
@@ -47,7 +47,7 @@ final class FolderService {
     }
 
     func remove(id: Int, completion: @escaping (Result<Void, Error>) -> Void) {
-        FolderRepository.shared.remove(id: id) { result in
+        FolderRepository.shared.remove(idF: id) { result in
             DispatchQueue.main.async {
                 completion(result.mapError { $0 })
             }

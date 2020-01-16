@@ -20,8 +20,11 @@ final class TodoRepository {
     private init() {
     }
 
-    func save(toSave item: Todo, inFolder idF: Int, completion: @escaping (Result<Void, APIError>) -> Void) {
-        guard let resourceURL = URL(string: "http://localhost:3000/folders/\(idF)/items/") else { return }
+    func save(toSave item: Todo, completion: @escaping (Result<Void, APIError>) -> Void) {
+        guard
+            let idF = item.from,
+            let resourceURL = URL(string: "http://localhost:3000/folders/\(idF)/items/")
+        else { return }
         var urlRequest = URLRequest(url: resourceURL)
         urlRequest.httpMethod = "POST"
         urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -40,8 +43,9 @@ final class TodoRepository {
         dataTask.resume()
     }
 
-    func update(toUpdate item: Todo, inFolder idF: Int, completion: @escaping (Result<Void, APIError>) -> Void) {
+    func update(toUpdate item: Todo, completion: @escaping (Result<Void, APIError>) -> Void) {
         guard
+            let idF = item.from,
             let id = item.id,
             let resourceURL = URL(string: "http://localhost:3000/folders/\(idF)/items/\(id)")
             else { return }
@@ -63,8 +67,11 @@ final class TodoRepository {
         dataTask.resume()
     }
 
-    func remove(inFolder idF: Int, id: Int, completion: @escaping (Result<Void, APIError>) -> Void) {
-        guard let resourceURL = URL(string: "http://localhost:3000/folders/\(idF)/items/\(id)") else { fatalError() }
+    func remove(item: Todo, completion: @escaping (Result<Void, APIError>) -> Void) {
+        guard
+            let idF = item.from,
+            let id = item.id,
+            let resourceURL = URL(string: "http://localhost:3000/folders/\(idF)/items/\(id)") else { fatalError() }
         var urlRequest = URLRequest(url: resourceURL)
         urlRequest.httpMethod = "DELETE"
         urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -109,31 +116,33 @@ final class TodoRepository {
         dataTask.resume()
     }
 
-    func getItem(inFolder idF: Int, id: Int, completion: @escaping (Result<Todo, APIError>) -> Void) {
+    func getItem(item: Todo, completion: @escaping (Result<Todo, APIError>) -> Void) {
+        guard
+            let idF = item.from,
+            let id = item.id,
+            let resourceURL = URL(string: "http://localhost:3000/folders/\(idF)/items/\(id)")
+        else { return }
+        var urlRequest = URLRequest(url: resourceURL)
+        urlRequest.httpMethod = "GET"
+        urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
 
-        if let resourceURL = URL(string: "http://localhost:3000/folders/\(idF)/items/\(id)") {
-            var urlRequest = URLRequest(url: resourceURL)
-            urlRequest.httpMethod = "GET"
-            urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
-
-            let dataTask = URLSession.shared.dataTask(with: urlRequest) { data, response, _ in
-                guard
-                    let httpResponse = response as? HTTPURLResponse,
-                    httpResponse.statusCode == 200,
-                    let jsonData = data
-                    else {
-                        completion(.failure(.responseProblem))
-                        return
-                }
-                do {
-                    let todoData = try JSONDecoder().decode(Todo.self, from: jsonData)
-                    completion(.success(todoData))
-                } catch {
-                    completion(.failure(.decodingProblem))
-                }
+        let dataTask = URLSession.shared.dataTask(with: urlRequest) { data, response, _ in
+            guard
+                let httpResponse = response as? HTTPURLResponse,
+                httpResponse.statusCode == 200,
+                let jsonData = data
+                else {
+                    completion(.failure(.responseProblem))
+                    return
             }
-            dataTask.resume()
-        } else { return }
+            do {
+                let todoData = try JSONDecoder().decode(Todo.self, from: jsonData)
+                completion(.success(todoData))
+            } catch {
+                completion(.failure(.decodingProblem))
+            }
+        }
+        dataTask.resume()
     }
 
 }

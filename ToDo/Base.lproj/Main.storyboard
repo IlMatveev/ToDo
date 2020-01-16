@@ -693,20 +693,20 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="EiJ-BM-lCI" customClass="FoldersCell" customModule="ToDo" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="375" height="37"/>
+                                <rect key="frame" x="0.0" y="28" width="375" height="37.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="EiJ-BM-lCI" id="fLP-nG-BEX">
-                                    <rect key="frame" x="0.0" y="0.0" width="348" height="37"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="348" height="37.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FVK-qx-qbH">
-                                            <rect key="frame" x="20" y="8" width="312" height="21"/>
+                                            <rect key="frame" x="20" y="8" width="306" height="21.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1g9-hm-3Al">
-                                            <rect key="frame" x="332" y="8" width="8" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="800" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1g9-hm-3Al">
+                                            <rect key="frame" x="326" y="8" width="14" height="21.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -717,7 +717,7 @@
                                         <constraint firstItem="1g9-hm-3Al" firstAttribute="leading" secondItem="FVK-qx-qbH" secondAttribute="trailing" id="8fo-5x-ieY"/>
                                         <constraint firstAttribute="bottom" secondItem="1g9-hm-3Al" secondAttribute="bottom" constant="8" id="Dgk-RL-dZw"/>
                                         <constraint firstItem="FVK-qx-qbH" firstAttribute="leading" secondItem="fLP-nG-BEX" secondAttribute="leading" constant="20" id="EcJ-pV-YbO"/>
-                                        <constraint firstItem="1g9-hm-3Al" firstAttribute="width" secondItem="fLP-nG-BEX" secondAttribute="width" multiplier="0.0229885" id="Ryj-s2-NuI"/>
+                                        <constraint firstItem="1g9-hm-3Al" firstAttribute="width" secondItem="fLP-nG-BEX" secondAttribute="width" multiplier="0.04" id="Ryj-s2-NuI"/>
                                         <constraint firstItem="1g9-hm-3Al" firstAttribute="top" secondItem="fLP-nG-BEX" secondAttribute="top" constant="8" id="WsM-QL-SXV"/>
                                         <constraint firstItem="FVK-qx-qbH" firstAttribute="top" secondItem="fLP-nG-BEX" secondAttribute="top" constant="8" id="waL-qG-XYq"/>
                                         <constraint firstAttribute="trailing" secondItem="1g9-hm-3Al" secondAttribute="trailing" constant="8" id="y5v-ru-vrt"/>

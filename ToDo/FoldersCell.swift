@@ -16,8 +16,9 @@ class FoldersCell: UITableViewCell {
     private var currentFolder: Folder?
 
     func fill(with folder: Folder) {
+        let amount = currentFolder?.items?.count ?? 0
         folderTitle.text = folder.name
-        folderAmount.text = String(folder.todoItems.count)
+        folderAmount.text = String(amount)
         currentFolder = folder
     }
     

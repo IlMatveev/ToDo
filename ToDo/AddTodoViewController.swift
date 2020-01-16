@@ -26,6 +26,7 @@ final class AddTodoViewController: UIViewController {
     @IBOutlet var toolBar: UIToolbar!
     @IBOutlet var datePicker: UIDatePicker!
 
+    var currentFolder: Folder?
     var currentItem: Todo?
     
     override func viewDidLoad() {
@@ -59,6 +60,7 @@ final class AddTodoViewController: UIViewController {
         guard let title = textField.text else { return }
 
         var item = currentItem ?? Todo()
+        item.from = currentFolder?.id
         item.title = title
         item.date = datePicker.date
         todoSrv.save(item: item) { _ in }

@@ -70,8 +70,7 @@ class TodoListViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            guard let currentId = items[indexPath.row].id else { return }
-            todoSrv.remove(id: currentId) { _ in }
+            todoSrv.remove(item: items[indexPath.row]) { _ in }
         }
     }
 
@@ -84,7 +83,8 @@ class TodoListViewController: UITableViewController {
 //    }
 
     @objc func updateData() {
-        todoSrv.getItems { result in
+        guard let idF = currentFolder?.id else { return }
+        todoSrv.getItems(inFolder: idF) { result in
             switch result {
             case .success(let items):
                 self.items = items

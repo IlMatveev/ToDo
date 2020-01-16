@@ -18,16 +18,16 @@ final class TodoService {
     private init() {
     }
 
-    func save(inFolder idF: Int, item: Todo, completion: @escaping (Result<Void, Error>) -> Void) {
+    func save(item: Todo, completion: @escaping (Result<Void, Error>) -> Void) {
         if item.id != nil {
-            TodoRepository.shared.update(toUpdate: item, inFolder: idF) { result in
+            TodoRepository.shared.update(toUpdate: item) { result in
                 DispatchQueue.main.async {
                     NotificationCenter.default.post(name: .update, object: nil)
                     completion(result.mapError { $0 })
                 }
             }
         } else {
-            TodoRepository.shared.save(toSave: item, inFolder: idF) { result in
+            TodoRepository.shared.save(toSave: item) { result in
                 DispatchQueue.main.async {
                     NotificationCenter.default.post(name: .update, object: nil)
                     completion(result.mapError { $0 })
@@ -36,8 +36,8 @@ final class TodoService {
         }
     }
 
-    func getItem(inFolder idF: Int, id: Int, completion: @escaping (Result<Todo, Error>) -> Void) {
-        TodoRepository.shared.getItem(inFolder: idF, id: id) { result in
+    func getItem(item: Todo, completion: @escaping (Result<Todo, Error>) -> Void) {
+        TodoRepository.shared.getItem(item: item) { result in
             DispatchQueue.main.async {
                 completion(result.mapError { $0 })
             }
@@ -52,8 +52,8 @@ final class TodoService {
         }
     }
 
-    func remove(inFolder idF: Int, id: Int, completion: @escaping (Result<Void, Error>) -> Void) {
-        TodoRepository.shared.remove(inFolder: idF, id: id) { result in
+    func remove(item: Todo, completion: @escaping (Result<Void, Error>) -> Void) {
+        TodoRepository.shared.remove(item: item) { result in
             DispatchQueue.main.async {
                 NotificationCenter.default.post(name: .update, object: nil)
                 completion(result.mapError { $0 })
