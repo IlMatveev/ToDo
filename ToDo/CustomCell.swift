@@ -31,4 +31,5 @@ class CustomCell: UITableViewCell {
         switchState.isOn = item.isDone
         currentItem = item
     }
+    
 }

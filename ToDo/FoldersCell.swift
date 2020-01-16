@@ -12,5 +12,13 @@ class FoldersCell: UITableViewCell {
 
     @IBOutlet var folderTitle: UILabel!
     @IBOutlet var folderAmount: UILabel!
+
+    private var currentFolder: Folder?
+
+    func fill(with folder: Folder) {
+        folderTitle.text = folder.name
+        folderAmount.text = String(folder.todoItems.count)
+        currentFolder = folder
+    }
     
 }
