@@ -10,6 +10,8 @@ import UIKit
 
 class FoldersViewController: UITableViewController {
 
+    private var folders: [Folder] = []
+
     @IBAction func toAddFolder(_ sender: UIBarButtonItem) {
         performSegue(withIdentifier: "toAddFolder", sender: nil)
     }
@@ -47,21 +49,22 @@ class FoldersViewController: UITableViewController {
         if editingStyle == .delete {
             // Delete the row from the data source
             tableView.deleteRows(at: [indexPath], with: .fade)
-        }    
+        }
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
 
-    /*
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        guard
+            let selectedCellIndexRow = tableView.indexPathForSelectedRow?.row,
+            let listController = segue.destination as? TodoListViewController
+        else { return }
+
+        listController.currentFolder = folders[selectedCellIndexRow]
     }
-    */
 
 }

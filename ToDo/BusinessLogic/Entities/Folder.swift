@@ -9,6 +9,7 @@
 import Foundation
 
 struct Folder: Codable {
+    var id: Int?
     var name: String = ""
-    var todo: [Todo]
+    var todoItems: [Todo]
 }

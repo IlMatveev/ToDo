@@ -19,6 +19,8 @@ class TodoListViewController: UITableViewController {
     private let todoSrv: TodoService = .shared
     private var items: [Todo] = []
 
+    var currentFolder: Folder?
+
     // MARK: - Outlets
     // MARK: - Local Variables
     // MARK: - Lifecycle

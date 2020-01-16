@@ -51,9 +51,22 @@
                     </navigationItem>
                     <connections>
                         <outlet property="folderTitle" destination="iEX-ZC-aPV" id="E4T-Md-lon"/>
+                        <outlet property="toolbar" destination="taU-Eu-h7r" id="7wZ-CQ-YYx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pyM-Qt-nBC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="taU-Eu-h7r">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                    <items>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="F6a-Qc-Fbm"/>
+                        <barButtonItem systemItem="done" id="RBc-lp-acu">
+                            <connections>
+                                <action selector="done:" destination="nai-82-800" id="6Hu-gQ-lIl"/>
+                            </connections>
+                        </barButtonItem>
+                    </items>
+                </toolbar>
             </objects>
             <point key="canvasLocation" x="5502" y="-585"/>
         </scene>

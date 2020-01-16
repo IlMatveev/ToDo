@@ -19,6 +19,8 @@
 		C796401B23D0299F001E723B /* FoldersCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C796401A23D0299F001E723B /* FoldersCell.swift */; };
 		C796401D23D03078001E723B /* AddFoldersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C796401C23D03078001E723B /* AddFoldersViewController.swift */; };
 		C796401F23D036E7001E723B /* Folder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C796401E23D036E7001E723B /* Folder.swift */; };
+		C796402123D088DA001E723B /* FolderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C796402023D088DA001E723B /* FolderService.swift */; };
+		C796402323D08D30001E723B /* FolderRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C796402223D08D30001E723B /* FolderRepository.swift */; };
 		C796534F23ACCF6600288168 /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C796534E23ACCF6600288168 /* Todo.swift */; };
 		C7C16C9723C526D8004C6F74 /* TodoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C16C9623C526D8004C6F74 /* TodoRepository.swift */; };
 		C7CFC1FC23946BB6002FB0EB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CFC1FB23946BB6002FB0EB /* AppDelegate.swift */; };
@@ -43,6 +45,8 @@
 		C796401A23D0299F001E723B /* FoldersCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoldersCell.swift; sourceTree = "<group>"; };
 		C796401C23D03078001E723B /* AddFoldersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFoldersViewController.swift; sourceTree = "<group>"; };
 		C796401E23D036E7001E723B /* Folder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Folder.swift; sourceTree = "<group>"; };
+		C796402023D088DA001E723B /* FolderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderService.swift; sourceTree = "<group>"; };
+		C796402223D08D30001E723B /* FolderRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderRepository.swift; sourceTree = "<group>"; };
 		C796534E23ACCF6600288168 /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
 		C7C16C9623C526D8004C6F74 /* TodoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoRepository.swift; sourceTree = "<group>"; };
 		C7CFC1F823946BB6002FB0EB /* ToDo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -109,6 +113,7 @@
 		C796534C23ABC09E00288168 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				C796402023D088DA001E723B /* FolderService.swift */,
 				C7CFC21123946EA0002FB0EB /* TodoService.swift */,
 				C76CD4D623AFEABE00CE6F8C /* UserService.swift */,
 			);
@@ -119,6 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				C7C16C9623C526D8004C6F74 /* TodoRepository.swift */,
+				C796402223D08D30001E723B /* FolderRepository.swift */,
 			);
 			path = Gateways;
 			sourceTree = "<group>";
@@ -258,6 +264,7 @@
 				C74A6FAB239A5FA300A8311E /* TodoDetailsViewController.swift in Sources */,
 				C7CFC1FC23946BB6002FB0EB /* AppDelegate.swift in Sources */,
 				C727AC6F23A295DA0039C50E /* AddTodoViewController.swift in Sources */,
+				C796402323D08D30001E723B /* FolderRepository.swift in Sources */,
 				C796534F23ACCF6600288168 /* Todo.swift in Sources */,
 				C7CFC21023946DF9002FB0EB /* TodoListViewController.swift in Sources */,
 				C7CFC1FE23946BB6002FB0EB /* SceneDelegate.swift in Sources */,
@@ -270,6 +277,7 @@
 				C796401D23D03078001E723B /* AddFoldersViewController.swift in Sources */,
 				C76CD4D323AF740F00CE6F8C /* SignInViewController.swift in Sources */,
 				C7CFC21223946EA0002FB0EB /* TodoService.swift in Sources */,
+				C796402123D088DA001E723B /* FolderService.swift in Sources */,
 				C796401F23D036E7001E723B /* Folder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
