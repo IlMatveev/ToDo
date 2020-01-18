@@ -19,6 +19,8 @@ class FoldersViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        updateData()
+
         self.navigationItem.hidesBackButton = true
 
     }
@@ -30,13 +32,15 @@ class FoldersViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return folders.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "FoldersCell", for: indexPath) as? FoldersCell else {
-            fatalError("Failed to dequeue custom cell")
+            fatalError("Failed to dequeue folders cell")
         }
+
+        cell.fill(with: folders[indexPath.row])
 
         return cell
     }
@@ -54,6 +58,18 @@ class FoldersViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+
+    func updateData() {
+        FolderService.shared.getFolders { result in
+            switch result {
+            case .success(let folders):
+                self.folders = folders
+                self.tableView.reloadData()
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
 
     // MARK: - Navigation
