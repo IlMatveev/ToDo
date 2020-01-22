@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class TodoDetailsViewController: UIViewController {
+final class TodoDetailsViewController: UIViewController, TodoServiceDelegate {
     private let todoSrv: TodoService = .shared
     private let notificationCenter: NotificationCenter = .default
 
@@ -27,8 +27,10 @@ final class TodoDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         renderItem()
+    }
 
-        notificationCenter.addObserver(self, selector: #selector(updateItem), name: .update, object: nil)
+    func update() {
+        updateItem()
     }
 
     private func renderItem () {
@@ -60,9 +62,12 @@ final class TodoDetailsViewController: UIViewController {
     }
 
     @objc func updateItem() {
-        guard let item = currentItem else { return }
+        guard
+            let id = currentItem?.id,
+            let idF = currentItem?.folderId
+        else { return }
 
-        todoSrv.getItem(item: item) { result in
+        todoSrv.getItem(id: id, idF: idF) { result in
             switch result {
             case .success(let item):
                 self.currentItem = item

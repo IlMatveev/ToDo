@@ -10,7 +10,7 @@ import Foundation
 
 struct Todo: Codable {
     var id: Int?
-    var from: Int?
+    var folderId: Int?
     var title: String = ""
     var date: Date?
     var isDone: Bool = false

@@ -51,8 +51,8 @@ class FoldersViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            guard let id = folders[indexPath.row].id else { return }
+            FolderService.shared.remove(id: id) { _ in }
         }
     }
 

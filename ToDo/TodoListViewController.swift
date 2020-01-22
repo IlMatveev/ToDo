@@ -9,13 +9,11 @@
 import UIKit
 
 extension NSNotification.Name {
-    static let update: NSNotification.Name = .init("update")
     static let kbWillChangeFrame = UIResponder.keyboardWillChangeFrameNotification
 }
 
-class TodoListViewController: UITableViewController {
+class TodoListViewController: UITableViewController, TodoServiceDelegate {
     // MARK: - Dependencies
-    private let notificationCenter: NotificationCenter = .default
     private let todoSrv: TodoService = .shared
     private var items: [Todo] = []
 
@@ -32,36 +30,48 @@ class TodoListViewController: UITableViewController {
         super.viewDidLoad()
 
         updateData()
-
-        notificationCenter.addObserver(self, selector: #selector(updateData), name: .update, object: nil)
     }
 
     @IBAction func pushEditAction(_ sender: UIBarButtonItem) {
         tableView.setEditing(!tableView.isEditing, animated: true)
     }
 
-    @IBAction func toAdd(_ sender: UIBarButtonItem) {
+    @IBAction func toAdd(_ sender: UIButton) {
         performSegue(withIdentifier: "toAdd", sender: nil)
     }
 
     // MARK: - Table view data source
 
+    func update() {
+        updateData()
+    }
+
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return items.count
+        if section == 0 {
+            return items.count
+        } else {
+            return 1
+        }
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "CustomCell", for: indexPath) as? CustomCell else {
-            fatalError("Failed to dequeue custom cell")
+
+        if indexPath.section == 0 {
+            guard let todoCell = tableView.dequeueReusableCell(withIdentifier: "CustomCell", for: indexPath) as? CustomCell else {
+                fatalError("Failed to dequeue custom cell")
+            }
+            todoCell.fill(with: items[indexPath.row])
+            return todoCell
+        } else {
+            guard let addCell = tableView.dequeueReusableCell(withIdentifier: "AddCell", for: indexPath) as? AddCell else {
+                fatalError("Failed to dequeue custom cell")
+            }
+            return addCell
         }
-
-        cell.fill(with: items[indexPath.row])
-
-        return cell
     }
 
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -78,11 +88,7 @@ class TodoListViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
     }
 
-//    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-//        todoSrv.moveItem(fromIndex: fromIndexPath.row, toIndex: to.row)
-//    }
-
-    @objc func updateData() {
+    func updateData() {
         guard let idF = currentFolder?.id else { return }
         todoSrv.getItems(inFolder: idF) { result in
             switch result {
@@ -98,12 +104,17 @@ class TodoListViewController: UITableViewController {
     // MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard
+        if
             let selectedCellIndexRow = tableView.indexPathForSelectedRow?.row,
-            let detailsController = segue.destination as? TodoDetailsViewController
-        else { return }
-
-        detailsController.currentItem = items[selectedCellIndexRow]
+            let detailsController = segue.destination as? TodoDetailsViewController {
+            detailsController.currentItem = items[selectedCellIndexRow]
+        }
+        
+        if
+            let navigationController = segue.destination as? UINavigationController,
+            let addController = navigationController.topViewController as? AddTodoViewController {
+            addController.currentFolder = currentFolder
+        }
     }
     
 }

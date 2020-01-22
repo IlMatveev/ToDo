@@ -12,32 +12,38 @@ enum ServiceError: Error {
     case searchProblem
 }
 
+protocol TodoServiceDelegate: class {
+    func update()
+}
+
 final class TodoService {
     static let shared: TodoService = .init()
 
     private init() {
     }
 
+    weak var delegate: TodoServiceDelegate?
+
     func save(item: Todo, completion: @escaping (Result<Void, Error>) -> Void) {
         if item.id != nil {
             TodoRepository.shared.update(toUpdate: item) { result in
                 DispatchQueue.main.async {
-                    NotificationCenter.default.post(name: .update, object: nil)
+                    self.delegate?.update()
                     completion(result.mapError { $0 })
                 }
             }
         } else {
             TodoRepository.shared.save(toSave: item) { result in
                 DispatchQueue.main.async {
-                    NotificationCenter.default.post(name: .update, object: nil)
+                    self.delegate?.update()
                     completion(result.mapError { $0 })
                 }
             }
         }
     }
 
-    func getItem(item: Todo, completion: @escaping (Result<Todo, Error>) -> Void) {
-        TodoRepository.shared.getItem(item: item) { result in
+    func getItem(id: Int, idF: Int, completion: @escaping (Result<Todo, Error>) -> Void) {
+        TodoRepository.shared.getItem(id: id, idF: idF) { result in
             DispatchQueue.main.async {
                 completion(result.mapError { $0 })
             }
@@ -55,7 +61,7 @@ final class TodoService {
     func remove(item: Todo, completion: @escaping (Result<Void, Error>) -> Void) {
         TodoRepository.shared.remove(item: item) { result in
             DispatchQueue.main.async {
-                NotificationCenter.default.post(name: .update, object: nil)
+                self.delegate?.update()
                 completion(result.mapError { $0 })
             }
         }

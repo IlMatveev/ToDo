@@ -127,19 +127,35 @@
                                     <segue destination="HdX-5w-0Pz" kind="show" id="57Z-Ct-pXc"/>
                                 </connections>
                             </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="AddCell" id="CEl-SG-wwg" customClass="AddCell" customModule="ToDo" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="82" width="375" height="54"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="CEl-SG-wwg" id="CLf-ht-BGo">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="54"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LgD-nt-asj">
+                                            <rect key="frame" x="112.5" y="12" width="150" height="30"/>
+                                            <state key="normal" title="Add ToDo"/>
+                                            <connections>
+                                                <action selector="toAdd:" destination="pjI-dH-Um0" eventType="touchUpInside" id="luo-e6-90V"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="LgD-nt-asj" firstAttribute="centerY" secondItem="CLf-ht-BGo" secondAttribute="centerY" id="9UZ-fv-uiN"/>
+                                        <constraint firstItem="LgD-nt-asj" firstAttribute="width" secondItem="CLf-ht-BGo" secondAttribute="width" multiplier="0.4" id="VqV-eg-VNz"/>
+                                        <constraint firstItem="LgD-nt-asj" firstAttribute="centerX" secondItem="CLf-ht-BGo" secondAttribute="centerX" id="uYk-eC-ZX4"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                            </tableViewCell>
                         </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="pjI-dH-Um0" id="Cb0-Vv-oWY"/>
                             <outlet property="delegate" destination="pjI-dH-Um0" id="ls7-ui-GAY"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="ToDo" id="IsQ-tP-Zo9">
-                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="waX-ep-px0">
-                            <connections>
-                                <action selector="toAdd:" destination="pjI-dH-Um0" id="xze-BC-Kwb"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="ToDo" id="IsQ-tP-Zo9"/>
                     <connections>
                         <segue destination="Ysx-uR-ptJ" kind="show" identifier="toAdd" id="eUH-Zl-X03"/>
                     </connections>
@@ -700,13 +716,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FVK-qx-qbH">
-                                            <rect key="frame" x="20" y="8" width="306" height="21.5"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="800" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1g9-hm-3Al">
-                                            <rect key="frame" x="326" y="8" width="14" height="21.5"/>
+                                            <rect key="frame" x="20" y="8" width="308" height="21.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -714,17 +724,12 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="bottom" secondItem="FVK-qx-qbH" secondAttribute="bottom" constant="8" id="1KM-oG-2qO"/>
-                                        <constraint firstItem="1g9-hm-3Al" firstAttribute="leading" secondItem="FVK-qx-qbH" secondAttribute="trailing" id="8fo-5x-ieY"/>
-                                        <constraint firstAttribute="bottom" secondItem="1g9-hm-3Al" secondAttribute="bottom" constant="8" id="Dgk-RL-dZw"/>
+                                        <constraint firstAttribute="trailing" secondItem="FVK-qx-qbH" secondAttribute="trailing" constant="20" id="37w-pi-xRl"/>
                                         <constraint firstItem="FVK-qx-qbH" firstAttribute="leading" secondItem="fLP-nG-BEX" secondAttribute="leading" constant="20" id="EcJ-pV-YbO"/>
-                                        <constraint firstItem="1g9-hm-3Al" firstAttribute="width" secondItem="fLP-nG-BEX" secondAttribute="width" multiplier="0.04" id="Ryj-s2-NuI"/>
-                                        <constraint firstItem="1g9-hm-3Al" firstAttribute="top" secondItem="fLP-nG-BEX" secondAttribute="top" constant="8" id="WsM-QL-SXV"/>
                                         <constraint firstItem="FVK-qx-qbH" firstAttribute="top" secondItem="fLP-nG-BEX" secondAttribute="top" constant="8" id="waL-qG-XYq"/>
-                                        <constraint firstAttribute="trailing" secondItem="1g9-hm-3Al" secondAttribute="trailing" constant="8" id="y5v-ru-vrt"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="folderAmount" destination="1g9-hm-3Al" id="vJj-bh-hTA"/>
                                     <outlet property="folderTitle" destination="FVK-qx-qbH" id="hsv-yC-tPB"/>
                                     <segue destination="pjI-dH-Um0" kind="show" id="Iea-T8-AqS"/>
                                 </connections>

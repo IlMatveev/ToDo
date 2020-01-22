@@ -19,7 +19,6 @@ extension Optional {
 
 final class AddTodoViewController: UIViewController {
     private let todoSrv: TodoService = .shared
-    private let notificationCenter: NotificationCenter = .default
 
     @IBOutlet private var textField: UITextField!
     @IBOutlet private var dateField: UITextField!
@@ -60,7 +59,7 @@ final class AddTodoViewController: UIViewController {
         guard let title = textField.text else { return }
 
         var item = currentItem ?? Todo()
-        item.from = currentFolder?.id
+        item.folderId = currentFolder?.id
         item.title = title
         item.date = datePicker.date
         todoSrv.save(item: item) { _ in }
