@@ -23,7 +23,7 @@ final class FolderRepository {
             .validate()
             .responseDecodable(of: Folder.self) { response in
                 completion(response.result)
-            }
+        }
     }
 
     func update(toUpdate folder: Folder, completion: @escaping (Result<Folder, AFError>) -> Void) {
@@ -45,7 +45,7 @@ final class FolderRepository {
             .validate()
             .response { response in
                 completion(response.result.map { data -> Void in () })
-            }
+        }
     }
 
     func getFolders(_ completion: @escaping (Result<[Folder], AFError>) -> Void) {
@@ -64,7 +64,6 @@ final class FolderRepository {
             .responseDecodable(of: Folder.self) { response in
                 completion(response.result)
         }
-
     }
 
 }

@@ -18,126 +18,63 @@ enum APIError: Error {
 final class TodoRepository {
     static let shared: TodoRepository = .init()
 
+    let session: Session = .default
+
     private init() {
     }
 
-    func save(toSave item: Todo, completion: @escaping (Result<Void, APIError>) -> Void) {
-        guard let resourceURL = URL(string: "http://localhost:3000/items/") else { return }
-        var urlRequest = URLRequest(url: resourceURL)
-        urlRequest.httpMethod = "POST"
-        urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        urlRequest.httpBody = try? JSONEncoder().encode(item)
-
-        let dataTask = URLSession.shared.dataTask(with: urlRequest) { _, response, _ in
-            guard
-                let httpResponse = response as? HTTPURLResponse,
-                httpResponse.statusCode == 200
-            else {
-                completion(.failure(.responseProblem))
-                return
-            }
-            completion(.success(()))
+    func save(toSave item: Todo, completion: @escaping (Result<Todo, AFError>) -> Void) {
+        session
+        .request("\(Current.backendUrl)/items", method: .post, parameters: item)
+        .validate()
+        .responseDecodable(of: Todo.self) { response in
+            completion(response.result)
         }
-        dataTask.resume()
     }
 
-    func update(toUpdate item: Todo, completion: @escaping (Result<Void, APIError>) -> Void) {
+    func update(toUpdate item: Todo, completion: @escaping (Result<Todo, AFError>) -> Void) {
         guard
             let idF = item.folderId,
-            let id = item.id,
-            let resourceURL = URL(string: "http://localhost:3000/folders/\(idF)/items/\(id)")
+            let id = item.id
             else { return }
-        var urlRequest = URLRequest(url: resourceURL)
-        urlRequest.httpMethod = "PUT"
-        urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        urlRequest.httpBody = try? JSONEncoder().encode(item)
-
-        let dataTask = URLSession.shared.dataTask(with: urlRequest) { _, response, _ in
-            guard
-                let httpResponse = response as? HTTPURLResponse,
-                httpResponse.statusCode == 200
-            else {
-                completion(.failure(.responseProblem))
-                return
-            }
-            completion(.success(()))
+        session
+            .request("\(Current.backendUrl)folders/\(idF)/items/\(id)", method: .put, parameters: item)
+            .validate()
+            .responseDecodable(of: Todo.self) { response in
+                completion(response.result)
         }
-        dataTask.resume()
     }
 
-    func remove(item: Todo, completion: @escaping (Result<Void, APIError>) -> Void) {
+    func remove(item: Todo, completion: @escaping (Result<Void, AFError>) -> Void) {
         guard
             let idF = item.folderId,
-            let id = item.id,
-            let resourceURL = URL(string: "http://localhost:3000/folders/\(idF)/items/\(id)") else { fatalError() }
-        var urlRequest = URLRequest(url: resourceURL)
-        urlRequest.httpMethod = "DELETE"
-        urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
-
-        let dataTask = URLSession.shared.dataTask(with: urlRequest) { _, response, _ in
-            guard
-                let httpResponse = response as? HTTPURLResponse,
-                httpResponse.statusCode == 200
-            else {
-                completion(.failure(.responseProblem))
-                return
-            }
-            completion(.success(()))
+            let id = item.id
+            else { fatalError() }
+        session
+            .request("\(Current.backendUrl)/folders/\(idF)/items/\(id)", method: .delete)
+            .validate()
+            .response { response in
+                completion(response.result.map { data -> Void in () })
         }
-        dataTask.resume()
     }
 
-    func getItems(inFolder idF: Int, completion: @escaping (Result<[Todo], APIError>) -> Void) {
-        guard let resourceURL = URL(string: "http://localhost:3000/folders/\(idF)/items/") else { fatalError() }
-
-        var urlRequest = URLRequest(url: resourceURL)
-        urlRequest.httpMethod = "GET"
-        urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
-
-        let dataTask = URLSession.shared.dataTask(with: urlRequest) { data, response, _ in
-            guard
-                let httpResponse = response as? HTTPURLResponse,
-                httpResponse.statusCode == 200,
-                let jsonData = data
-                else {
-                    completion(.failure(.responseProblem))
-                    return
-            }
-            do {
-                let todoData = try JSONDecoder().decode([Todo].self, from: jsonData)
-                completion(.success(todoData))
-            } catch {
-                dump(error)
-                completion(.failure(.decodingProblem))
-            }
+    func getItems(inFolder idF: Int, completion: @escaping (Result<[Todo], AFError>) -> Void) {
+        session
+            .request("\(Current.backendUrl)/folders/\(idF)/items", method: .get)
+            .validate()
+            .responseDecodable(of: [Todo].self) { response in
+                completion(response.result)
         }
-        dataTask.resume()
+
     }
 
-    func getItem(id: Int, idF: Int, completion: @escaping (Result<Todo, APIError>) -> Void) {
-        guard let resourceURL = URL(string: "http://localhost:3000/folders/\(idF)/items/\(id)") else { return }
-        
-        var urlRequest = URLRequest(url: resourceURL)
-        urlRequest.httpMethod = "GET"
-        urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
-
-        let dataTask = URLSession.shared.dataTask(with: urlRequest) { data, response, _ in
-            guard
-                let httpResponse = response as? HTTPURLResponse,
-                httpResponse.statusCode == 200,
-                let jsonData = data
-                else {
-                    completion(.failure(.responseProblem))
-                    return
-            }
-            do {
-                let todoData = try JSONDecoder().decode(Todo.self, from: jsonData)
-                completion(.success(todoData))
-            } catch {
-                completion(.failure(.decodingProblem))
-            }
+    func getItem(id: Int, idF: Int, completion: @escaping (Result<Todo, AFError>) -> Void) {
+        session
+            .request("\(Current.backendUrl)/folders/\(idF)/items/\(id)", method: .get)
+            .validate()
+            .responseDecodable(of: Todo.self) { response in
+                completion(response.result)
         }
-        dataTask.resume()
     }
 
 }
