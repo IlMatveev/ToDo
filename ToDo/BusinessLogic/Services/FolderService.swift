@@ -14,7 +14,7 @@ final class FolderService {
     private init() {
     }
 
-    func save(folder: Folder, completion: @escaping (Result<Void, Error>) -> Void) {
+    func save(folder: Folder, completion: @escaping (Result<Folder, Error>) -> Void) {
         if folder.id != nil {
             FolderRepository.shared.update(toUpdate: folder) { result in
                 DispatchQueue.main.async {

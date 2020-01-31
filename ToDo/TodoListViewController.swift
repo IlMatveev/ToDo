@@ -29,6 +29,8 @@ class TodoListViewController: UITableViewController, TodoServiceDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        todoSrv.attach(self)
+
         updateData()
     }
 
@@ -42,7 +44,7 @@ class TodoListViewController: UITableViewController, TodoServiceDelegate {
 
     // MARK: - Table view data source
 
-    func update() {
+    func update(subject: TodoService) {
         updateData()
     }
 

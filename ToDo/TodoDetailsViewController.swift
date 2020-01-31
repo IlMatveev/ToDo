@@ -29,7 +29,7 @@ final class TodoDetailsViewController: UIViewController, TodoServiceDelegate {
         renderItem()
     }
 
-    func update() {
+    func update(subject: TodoService) {
         updateItem()
     }
 

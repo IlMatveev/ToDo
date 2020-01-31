@@ -13,7 +13,7 @@ enum ServiceError: Error {
 }
 
 protocol TodoServiceDelegate: class {
-    func update()
+    func update(subject: TodoService)
 }
 
 final class TodoService {
@@ -22,20 +22,38 @@ final class TodoService {
     private init() {
     }
 
+    private lazy var observers: [TodoServiceDelegate] = []
+
     weak var delegate: TodoServiceDelegate?
+
+    func attach(_ observer: TodoServiceDelegate) {
+        observers.append(observer)
+    }
+
+    func detach(_ observer: TodoServiceDelegate) {
+        if let idx = observers.firstIndex(where: { $0 === observer }) {
+            observers.remove(at: idx)
+        }
+    }
+
+    func notify() {
+        observers.forEach({ $0.update(subject: self)})
+    }
 
     func save(item: Todo, completion: @escaping (Result<Void, Error>) -> Void) {
         if item.id != nil {
             TodoRepository.shared.update(toUpdate: item) { result in
                 DispatchQueue.main.async {
-                    self.delegate?.update()
+                    self.delegate?.update(subject: self)
+                    self.notify()
                     completion(result.mapError { $0 })
                 }
             }
         } else {
             TodoRepository.shared.save(toSave: item) { result in
                 DispatchQueue.main.async {
-                    self.delegate?.update()
+                    self.delegate?.update(subject: self)
+                    self.notify()
                     completion(result.mapError { $0 })
                 }
             }
@@ -61,7 +79,7 @@ final class TodoService {
     func remove(item: Todo, completion: @escaping (Result<Void, Error>) -> Void) {
         TodoRepository.shared.remove(item: item) { result in
             DispatchQueue.main.async {
-                self.delegate?.update()
+                self.delegate?.update(subject: self)
                 completion(result.mapError { $0 })
             }
         }

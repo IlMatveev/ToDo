@@ -7,127 +7,64 @@
 //
 
 import Foundation
+import Alamofire
 
 final class FolderRepository {
     static let shared: FolderRepository = .init()
 
+    let session: Session = .default
+
     private init() {
     }
 
-    func save(toSave folder: Folder, completion: @escaping (Result<Void, APIError>) -> Void) {
-        guard let resourceURL = URL(string: "http://localhost:3000/folders") else { return }
-        var urlRequest = URLRequest(url: resourceURL)
-        urlRequest.httpMethod = "POST"
-        urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        urlRequest.httpBody = try? JSONEncoder().encode(folder)
-
-        let dataTask = URLSession.shared.dataTask(with: urlRequest) { _, response, _ in
-            guard
-                let httpResponse = response as? HTTPURLResponse,
-                httpResponse.statusCode == 200
-            else {
-                completion(.failure(.responseProblem))
-                return
+    func save(toSave folder: Folder, completion: @escaping (Result<Folder, AFError>) -> Void) {
+        session
+            .request("\(Current.backendUrl)/folders", method: .post, parameters: folder)
+            .validate()
+            .responseDecodable(of: Folder.self) { response in
+                completion(response.result)
             }
-            completion(.success(()))
-        }
-        dataTask.resume()
     }
 
-    func update(toUpdate folder: Folder, completion: @escaping (Result<Void, APIError>) -> Void) {
-        guard
-            let idF = folder.id,
-            let resourceURL = URL(string: "http://localhost:3000/folders/\(idF)")
-            else { return }
-        var urlRequest = URLRequest(url: resourceURL)
-        urlRequest.httpMethod = "PUT"
-        urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        urlRequest.httpBody = try? JSONEncoder().encode(folder)
-
-        let dataTask = URLSession.shared.dataTask(with: urlRequest) { _, response, _ in
-            guard
-                let httpResponse = response as? HTTPURLResponse,
-                httpResponse.statusCode == 200
-            else {
-                completion(.failure(.responseProblem))
-                return
-            }
-            completion(.success(()))
+    func update(toUpdate folder: Folder, completion: @escaping (Result<Folder, AFError>) -> Void) {
+        guard let idF = folder.id else {
+            fatalError("Folder not found")
         }
-        dataTask.resume()
+        session
+            .request("\(Current.backendUrl)/folders/\(idF)", method: .put, parameters: folder)
+            .validate()
+            .responseDecodable(of: Folder.self) { response in
+                completion(response.result)
+        }
+
     }
 
-    func remove(idF: Int, completion: @escaping (Result<Void, APIError>) -> Void) {
-        guard let resourceURL = URL(string: "http://localhost:3000/folders/\(idF)") else { fatalError() }
-        var urlRequest = URLRequest(url: resourceURL)
-        urlRequest.httpMethod = "DELETE"
-        urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
-
-        let dataTask = URLSession.shared.dataTask(with: urlRequest) { _, response, _ in
-            guard
-                let httpResponse = response as? HTTPURLResponse,
-                httpResponse.statusCode == 200
-            else {
-                completion(.failure(.responseProblem))
-                return
+    func remove(idF: Int, completion: @escaping (Result<Void, AFError>) -> Void) {
+        session
+            .request("\(Current.backendUrl)/folders/\(idF)", method: .delete)
+            .validate()
+            .response { response in
+                completion(response.result.map { data -> Void in () })
             }
-            completion(.success(()))
-        }
-        dataTask.resume()
     }
 
-    func getFolders(_ completion: @escaping (Result<[Folder], APIError>) -> Void) {
-        guard let resourceURL = URL(string: "http://localhost:3000/folders/") else { fatalError() }
-
-        var urlRequest = URLRequest(url: resourceURL)
-        urlRequest.httpMethod = "GET"
-        urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
-
-        let dataTask = URLSession.shared.dataTask(with: urlRequest) { data, response, _ in
-            guard
-                let httpResponse = response as? HTTPURLResponse,
-                httpResponse.statusCode == 200,
-                let jsonData = data
-                else {
-                    completion(.failure(.responseProblem))
-                    return
-            }
-            do {
-                let folderData = try JSONDecoder().decode([Folder].self, from: jsonData)
-                completion(.success(folderData))
-            } catch {
-                dump(error)
-                completion(.failure(.decodingProblem))
-            }
+    func getFolders(_ completion: @escaping (Result<[Folder], AFError>) -> Void) {
+        session
+            .request("\(Current.backendUrl)/folders", method: .get)
+            .validate()
+            .responseDecodable(of: [Folder].self) { response in
+                completion(response.result)
         }
-        dataTask.resume()
     }
 
-    func getFolder(idF: Int, completion: @escaping (Result<Folder, APIError>) -> Void) {
+    func getFolder(idF: Int, completion: @escaping (Result<Folder, AFError>) -> Void) {
+        session
+            .request("\(Current.backendUrl)/folders/\(idF)", method: .get)
+            .validate()
+            .responseDecodable(of: Folder.self) { response in
+                completion(response.result)
+        }
 
-        if let resourceURL = URL(string: "http://localhost:3000/folders/\(idF)") {
-            var urlRequest = URLRequest(url: resourceURL)
-            urlRequest.httpMethod = "GET"
-            urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
-
-            let dataTask = URLSession.shared.dataTask(with: urlRequest) { data, response, _ in
-                guard
-                    let httpResponse = response as? HTTPURLResponse,
-                    httpResponse.statusCode == 200,
-                    let jsonData = data
-                    else {
-                        completion(.failure(.responseProblem))
-                        return
-                }
-                do {
-                    let folderData = try JSONDecoder().decode(Folder.self, from: jsonData)
-                    completion(.success(folderData))
-                } catch {
-                    completion(.failure(.decodingProblem))
-                }
-            }
-            dataTask.resume()
-        } else { return }
     }
 
 }
