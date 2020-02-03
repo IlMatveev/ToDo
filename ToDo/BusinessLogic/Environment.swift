@@ -13,7 +13,9 @@ struct Environment {
     var backendUrl: String = "http://localhost:3000"
 }
 
+// swiftlint:disable variable_name
 var Current: Environment = .init()
+// swiftlint:enable variable_name
 
 extension Environment {
     static let mock: Environment = .init(

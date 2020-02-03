@@ -9,12 +9,6 @@
 import Foundation
 import Alamofire
 
-enum APIError: Error {
-    case responseProblem
-    case decodingProblem
-    case encodingProblem
-}
-
 final class TodoRepository {
     static let shared: TodoRepository = .init()
 
@@ -36,13 +30,15 @@ final class TodoRepository {
         guard
             let idF = item.folderId,
             let id = item.id
-            else { return }
+            else {
+                fatalError("Item not found")
+        }
         session
             .request("\(Current.backendUrl)folders/\(idF)/items/\(id)", method: .put, parameters: item)
             .validate()
             .responseDecodable(of: Todo.self) { response in
                 completion(response.result)
-        }
+            }
     }
 
     func remove(item: Todo, completion: @escaping (Result<Void, AFError>) -> Void) {
@@ -55,7 +51,7 @@ final class TodoRepository {
             .validate()
             .response { response in
                 completion(response.result.map { data -> Void in () })
-        }
+            }
     }
 
     func getItems(inFolder idF: Int, completion: @escaping (Result<[Todo], AFError>) -> Void) {
@@ -64,7 +60,7 @@ final class TodoRepository {
             .validate()
             .responseDecodable(of: [Todo].self) { response in
                 completion(response.result)
-        }
+            }
 
     }
 
@@ -74,7 +70,7 @@ final class TodoRepository {
             .validate()
             .responseDecodable(of: Todo.self) { response in
                 completion(response.result)
-        }
+            }
     }
 
 }

@@ -14,6 +14,8 @@ final class FolderService {
     private init() {
     }
 
+    var folders: [Folder] = []
+
     func save(folder: Folder, completion: @escaping (Result<Folder, Error>) -> Void) {
         if folder.id != nil {
             FolderRepository.shared.update(toUpdate: folder) { result in

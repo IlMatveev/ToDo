@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Alamofire
 
 enum ServiceError: Error {
     case searchProblem
@@ -21,6 +22,8 @@ final class TodoService {
 
     private init() {
     }
+
+    let items: [Todo] = []
 
     private lazy var observers: [TodoServiceDelegate] = []
 
@@ -40,7 +43,7 @@ final class TodoService {
         observers.forEach({ $0.update(subject: self)})
     }
 
-    func save(item: Todo, completion: @escaping (Result<Void, Error>) -> Void) {
+    func save(item: Todo, completion: @escaping (Result<Todo, Error>) -> Void) {
         if item.id != nil {
             TodoRepository.shared.update(toUpdate: item) { result in
                 DispatchQueue.main.async {
