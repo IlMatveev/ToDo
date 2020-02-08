@@ -8,12 +8,20 @@
 
 import Foundation
 
-struct Todo: Codable {
-    var id: Int?
+struct Todo: Codable, Entity {
+    var id: ID?
     var folderId: Int?
     var title: String = ""
     var date: Date?
     var isDone: Bool = false
+}
+
+extension EntityCollection where E == Todo {
+    static let todos: EntityCollection = .init(path: "items")
+
+    static func todos(from folderId: Folder.ID) -> EntityCollection {
+        return .init(path: "folders/\(folderId)/items")
+    }
 }
 
 extension Todo {

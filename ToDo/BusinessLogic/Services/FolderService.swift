@@ -13,18 +13,17 @@ final class FolderService {
 
     private init() {
     }
-
-    var folders: [Folder] = []
-
-    func save(folder: Folder, completion: @escaping (Result<Folder, Error>) -> Void) {
+    
+    func save(folder: Folder, completion: @escaping (Result<Void, Error>) -> Void) {
         if folder.id != nil {
-            FolderRepository.shared.update(toUpdate: folder) { result in
+            guard let id = folder.id else { return }
+            RestApiRepository.shared.update(from: .folders, id: id, item: folder) { result in
                 DispatchQueue.main.async {
                     completion(result.mapError { $0 })
                 }
             }
         } else {
-            FolderRepository.shared.save(toSave: folder) { result in
+            RestApiRepository.shared.save(from: .folders, item: folder) { result in
                 DispatchQueue.main.async {
                     completion(result.mapError { $0 })
                 }
@@ -33,7 +32,7 @@ final class FolderService {
     }
 
     func getFolder(id: Int, completion: @escaping (Result<Folder, Error>) -> Void) {
-        FolderRepository.shared.getFolder(idF: id) { result in
+        RestApiRepository.shared.getOne(from: .folders, id: id) { result in
             DispatchQueue.main.async {
                 completion(result.mapError { $0 })
             }
@@ -41,7 +40,7 @@ final class FolderService {
     }
 
     func getFolders(_ completion: @escaping (Result<[Folder], Error>) -> Void) {
-        FolderRepository.shared.getFolders { result in
+        RestApiRepository.shared.getAll(from: .folders) { result in
             DispatchQueue.main.async {
                 completion(result.mapError { $0 })
             }
@@ -49,7 +48,7 @@ final class FolderService {
     }
 
     func remove(id: Int, completion: @escaping (Result<Void, Error>) -> Void) {
-        FolderRepository.shared.remove(idF: id) { result in
+        RestApiRepository.shared.remove(from: .folders, id: id) { result in
             DispatchQueue.main.async {
                 completion(result.mapError { $0 })
             }

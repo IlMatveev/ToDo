@@ -22,9 +22,7 @@
 		C796401D23D03078001E723B /* AddFoldersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C796401C23D03078001E723B /* AddFoldersViewController.swift */; };
 		C796401F23D036E7001E723B /* Folder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C796401E23D036E7001E723B /* Folder.swift */; };
 		C796402123D088DA001E723B /* FolderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C796402023D088DA001E723B /* FolderService.swift */; };
-		C796402323D08D30001E723B /* FolderRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C796402223D08D30001E723B /* FolderRepository.swift */; };
 		C796534F23ACCF6600288168 /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C796534E23ACCF6600288168 /* Todo.swift */; };
-		C7C16C9723C526D8004C6F74 /* TodoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C16C9623C526D8004C6F74 /* TodoRepository.swift */; };
 		C7CFC1FC23946BB6002FB0EB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CFC1FB23946BB6002FB0EB /* AppDelegate.swift */; };
 		C7CFC1FE23946BB6002FB0EB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CFC1FD23946BB6002FB0EB /* SceneDelegate.swift */; };
 		C7CFC20323946BB6002FB0EB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C7CFC20123946BB6002FB0EB /* Main.storyboard */; };
@@ -32,6 +30,8 @@
 		C7CFC20823946BB7002FB0EB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C7CFC20623946BB7002FB0EB /* LaunchScreen.storyboard */; };
 		C7CFC21023946DF9002FB0EB /* TodoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CFC20F23946DF9002FB0EB /* TodoListViewController.swift */; };
 		C7CFC21223946EA0002FB0EB /* TodoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CFC21123946EA0002FB0EB /* TodoService.swift */; };
+		C7DA4F1A23EAB4BA00F693B7 /* RestApiRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DA4F1923EAB4BA00F693B7 /* RestApiRepository.swift */; };
+		C7EE3E2023EC801C00CE4A34 /* InMemoryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7EE3E1F23EC801C00CE4A34 /* InMemoryRepository.swift */; };
 		F58E432AA1648132D9E8D4F7 /* Pods_ToDo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9585E6A7BAE479D625A3AD53 /* Pods_ToDo.framework */; };
 /* End PBXBuildFile section */
 
@@ -54,9 +54,7 @@
 		C796401C23D03078001E723B /* AddFoldersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFoldersViewController.swift; sourceTree = "<group>"; };
 		C796401E23D036E7001E723B /* Folder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Folder.swift; sourceTree = "<group>"; };
 		C796402023D088DA001E723B /* FolderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderService.swift; sourceTree = "<group>"; };
-		C796402223D08D30001E723B /* FolderRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderRepository.swift; sourceTree = "<group>"; };
 		C796534E23ACCF6600288168 /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
-		C7C16C9623C526D8004C6F74 /* TodoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoRepository.swift; sourceTree = "<group>"; };
 		C7CFC1F823946BB6002FB0EB /* ToDo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7CFC1FB23946BB6002FB0EB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C7CFC1FD23946BB6002FB0EB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -66,6 +64,8 @@
 		C7CFC20923946BB7002FB0EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C7CFC20F23946DF9002FB0EB /* TodoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListViewController.swift; sourceTree = "<group>"; };
 		C7CFC21123946EA0002FB0EB /* TodoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoService.swift; sourceTree = "<group>"; };
+		C7DA4F1923EAB4BA00F693B7 /* RestApiRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestApiRepository.swift; sourceTree = "<group>"; };
+		C7EE3E1F23EC801C00CE4A34 /* InMemoryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryRepository.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,8 +150,8 @@
 		C796534D23ABC0AB00288168 /* Gateways */ = {
 			isa = PBXGroup;
 			children = (
-				C796402223D08D30001E723B /* FolderRepository.swift */,
-				C7C16C9623C526D8004C6F74 /* TodoRepository.swift */,
+				C7DA4F1923EAB4BA00F693B7 /* RestApiRepository.swift */,
+				C7EE3E1F23EC801C00CE4A34 /* InMemoryRepository.swift */,
 			);
 			path = Gateways;
 			sourceTree = "<group>";
@@ -335,17 +335,17 @@
 				C74A6FAB239A5FA300A8311E /* TodoDetailsViewController.swift in Sources */,
 				C7CFC1FC23946BB6002FB0EB /* AppDelegate.swift in Sources */,
 				C727AC6F23A295DA0039C50E /* AddTodoViewController.swift in Sources */,
-				C796402323D08D30001E723B /* FolderRepository.swift in Sources */,
 				C796534F23ACCF6600288168 /* Todo.swift in Sources */,
 				C73C016623E48F2A004BD497 /* Environment.swift in Sources */,
 				C7CFC21023946DF9002FB0EB /* TodoListViewController.swift in Sources */,
+				C7DA4F1A23EAB4BA00F693B7 /* RestApiRepository.swift in Sources */,
 				C7CFC1FE23946BB6002FB0EB /* SceneDelegate.swift in Sources */,
-				C7C16C9723C526D8004C6F74 /* TodoRepository.swift in Sources */,
 				C72F64A123A7824E005859A5 /* CustomCell.swift in Sources */,
 				C76CD4D723AFEABE00CE6F8C /* UserService.swift in Sources */,
 				C756C9CE23D46D3700E3A6A5 /* AddCell.swift in Sources */,
 				C796401B23D0299F001E723B /* FoldersCell.swift in Sources */,
 				C796401723D021A2001E723B /* FoldersViewController.swift in Sources */,
+				C7EE3E2023EC801C00CE4A34 /* InMemoryRepository.swift in Sources */,
 				C76CD4D123AF73F900CE6F8C /* LoginViewController.swift in Sources */,
 				C796401D23D03078001E723B /* AddFoldersViewController.swift in Sources */,
 				C76CD4D323AF740F00CE6F8C /* SignInViewController.swift in Sources */,

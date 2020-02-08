@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Alamofire
 
 enum ServiceError: Error {
     case searchProblem
@@ -22,8 +21,6 @@ final class TodoService {
 
     private init() {
     }
-
-    let items: [Todo] = []
 
     private lazy var observers: [TodoServiceDelegate] = []
 
@@ -43,9 +40,10 @@ final class TodoService {
         observers.forEach({ $0.update(subject: self)})
     }
 
-    func save(item: Todo, completion: @escaping (Result<Todo, Error>) -> Void) {
+    func save(item: Todo, completion: @escaping (Result<Void, Error>) -> Void) {
         if item.id != nil {
-            TodoRepository.shared.update(toUpdate: item) { result in
+            guard let id = item.id else { return }
+            RestApiRepository.shared.update(from: .todos, id: id, item: item) { result in
                 DispatchQueue.main.async {
                     self.delegate?.update(subject: self)
                     self.notify()
@@ -53,7 +51,7 @@ final class TodoService {
                 }
             }
         } else {
-            TodoRepository.shared.save(toSave: item) { result in
+            RestApiRepository.shared.save(from: .todos, item: item) { result in
                 DispatchQueue.main.async {
                     self.delegate?.update(subject: self)
                     self.notify()
@@ -64,7 +62,7 @@ final class TodoService {
     }
 
     func getItem(id: Int, idF: Int, completion: @escaping (Result<Todo, Error>) -> Void) {
-        TodoRepository.shared.getItem(id: id, idF: idF) { result in
+        RestApiRepository.shared.getOne(from: .todos(from: idF), id: id) { result in
             DispatchQueue.main.async {
                 completion(result.mapError { $0 })
             }
@@ -72,7 +70,7 @@ final class TodoService {
     }
 
     func getItems(inFolder idF: Int, completion: @escaping (Result<[Todo], Error>) -> Void) {
-        TodoRepository.shared.getItems(inFolder: idF) { result in
+        RestApiRepository.shared.getAll(from: .todos(from: idF)) { result in
             DispatchQueue.main.async {
                 completion(result.mapError { $0 })
             }
@@ -80,7 +78,8 @@ final class TodoService {
     }
 
     func remove(item: Todo, completion: @escaping (Result<Void, Error>) -> Void) {
-        TodoRepository.shared.remove(item: item) { result in
+        guard let id = item.id else { return }
+        RestApiRepository.shared.remove(from: .todos, id: id) { result in
             DispatchQueue.main.async {
                 self.delegate?.update(subject: self)
                 completion(result.mapError { $0 })
