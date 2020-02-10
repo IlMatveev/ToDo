@@ -13,7 +13,7 @@ struct Folder: Codable, Entity {
     var name: String = ""
 }
 
-struct EntityCollection<E> {
+struct EntityCollection<E>: Hashable {
     let path: String
 }
 
@@ -22,12 +22,14 @@ struct Identifier<E>: RawRepresentable, Codable, Equatable {
 }
 
 extension EntityCollection where E == Folder {
-    static let folders: EntityCollection = .init(path: "folders")
+    static let folders: EntityCollection = .init(path: "folders/")
 }
 
 protocol Entity: Codable {
     typealias Collection = EntityCollection<Self>
+// swiftlint:disable type_name
     typealias ID = Identifier<Self>
+// swiftlint:enable type_name
 
     var id: ID? { get set }
 }

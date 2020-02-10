@@ -8,10 +8,6 @@
 
 import Foundation
 
-enum ServiceError: Error {
-    case searchProblem
-}
-
 protocol TodoServiceDelegate: class {
     func update(subject: TodoService)
 }

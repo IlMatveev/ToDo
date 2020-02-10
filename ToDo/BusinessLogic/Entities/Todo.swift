@@ -17,10 +17,10 @@ struct Todo: Codable, Entity {
 }
 
 extension EntityCollection where E == Todo {
-    static let todos: EntityCollection = .init(path: "items")
+    static let todos: EntityCollection = .init(path: "items/")
 
     static func todos(from folderId: Folder.ID) -> EntityCollection {
-        return .init(path: "folders/\(folderId)/items")
+        return .init(path: "folders/\(folderId.rawValue)/items/")
     }
 }
 

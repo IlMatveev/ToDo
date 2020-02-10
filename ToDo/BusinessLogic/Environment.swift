@@ -10,7 +10,7 @@ import Foundation
 
 struct Environment {
     var date: () -> Date = Date.init
-    var repository: Repository = RestApiRepository(backendUrl: "http://localhost:3000")
+    var repository: Repository = RestApiRepository(backendUrl: "http://localhost:3000/")
 }
 
 // swiftlint:disable variable_name

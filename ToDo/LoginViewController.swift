@@ -19,7 +19,6 @@ class LoginViewController: UIViewController {
 
         signInOutlet.layer.cornerRadius = 6
         signUpOutlet.layer.cornerRadius = 6
-
     }
 
     override func viewWillAppear(_ animated: Bool) {
