@@ -40,7 +40,7 @@ class AddFoldersViewController: UIViewController {
 
         var folder = currentFolder ?? Folder()
         folder.name = title
-        FolderRepository.shared.save(toSave: folder) { _ in }
+        FolderService.shared.save(folder: folder) { _ in }
         dismiss(animated: true, completion: nil)
     }
     

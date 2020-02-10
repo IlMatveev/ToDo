@@ -67,7 +67,7 @@ final class TodoDetailsViewController: UIViewController, TodoServiceDelegate {
             let idF = currentItem?.folderId
         else { return }
 
-        todoSrv.getItem(id: id, idF: idF) { result in
+        todoSrv.getItem(id: id, idF: Folder.ID(rawValue: idF)) { result in
             switch result {
             case .success(let item):
                 self.currentItem = item
@@ -76,4 +76,5 @@ final class TodoDetailsViewController: UIViewController, TodoServiceDelegate {
             }
         }
     }
+
 }
