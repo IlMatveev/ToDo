@@ -9,5 +9,11 @@
 import Foundation
 
 final class InMemoryRepository {
+    var items: [Todo] = []
+    var folders: [Folder] = []
+
+    func add<T: Entity>(collection: T.Collection, item: T) {
+        
+    }
 
 }

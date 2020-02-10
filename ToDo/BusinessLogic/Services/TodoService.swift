@@ -42,8 +42,7 @@ final class TodoService {
 
     func save(item: Todo, completion: @escaping (Result<Void, Error>) -> Void) {
         if item.id != nil {
-            guard let id = item.id else { return }
-            RestApiRepository.shared.update(from: .todos, id: id, item: item) { result in
+            Current.repository.update(from: .todos, item: item) { result in
                 DispatchQueue.main.async {
                     self.delegate?.update(subject: self)
                     self.notify()
@@ -51,26 +50,26 @@ final class TodoService {
                 }
             }
         } else {
-            RestApiRepository.shared.save(from: .todos, item: item) { result in
+            Current.repository.save(from: .todos, item: item) { result in
                 DispatchQueue.main.async {
                     self.delegate?.update(subject: self)
                     self.notify()
-                    completion(result.mapError { $0 })
+                    completion(result.mapError { $0 }.map { _ in () })
                 }
             }
         }
     }
 
-    func getItem(id: Int, idF: Int, completion: @escaping (Result<Todo, Error>) -> Void) {
-        RestApiRepository.shared.getOne(from: .todos(from: idF), id: id) { result in
+    func getItem(id: Todo.ID, idF: Folder.ID, completion: @escaping (Result<Todo, Error>) -> Void) {
+        Current.repository.getOne(from: .todos(from: idF), id: id) { result in
             DispatchQueue.main.async {
                 completion(result.mapError { $0 })
             }
         }
     }
 
-    func getItems(inFolder idF: Int, completion: @escaping (Result<[Todo], Error>) -> Void) {
-        RestApiRepository.shared.getAll(from: .todos(from: idF)) { result in
+    func getItems(inFolder idF: Folder.ID, completion: @escaping (Result<[Todo], Error>) -> Void) {
+        Current.repository.getAll(from: .todos(from: idF)) { result in
             DispatchQueue.main.async {
                 completion(result.mapError { $0 })
             }
@@ -79,7 +78,7 @@ final class TodoService {
 
     func remove(item: Todo, completion: @escaping (Result<Void, Error>) -> Void) {
         guard let id = item.id else { return }
-        RestApiRepository.shared.remove(from: .todos, id: id) { result in
+        Current.repository.remove(from: .todos, id: id) { result in
             DispatchQueue.main.async {
                 self.delegate?.update(subject: self)
                 completion(result.mapError { $0 })

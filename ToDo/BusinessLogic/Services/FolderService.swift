@@ -16,23 +16,22 @@ final class FolderService {
     
     func save(folder: Folder, completion: @escaping (Result<Void, Error>) -> Void) {
         if folder.id != nil {
-            guard let id = folder.id else { return }
-            RestApiRepository.shared.update(from: .folders, id: id, item: folder) { result in
+            Current.repository.update(from: .folders, item: folder) { result in
                 DispatchQueue.main.async {
                     completion(result.mapError { $0 })
                 }
             }
         } else {
-            RestApiRepository.shared.save(from: .folders, item: folder) { result in
+            Current.repository.save(from: .folders, item: folder) { result in
                 DispatchQueue.main.async {
-                    completion(result.mapError { $0 })
+                    completion(result.mapError { $0 }.map { _ in () })
                 }
             }
         }
     }
 
-    func getFolder(id: Int, completion: @escaping (Result<Folder, Error>) -> Void) {
-        RestApiRepository.shared.getOne(from: .folders, id: id) { result in
+    func getFolder(id: Folder.ID, completion: @escaping (Result<Folder, Error>) -> Void) {
+        Current.repository.getOne(from: .folders, id: id) { result in
             DispatchQueue.main.async {
                 completion(result.mapError { $0 })
             }
@@ -40,15 +39,15 @@ final class FolderService {
     }
 
     func getFolders(_ completion: @escaping (Result<[Folder], Error>) -> Void) {
-        RestApiRepository.shared.getAll(from: .folders) { result in
+        Current.repository.getAll(from: .folders) { result in
             DispatchQueue.main.async {
                 completion(result.mapError { $0 })
             }
         }
     }
 
-    func remove(id: Int, completion: @escaping (Result<Void, Error>) -> Void) {
-        RestApiRepository.shared.remove(from: .folders, id: id) { result in
+    func remove(id: Folder.ID, completion: @escaping (Result<Void, Error>) -> Void) {
+        Current.repository.remove(from: .folders, id: id) { result in
             DispatchQueue.main.async {
                 completion(result.mapError { $0 })
             }
