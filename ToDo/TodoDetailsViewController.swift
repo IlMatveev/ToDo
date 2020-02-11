@@ -1,0 +1,80 @@
+//
+//  TodoDetailsViewController.swift
+//  ToDo
+//
+//  Created by Ilya Matveev on 06.12.2019.
+//  Copyright © 2019 Ilya Matveev. All rights reserved.
+//
+
+import UIKit
+
+final class TodoDetailsViewController: UIViewController, TodoServiceDelegate {
+    private let todoSrv: TodoService = .shared
+    private let notificationCenter: NotificationCenter = .default
+
+    @IBOutlet private var stateOutlet: UISwitch!
+    @IBOutlet private var titleOutlet: UILabel!
+    @IBOutlet private var dateOutlet: UILabel!
+
+    var currentItem: Todo? {
+        didSet {
+            renderItem()
+        }
+    }
+
+    // MARK: - Lifecycle
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        renderItem()
+    }
+
+    func update(subject: TodoService) {
+        updateItem()
+    }
+
+    private func renderItem () {
+        guard let item = currentItem, isViewLoaded else { return }
+
+        titleOutlet.text = "Title: \(item.title)"
+        dateOutlet.text = "Due date: \(item.itemLongDate())"
+        stateOutlet.isOn = item.isDone
+    }
+
+    @IBAction func editAction(_ sender: UIBarButtonItem) {
+        performSegue(withIdentifier: "toEdit", sender: nil)
+
+    }
+
+    @IBAction func stateAction(_ sender: UISwitch) {
+        currentItem?.isDone = stateOutlet.isOn
+        guard let item = currentItem else {return}
+        todoSrv.save(item: item) { _ in }
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard
+            let addNavigationController = segue.destination as? UINavigationController,
+            let addController = addNavigationController.viewControllers.first as? AddTodoViewController
+        else { return }
+
+        addController.currentItem = currentItem
+    }
+
+    @objc func updateItem() {
+        guard
+            let id = currentItem?.id,
+            let idF = currentItem?.folderId
+        else { return }
+
+        todoSrv.getItem(id: id, idF: Folder.ID(rawValue: idF)) { result in
+            switch result {
+            case .success(let item):
+                self.currentItem = item
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+
+}
