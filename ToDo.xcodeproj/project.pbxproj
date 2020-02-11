@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C711AC8023F2A0E2006C31E2 /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C711AC7F23F2A0E2006C31E2 /* Repository.swift */; };
 		C727AC6F23A295DA0039C50E /* AddTodoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C727AC6E23A295DA0039C50E /* AddTodoViewController.swift */; };
 		C72F64A123A7824E005859A5 /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72F64A023A7824E005859A5 /* CustomCell.swift */; };
 		C73C016623E48F2A004BD497 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73C016523E48F2A004BD497 /* Environment.swift */; };
@@ -39,6 +40,7 @@
 		03DFE09AE707F119182BE859 /* Pods-ToDo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ToDo.release.xcconfig"; path = "Target Support Files/Pods-ToDo/Pods-ToDo.release.xcconfig"; sourceTree = "<group>"; };
 		7242B472DA28A8206AABB93B /* Pods-ToDo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ToDo.debug.xcconfig"; path = "Target Support Files/Pods-ToDo/Pods-ToDo.debug.xcconfig"; sourceTree = "<group>"; };
 		9585E6A7BAE479D625A3AD53 /* Pods_ToDo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ToDo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C711AC7F23F2A0E2006C31E2 /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
 		C727AC6E23A295DA0039C50E /* AddTodoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodoViewController.swift; sourceTree = "<group>"; };
 		C72F64A023A7824E005859A5 /* CustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
 		C73C016523E48F2A004BD497 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
@@ -150,6 +152,7 @@
 		C796534D23ABC0AB00288168 /* Gateways */ = {
 			isa = PBXGroup;
 			children = (
+				C711AC7F23F2A0E2006C31E2 /* Repository.swift */,
 				C7DA4F1923EAB4BA00F693B7 /* RestApiRepository.swift */,
 				C7EE3E1F23EC801C00CE4A34 /* InMemoryRepository.swift */,
 			);
@@ -339,6 +342,7 @@
 				C73C016623E48F2A004BD497 /* Environment.swift in Sources */,
 				C7CFC21023946DF9002FB0EB /* TodoListViewController.swift in Sources */,
 				C7DA4F1A23EAB4BA00F693B7 /* RestApiRepository.swift in Sources */,
+				C711AC8023F2A0E2006C31E2 /* Repository.swift in Sources */,
 				C7CFC1FE23946BB6002FB0EB /* SceneDelegate.swift in Sources */,
 				C72F64A123A7824E005859A5 /* CustomCell.swift in Sources */,
 				C76CD4D723AFEABE00CE6F8C /* UserService.swift in Sources */,

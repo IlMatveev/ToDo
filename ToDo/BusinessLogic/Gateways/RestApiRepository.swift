@@ -9,12 +9,10 @@
 import Foundation
 import Alamofire
 
-protocol Repository {
-    func getAll<T: Entity>(from collection: T.Collection, completion: @escaping (Result<[T], AFError>) -> Void)
-    func getOne<T: Entity>(from collection: T.Collection, id: T.ID, completion: @escaping (Result<T, AFError>) -> Void)
-    func save<T: Entity>(from collection: T.Collection, item: T, completion: @escaping (Result<T, AFError>) -> Void)
-    func update<T: Entity>(from collection: T.Collection, item: T, completion: @escaping (Result<Void, AFError>) -> Void)
-    func remove<T: Entity>(from collection: T.Collection, id: T.ID, completion: @escaping (Result<Void, AFError>) -> Void)
+extension RepositoryError {
+    var alamofireError: AFError? {
+        return underlyingError as? AFError
+    }
 }
 
 final class RestApiRepository: Repository {
@@ -27,34 +25,34 @@ final class RestApiRepository: Repository {
         self.backendUrl = backendUrl
     }
 
-    func getAll<T: Entity>(from collection: T.Collection, completion: @escaping (Result<[T], AFError>) -> Void) {
+    func getAll<T: Entity>(from collection: T.Collection, completion: @escaping (Result<[T], RepositoryError>) -> Void) {
         session
             .request("\(backendUrl)\(collection.path)", method: .get)
             .validate()
             .responseDecodable(of: [T].self) { response in
-                completion(response.result)
+                completion(response.result.mapError(RepositoryError.init))
             }
     }
 
-    func getOne<T: Entity>(from collection: T.Collection, id: T.ID, completion: @escaping (Result<T, AFError>) -> Void) {
+    func getOne<T: Entity>(id: T.ID, from collection: T.Collection, completion: @escaping (Result<T, RepositoryError>) -> Void) {
         session
             .request("\(backendUrl)\(collection.path)\(id)", method: .get)
             .validate()
             .responseDecodable(of: T.self) { response in
-                completion(response.result)
+                completion(response.result.mapError(RepositoryError.init))
             }
     }
 
-    func save<T: Entity>(from collection: T.Collection, item: T, completion: @escaping (Result<T, AFError>) -> Void) {
+    func save<T: Entity>(item: T, to collection: T.Collection, completion: @escaping (Result<T, RepositoryError>) -> Void) {
         session
             .request("\(backendUrl)\(collection.path)", method: .post, parameters: item)
             .validate()
             .responseDecodable(of: T.self) { response in
-                completion(response.result)
+                completion(response.result.mapError(RepositoryError.init))
             }
     }
 
-    func update<T: Entity>(from collection: T.Collection, item: T, completion: @escaping (Result<Void, AFError>) -> Void) {
+    func update<T: Entity>(item: T, in collection: T.Collection, completion: @escaping (Result<T, RepositoryError>) -> Void) {
         guard let id = item.id else {
             fatalError("Not found id")
         }
@@ -62,16 +60,16 @@ final class RestApiRepository: Repository {
             .request("\(backendUrl)\(collection.path)\(id)", method: .put, parameters: item)
             .validate()
             .responseDecodable(of: T.self) { response in
-                completion(response.result.map { data -> Void in () })
+                completion(response.result.mapError(RepositoryError.init))
             }
     }
 
-    func remove<T: Entity>(from collection: T.Collection, id: T.ID, completion: @escaping (Result<Void, AFError>) -> Void) {
+    func remove<T: Entity>(id: T.ID, from collection: T.Collection, completion: @escaping (Result<Void, RepositoryError>) -> Void) {
         session
             .request("\(backendUrl)\(collection.path)\(id)", method: .delete)
             .validate()
             .responseDecodable(of: T.self) { response in
-                completion(response.result.map { data -> Void in () })
+                completion(response.result.map { data -> Void in () }.mapError(RepositoryError.init))
             }
     }
 

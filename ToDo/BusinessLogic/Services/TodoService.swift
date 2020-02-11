@@ -38,15 +38,15 @@ final class TodoService {
 
     func save(item: Todo, completion: @escaping (Result<Void, Error>) -> Void) {
         if item.id != nil {
-            Current.repository.update(from: .todos, item: item) { result in
+            Current.repository.update(item: item, in: .todos) { result in
                 DispatchQueue.main.async {
                     self.delegate?.update(subject: self)
                     self.notify()
-                    completion(result.mapError { $0 })
+                    completion(result.mapError { $0 }.map({ $0 }))
                 }
             }
         } else {
-            Current.repository.save(from: .todos, item: item) { result in
+            Current.repository.save(item: item, to: .todos) { result in
                 DispatchQueue.main.async {
                     self.delegate?.update(subject: self)
                     self.notify()
@@ -57,7 +57,7 @@ final class TodoService {
     }
 
     func getItem(id: Todo.ID, idF: Folder.ID, completion: @escaping (Result<Todo, Error>) -> Void) {
-        Current.repository.getOne(from: .todos(from: idF), id: id) { result in
+        Current.repository.getOne(id: id, from: .todos(from: idF)) { result in
             DispatchQueue.main.async {
                 completion(result.mapError { $0 })
             }
@@ -74,7 +74,7 @@ final class TodoService {
 
     func remove(item: Todo, completion: @escaping (Result<Void, Error>) -> Void) {
         guard let id = item.id else { return }
-        Current.repository.remove(from: .todos, id: id) { result in
+        Current.repository.remove(id: id, from: .todos) { result in
             DispatchQueue.main.async {
                 self.delegate?.update(subject: self)
                 completion(result.mapError { $0 })

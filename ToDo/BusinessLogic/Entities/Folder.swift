@@ -13,16 +13,18 @@ struct Folder: Codable, Entity {
     var name: String = ""
 }
 
+extension EntityCollection {
+    static var folders: EntityCollection<Folder> {
+        return .init(path: "folders/")
+    }
+}
+
 struct EntityCollection<E>: Hashable {
     let path: String
 }
 
 struct Identifier<E>: RawRepresentable, Codable, Equatable {
     let rawValue: Int
-}
-
-extension EntityCollection where E == Folder {
-    static let folders: EntityCollection = .init(path: "folders/")
 }
 
 protocol Entity: Codable {

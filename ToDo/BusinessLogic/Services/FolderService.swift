@@ -16,13 +16,13 @@ final class FolderService {
     
     func save(folder: Folder, completion: @escaping (Result<Void, Error>) -> Void) {
         if folder.id != nil {
-            Current.repository.update(from: .folders, item: folder) { result in
+            Current.repository.update(item: folder, in: .folders) { result in
                 DispatchQueue.main.async {
-                    completion(result.mapError { $0 })
+                    completion(result.mapError { $0 }.map({ $0 }))
                 }
             }
         } else {
-            Current.repository.save(from: .folders, item: folder) { result in
+            Current.repository.save(item: folder, to: .folders) { result in
                 DispatchQueue.main.async {
                     completion(result.mapError { $0 }.map { _ in () })
                 }
@@ -31,7 +31,7 @@ final class FolderService {
     }
 
     func getFolder(id: Folder.ID, completion: @escaping (Result<Folder, Error>) -> Void) {
-        Current.repository.getOne(from: .folders, id: id) { result in
+        Current.repository.getOne(id: id, from: .folders) { result in
             DispatchQueue.main.async {
                 completion(result.mapError { $0 })
             }
@@ -47,7 +47,7 @@ final class FolderService {
     }
 
     func remove(id: Folder.ID, completion: @escaping (Result<Void, Error>) -> Void) {
-        Current.repository.remove(from: .folders, id: id) { result in
+        Current.repository.remove(id: id, from: .folders) { result in
             DispatchQueue.main.async {
                 completion(result.mapError { $0 })
             }
