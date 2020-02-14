@@ -99,6 +99,65 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		C74B503C23F69F33008C212B /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				C7CFC20123946BB6002FB0EB /* Main.storyboard */,
+				C74B504123F69FA5008C212B /* Flows */,
+				C74B503D23F69F59008C212B /* Cells */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		C74B503D23F69F59008C212B /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				C796401A23D0299F001E723B /* FoldersCell.swift */,
+				C72F64A023A7824E005859A5 /* CustomCell.swift */,
+				C756C9CD23D46D3700E3A6A5 /* AddCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		C74B503E23F69F6B008C212B /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				C76CD4D023AF73F900CE6F8C /* LoginViewController.swift */,
+				C76CD4D223AF740F00CE6F8C /* SignInViewController.swift */,
+				C76CD4D423AF742000CE6F8C /* SignUpViewController.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		C74B503F23F69F87008C212B /* Todos */ = {
+			isa = PBXGroup;
+			children = (
+				C7CFC20F23946DF9002FB0EB /* TodoListViewController.swift */,
+				C74A6FAA239A5FA300A8311E /* TodoDetailsViewController.swift */,
+				C727AC6E23A295DA0039C50E /* AddTodoViewController.swift */,
+			);
+			path = Todos;
+			sourceTree = "<group>";
+		};
+		C74B504023F69F90008C212B /* Folders */ = {
+			isa = PBXGroup;
+			children = (
+				C796401C23D03078001E723B /* AddFoldersViewController.swift */,
+				C796401623D021A2001E723B /* FoldersViewController.swift */,
+			);
+			path = Folders;
+			sourceTree = "<group>";
+		};
+		C74B504123F69FA5008C212B /* Flows */ = {
+			isa = PBXGroup;
+			children = (
+				C74B503E23F69F6B008C212B /* Auth */,
+				C74B504023F69F90008C212B /* Folders */,
+				C74B503F23F69F87008C212B /* Todos */,
+			);
+			path = Flows;
+			sourceTree = "<group>";
+		};
 		C796534823ABC02600288168 /* App */ = {
 			isa = PBXGroup;
 			children = (
@@ -183,18 +242,7 @@
 				C796534823ABC02600288168 /* App */,
 				C796534923ABC03300288168 /* Resources */,
 				C796534A23ABC04B00288168 /* BusinessLogic */,
-				C7CFC20123946BB6002FB0EB /* Main.storyboard */,
-				C76CD4D023AF73F900CE6F8C /* LoginViewController.swift */,
-				C76CD4D223AF740F00CE6F8C /* SignInViewController.swift */,
-				C76CD4D423AF742000CE6F8C /* SignUpViewController.swift */,
-				C796401C23D03078001E723B /* AddFoldersViewController.swift */,
-				C796401623D021A2001E723B /* FoldersViewController.swift */,
-				C7CFC20F23946DF9002FB0EB /* TodoListViewController.swift */,
-				C74A6FAA239A5FA300A8311E /* TodoDetailsViewController.swift */,
-				C727AC6E23A295DA0039C50E /* AddTodoViewController.swift */,
-				C796401A23D0299F001E723B /* FoldersCell.swift */,
-				C72F64A023A7824E005859A5 /* CustomCell.swift */,
-				C756C9CD23D46D3700E3A6A5 /* AddCell.swift */,
+				C74B503C23F69F33008C212B /* Presentation */,
 			);
 			path = ToDo;
 			sourceTree = "<group>";
