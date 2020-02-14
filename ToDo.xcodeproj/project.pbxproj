@@ -12,6 +12,7 @@
 		C72F64A123A7824E005859A5 /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72F64A023A7824E005859A5 /* CustomCell.swift */; };
 		C73C016623E48F2A004BD497 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73C016523E48F2A004BD497 /* Environment.swift */; };
 		C74A6FAB239A5FA300A8311E /* TodoDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74A6FAA239A5FA300A8311E /* TodoDetailsViewController.swift */; };
+		C74B504423F6A0A5008C212B /* AuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74B504323F6A0A5008C212B /* AuthCoordinator.swift */; };
 		C756C9CE23D46D3700E3A6A5 /* AddCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C756C9CD23D46D3700E3A6A5 /* AddCell.swift */; };
 		C76CD4D123AF73F900CE6F8C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76CD4D023AF73F900CE6F8C /* LoginViewController.swift */; };
 		C76CD4D323AF740F00CE6F8C /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76CD4D223AF740F00CE6F8C /* SignInViewController.swift */; };
@@ -45,6 +46,7 @@
 		C72F64A023A7824E005859A5 /* CustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
 		C73C016523E48F2A004BD497 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		C74A6FAA239A5FA300A8311E /* TodoDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoDetailsViewController.swift; sourceTree = "<group>"; };
+		C74B504323F6A0A5008C212B /* AuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
 		C756C9CD23D46D3700E3A6A5 /* AddCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCell.swift; sourceTree = "<group>"; };
 		C76CD4D023AF73F900CE6F8C /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		C76CD4D223AF740F00CE6F8C /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
@@ -122,9 +124,8 @@
 		C74B503E23F69F6B008C212B /* Auth */ = {
 			isa = PBXGroup;
 			children = (
-				C76CD4D023AF73F900CE6F8C /* LoginViewController.swift */,
-				C76CD4D223AF740F00CE6F8C /* SignInViewController.swift */,
-				C76CD4D423AF742000CE6F8C /* SignUpViewController.swift */,
+				C74B504223F6A08A008C212B /* Modules */,
+				C74B504323F6A0A5008C212B /* AuthCoordinator.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -156,6 +157,16 @@
 				C74B503F23F69F87008C212B /* Todos */,
 			);
 			path = Flows;
+			sourceTree = "<group>";
+		};
+		C74B504223F6A08A008C212B /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				C76CD4D023AF73F900CE6F8C /* LoginViewController.swift */,
+				C76CD4D223AF740F00CE6F8C /* SignInViewController.swift */,
+				C76CD4D423AF742000CE6F8C /* SignUpViewController.swift */,
+			);
+			path = Modules;
 			sourceTree = "<group>";
 		};
 		C796534823ABC02600288168 /* App */ = {
@@ -403,6 +414,7 @@
 				C76CD4D323AF740F00CE6F8C /* SignInViewController.swift in Sources */,
 				C7CFC21223946EA0002FB0EB /* TodoService.swift in Sources */,
 				C796402123D088DA001E723B /* FolderService.swift in Sources */,
+				C74B504423F6A0A5008C212B /* AuthCoordinator.swift in Sources */,
 				C796401F23D036E7001E723B /* Folder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

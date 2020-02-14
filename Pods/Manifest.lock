@@ -1,16 +1,20 @@
 PODS:
   - Alamofire (5.0.0-rc.3)
+  - EasyDi (1.6.1)
 
 DEPENDENCIES:
   - Alamofire (= 5.0.0-rc.3)
+  - EasyDi
 
 SPEC REPOS:
   trunk:
     - Alamofire
+    - EasyDi
 
 SPEC CHECKSUMS:
   Alamofire: ca8c0de6906873be89d6deec5c8de279e00bf872
+  EasyDi: 3d7d4c0d3ad2d78b3ff22d4755590d32945f69cc
 
-PODFILE CHECKSUM: ac02b8eadac14452ddc30fda9b45ff2993f44518
+PODFILE CHECKSUM: b6179b8384291a97df245be8b289a93053411775
 
 COCOAPODS: 1.8.4
