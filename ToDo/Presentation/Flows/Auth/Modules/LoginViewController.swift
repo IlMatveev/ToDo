@@ -8,9 +8,20 @@
 
 import UIKit
 
-class LoginViewController: UIViewController {
-    @IBOutlet var signInOutlet: UIButton!
-    @IBOutlet var signUpOutlet: UIButton!
+final class LoginViewController: UIViewController, Storyboarded {
+    struct Config {
+        var signInTapped: () -> Void
+        var signUpTapped: () -> Void
+    }
+
+    @IBOutlet private var signInOutlet: UIButton!
+    @IBOutlet private var signUpOutlet: UIButton!
+
+    private var configuration: Config?
+
+    func configure(with config: Config) {
+        configuration = config
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,7 +33,16 @@ class LoginViewController: UIViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        super.viewWillAppear(animated)
+
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
     }
 
+    @IBAction private func signInTapped(_ sender: UIButton) {
+        configuration?.signInTapped()
+    }
+
+    @IBAction private func signUpTapped(_ sender: UIButton) {
+        configuration?.signUpTapped()
+    }
 }

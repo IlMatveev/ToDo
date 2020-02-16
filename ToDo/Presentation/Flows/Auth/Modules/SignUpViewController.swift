@@ -8,7 +8,9 @@
 
 import UIKit
 
-class SignUpViewController: UIViewController {
+class SignUpViewController: UIViewController, Storyboarded {
+    weak var coordinator: AuthCoordinator?
+
     private let userManager: UserService = .shared
     private let notificationCenter: NotificationCenter = .default
     private let scrollView = UIScrollView()

@@ -8,7 +8,9 @@
 
 import UIKit
 
-class SignInViewController: UIViewController {
+class SignInViewController: UIViewController, Storyboarded {
+    weak var coordinator: AuthCoordinator?
+
     private let userManager: UserService = .shared
     private let notificationCenter: NotificationCenter = .default
     

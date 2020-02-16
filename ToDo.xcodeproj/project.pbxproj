@@ -13,6 +13,8 @@
 		C73C016623E48F2A004BD497 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73C016523E48F2A004BD497 /* Environment.swift */; };
 		C74A6FAB239A5FA300A8311E /* TodoDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74A6FAA239A5FA300A8311E /* TodoDetailsViewController.swift */; };
 		C74B504423F6A0A5008C212B /* AuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74B504323F6A0A5008C212B /* AuthCoordinator.swift */; };
+		C74B504623F8B0F9008C212B /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74B504523F8B0F9008C212B /* Coordinator.swift */; };
+		C74B504823F8B10C008C212B /* Storyboarded.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74B504723F8B10C008C212B /* Storyboarded.swift */; };
 		C756C9CE23D46D3700E3A6A5 /* AddCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C756C9CD23D46D3700E3A6A5 /* AddCell.swift */; };
 		C76CD4D123AF73F900CE6F8C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76CD4D023AF73F900CE6F8C /* LoginViewController.swift */; };
 		C76CD4D323AF740F00CE6F8C /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76CD4D223AF740F00CE6F8C /* SignInViewController.swift */; };
@@ -47,6 +49,8 @@
 		C73C016523E48F2A004BD497 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		C74A6FAA239A5FA300A8311E /* TodoDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoDetailsViewController.swift; sourceTree = "<group>"; };
 		C74B504323F6A0A5008C212B /* AuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
+		C74B504523F8B0F9008C212B /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		C74B504723F8B10C008C212B /* Storyboarded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboarded.swift; sourceTree = "<group>"; };
 		C756C9CD23D46D3700E3A6A5 /* AddCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCell.swift; sourceTree = "<group>"; };
 		C76CD4D023AF73F900CE6F8C /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		C76CD4D223AF740F00CE6F8C /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
@@ -155,6 +159,8 @@
 				C74B503E23F69F6B008C212B /* Auth */,
 				C74B504023F69F90008C212B /* Folders */,
 				C74B503F23F69F87008C212B /* Todos */,
+				C74B504523F8B0F9008C212B /* Coordinator.swift */,
+				C74B504723F8B10C008C212B /* Storyboarded.swift */,
 			);
 			path = Flows;
 			sourceTree = "<group>";
@@ -397,6 +403,7 @@
 				C74A6FAB239A5FA300A8311E /* TodoDetailsViewController.swift in Sources */,
 				C7CFC1FC23946BB6002FB0EB /* AppDelegate.swift in Sources */,
 				C727AC6F23A295DA0039C50E /* AddTodoViewController.swift in Sources */,
+				C74B504823F8B10C008C212B /* Storyboarded.swift in Sources */,
 				C796534F23ACCF6600288168 /* Todo.swift in Sources */,
 				C73C016623E48F2A004BD497 /* Environment.swift in Sources */,
 				C7CFC21023946DF9002FB0EB /* TodoListViewController.swift in Sources */,
@@ -414,6 +421,7 @@
 				C76CD4D323AF740F00CE6F8C /* SignInViewController.swift in Sources */,
 				C7CFC21223946EA0002FB0EB /* TodoService.swift in Sources */,
 				C796402123D088DA001E723B /* FolderService.swift in Sources */,
+				C74B504623F8B0F9008C212B /* Coordinator.swift in Sources */,
 				C74B504423F6A0A5008C212B /* AuthCoordinator.swift in Sources */,
 				C796401F23D036E7001E723B /* Folder.swift in Sources */,
 			);
