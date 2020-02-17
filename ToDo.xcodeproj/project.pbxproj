@@ -15,6 +15,8 @@
 		C74B504423F6A0A5008C212B /* AuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74B504323F6A0A5008C212B /* AuthCoordinator.swift */; };
 		C74B504623F8B0F9008C212B /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74B504523F8B0F9008C212B /* Coordinator.swift */; };
 		C74B504823F8B10C008C212B /* Storyboarded.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74B504723F8B10C008C212B /* Storyboarded.swift */; };
+		C74B504A23FA8AD6008C212B /* FoldersCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74B504923FA8AD6008C212B /* FoldersCoordinator.swift */; };
+		C74B504D23FA8B2C008C212B /* TodosCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74B504C23FA8B2C008C212B /* TodosCoordinator.swift */; };
 		C756C9CE23D46D3700E3A6A5 /* AddCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C756C9CD23D46D3700E3A6A5 /* AddCell.swift */; };
 		C76CD4D123AF73F900CE6F8C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76CD4D023AF73F900CE6F8C /* LoginViewController.swift */; };
 		C76CD4D323AF740F00CE6F8C /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76CD4D223AF740F00CE6F8C /* SignInViewController.swift */; };
@@ -51,6 +53,8 @@
 		C74B504323F6A0A5008C212B /* AuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
 		C74B504523F8B0F9008C212B /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		C74B504723F8B10C008C212B /* Storyboarded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboarded.swift; sourceTree = "<group>"; };
+		C74B504923FA8AD6008C212B /* FoldersCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoldersCoordinator.swift; sourceTree = "<group>"; };
+		C74B504C23FA8B2C008C212B /* TodosCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodosCoordinator.swift; sourceTree = "<group>"; };
 		C756C9CD23D46D3700E3A6A5 /* AddCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCell.swift; sourceTree = "<group>"; };
 		C76CD4D023AF73F900CE6F8C /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		C76CD4D223AF740F00CE6F8C /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
@@ -137,9 +141,8 @@
 		C74B503F23F69F87008C212B /* Todos */ = {
 			isa = PBXGroup;
 			children = (
-				C7CFC20F23946DF9002FB0EB /* TodoListViewController.swift */,
-				C74A6FAA239A5FA300A8311E /* TodoDetailsViewController.swift */,
-				C727AC6E23A295DA0039C50E /* AddTodoViewController.swift */,
+				C74B504E23FA8B3D008C212B /* Modules */,
+				C74B504C23FA8B2C008C212B /* TodosCoordinator.swift */,
 			);
 			path = Todos;
 			sourceTree = "<group>";
@@ -147,8 +150,8 @@
 		C74B504023F69F90008C212B /* Folders */ = {
 			isa = PBXGroup;
 			children = (
-				C796401C23D03078001E723B /* AddFoldersViewController.swift */,
-				C796401623D021A2001E723B /* FoldersViewController.swift */,
+				C74B504B23FA8B02008C212B /* Modules */,
+				C74B504923FA8AD6008C212B /* FoldersCoordinator.swift */,
 			);
 			path = Folders;
 			sourceTree = "<group>";
@@ -171,6 +174,25 @@
 				C76CD4D023AF73F900CE6F8C /* LoginViewController.swift */,
 				C76CD4D223AF740F00CE6F8C /* SignInViewController.swift */,
 				C76CD4D423AF742000CE6F8C /* SignUpViewController.swift */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		C74B504B23FA8B02008C212B /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				C796401C23D03078001E723B /* AddFoldersViewController.swift */,
+				C796401623D021A2001E723B /* FoldersViewController.swift */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		C74B504E23FA8B3D008C212B /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				C7CFC20F23946DF9002FB0EB /* TodoListViewController.swift */,
+				C74A6FAA239A5FA300A8311E /* TodoDetailsViewController.swift */,
+				C727AC6E23A295DA0039C50E /* AddTodoViewController.swift */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -418,7 +440,9 @@
 				C7EE3E2023EC801C00CE4A34 /* InMemoryRepository.swift in Sources */,
 				C76CD4D123AF73F900CE6F8C /* LoginViewController.swift in Sources */,
 				C796401D23D03078001E723B /* AddFoldersViewController.swift in Sources */,
+				C74B504A23FA8AD6008C212B /* FoldersCoordinator.swift in Sources */,
 				C76CD4D323AF740F00CE6F8C /* SignInViewController.swift in Sources */,
+				C74B504D23FA8B2C008C212B /* TodosCoordinator.swift in Sources */,
 				C7CFC21223946EA0002FB0EB /* TodoService.swift in Sources */,
 				C796402123D088DA001E723B /* FolderService.swift in Sources */,
 				C74B504623F8B0F9008C212B /* Coordinator.swift in Sources */,

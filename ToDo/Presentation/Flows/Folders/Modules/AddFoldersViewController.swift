@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddFoldersViewController: UIViewController {
+class AddFoldersViewController: UIViewController, Storyboarded {
     @IBOutlet var folderTitle: UITextField!
     @IBOutlet var toolbar: UIToolbar!
 

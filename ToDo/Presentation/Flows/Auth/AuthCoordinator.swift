@@ -35,18 +35,27 @@ final class AuthCoordinator: Coordinator {
 
     private func showSignIn() {
         let vc = SignInViewController.instantiate()
-        vc.coordinator = self
+        vc.configure(with: .init(
+            signInTapped: { [weak self] in
+                self?.openFolders()
+            }
+        ))
         navigationController.pushViewController(vc, animated: true)
     }
 
     private func showSignUp() {
         let vc = SignUpViewController.instantiate()
-        vc.coordinator = self
+        vc.configure(with: .init(
+            signUpTapped: { [weak self] in
+                self?.showLogin()
+            }
+        ))
         navigationController.pushViewController(vc, animated: true)
     }
 
     private func openFolders() {
-
+        let vc = FoldersViewController.instantiate()
+        navigationController.pushViewController(vc, animated: true)
     }
 
 }

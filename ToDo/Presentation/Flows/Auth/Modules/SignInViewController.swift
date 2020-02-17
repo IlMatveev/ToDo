@@ -9,17 +9,25 @@
 import UIKit
 
 class SignInViewController: UIViewController, Storyboarded {
-    weak var coordinator: AuthCoordinator?
+    struct Config {
+        var signInTapped: () -> Void
+    }
 
     private let userManager: UserService = .shared
     private let notificationCenter: NotificationCenter = .default
     
-    @IBOutlet var toolBarOutlet: UIToolbar!
-    @IBOutlet var checkOutlet: UILabel!
-    @IBOutlet var loginOutlet: UITextField!
-    @IBOutlet var passwordOutlet: UITextField!
-    @IBOutlet var signInOutlet: UIButton!
-    @IBOutlet var image: UIImageView!
+    @IBOutlet private var toolBarOutlet: UIToolbar!
+    @IBOutlet private var checkOutlet: UILabel!
+    @IBOutlet private var loginOutlet: UITextField!
+    @IBOutlet private var passwordOutlet: UITextField!
+    @IBOutlet private var signInOutlet: UIButton!
+    @IBOutlet private var image: UIImageView!
+
+    private var configuration: Config?
+
+    func configure(with config: Config) {
+        configuration = config
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,11 +51,11 @@ class SignInViewController: UIViewController, Storyboarded {
         notificationCenter.removeObserver(self, name: .kbWillChangeFrame, object: nil)
     }
 
-    @IBAction func doneAction(_ sender: UIBarButtonItem) {
+    @IBAction private func doneAction(_ sender: UIBarButtonItem) {
         view.endEditing(true)
     }
 
-    @IBAction func signInAction(_ sender: UIButton) {
+    @IBAction private func signInTapped(_ sender: UIButton) {
         guard
             let login = loginOutlet.text,
             let password = passwordOutlet.text
@@ -58,7 +66,7 @@ class SignInViewController: UIViewController, Storyboarded {
         let check = userManager.checkUser(user: user)
 
         if check == true {
-             performSegue(withIdentifier: "toToDo", sender: nil)
+             configuration?.signInTapped()
         } else {
             checkOutlet.text = "Incorrect login or password!"
         }

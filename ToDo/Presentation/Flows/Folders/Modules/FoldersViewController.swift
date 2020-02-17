@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FoldersViewController: UITableViewController {
+class FoldersViewController: UITableViewController, Storyboarded {
 
     private var folders: [Folder] = []
 

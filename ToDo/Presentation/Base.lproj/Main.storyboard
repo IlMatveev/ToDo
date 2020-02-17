@@ -10,7 +10,7 @@
         <!--Add Folder-->
         <scene sceneID="ueb-lX-OGp">
             <objects>
-                <viewController id="nai-82-800" customClass="AddFoldersViewController" customModule="ToDo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddFoldersViewController" id="nai-82-800" customClass="AddFoldersViewController" customModule="ToDo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="EOs-NW-XQ5">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -404,7 +404,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xRM-Fp-kfH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2052" y="122"/>
+            <point key="canvasLocation" x="2527" y="122"/>
         </scene>
         <!--Registration-->
         <scene sceneID="aLN-8a-IlQ">
@@ -545,7 +545,7 @@
                     </items>
                 </toolbar>
             </objects>
-            <point key="canvasLocation" x="2051" y="903"/>
+            <point key="canvasLocation" x="2526" y="799"/>
         </scene>
         <!--Entrance-->
         <scene sceneID="gZx-cs-gqb">
@@ -607,7 +607,7 @@
                                                     <color key="titleColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="signInAction:" destination="qR4-wH-CvM" eventType="touchUpInside" id="AWJ-Mh-hc5"/>
+                                                    <action selector="signInTapped:" destination="qR4-wH-CvM" eventType="touchUpInside" id="lka-uv-ZsW"/>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9eF-Lv-eGv">
@@ -680,7 +680,6 @@
                         <outlet property="passwordOutlet" destination="j9T-Dr-wf0" id="8G1-eG-7en"/>
                         <outlet property="signInOutlet" destination="7SV-Z4-P8J" id="Jqd-T6-fq7"/>
                         <outlet property="toolBarOutlet" destination="qfe-6Q-NhG" id="4UU-5R-d8h"/>
-                        <segue destination="E3i-G0-n5v" kind="show" identifier="toToDo" id="YHo-68-3RS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F7R-PW-ROA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -697,14 +696,14 @@
                     </items>
                 </toolbar>
             </objects>
-            <point key="canvasLocation" x="2894" y="122"/>
+            <point key="canvasLocation" x="3241" y="122"/>
         </scene>
         <!--Folders-->
         <scene sceneID="6uE-yQ-Chf">
             <objects>
-                <tableViewController id="E3i-G0-n5v" customClass="FoldersViewController" customModule="ToDo" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="FoldersViewController" id="E3i-G0-n5v" customClass="FoldersViewController" customModule="ToDo" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="0Jo-lI-hbr">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
@@ -800,6 +799,6 @@
         <image name="Todo" width="200" height="200"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="eUH-Zl-X03"/>
+        <segue reference="nsq-bg-TAb"/>
     </inferredMetricsTieBreakers>
 </document>

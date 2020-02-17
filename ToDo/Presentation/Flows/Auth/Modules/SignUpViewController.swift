@@ -9,7 +9,9 @@
 import UIKit
 
 class SignUpViewController: UIViewController, Storyboarded {
-    weak var coordinator: AuthCoordinator?
+    struct Config {
+        var signUpTapped: () -> Void
+    }
 
     private let userManager: UserService = .shared
     private let notificationCenter: NotificationCenter = .default
@@ -21,6 +23,12 @@ class SignUpViewController: UIViewController, Storyboarded {
     @IBOutlet var passwordOutlet: UITextField!
     @IBOutlet var rePasswordOutlet: UITextField!
     @IBOutlet var checkOutlet: UILabel!
+
+    private var configuration: Config?
+
+    func configure(with config: Config) {
+        configuration = config
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
