@@ -9,11 +9,23 @@
 import UIKit
 
 class FoldersViewController: UITableViewController, Storyboarded {
+    struct Config {
+        var newFolderTapped: () -> Void
+        var cellTapped: (Folder) -> Void
+    }
 
     private var folders: [Folder] = []
 
-    @IBAction func toAddFolder(_ sender: UIBarButtonItem) {
-        performSegue(withIdentifier: "toAddFolder", sender: nil)
+    private var configuration: Config?
+
+    func configure(with config: Config) {
+        configuration = config
+    }
+
+    @IBAction func logOutTapped(_ sender: UIBarButtonItem) {
+    }
+    @IBAction private func newFolderTapped(_ sender: UIBarButtonItem) {
+        configuration?.newFolderTapped()
     }
 
     override func viewDidLoad() {
@@ -22,7 +34,6 @@ class FoldersViewController: UITableViewController, Storyboarded {
         updateData()
 
         self.navigationItem.hidesBackButton = true
-
     }
 
     // MARK: - Table view data source
@@ -58,9 +69,10 @@ class FoldersViewController: UITableViewController, Storyboarded {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        configuration?.cellTapped(folders[indexPath.row])
     }
 
-    func updateData() {
+    private func updateData() {
         FolderService.shared.getFolders { result in
             switch result {
             case .success(let folders):
@@ -70,17 +82,6 @@ class FoldersViewController: UITableViewController, Storyboarded {
                 print(error)
             }
         }
-    }
-
-    // MARK: - Navigation
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard
-            let selectedCellIndexRow = tableView.indexPathForSelectedRow?.row,
-            let listController = segue.destination as? TodoListViewController
-        else { return }
-
-        listController.currentFolder = folders[selectedCellIndexRow]
     }
 
 }

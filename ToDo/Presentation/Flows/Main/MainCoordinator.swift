@@ -1,15 +1,15 @@
 //
-//  FoldersCoordinator.swift
+//  MainCoordinator.swift
 //  ToDo
 //
-//  Created by Ilya Matveev on 17.02.2020.
+//  Created by Ilya Matveev on 21.02.2020.
 //  Copyright © 2020 Ilya Matveev. All rights reserved.
 //
 
 import Foundation
 import UIKit
 
-final class FoldersCoordinator: Coordinator {
+final class MainCoordinator: Coordinator {
     private var navigationController: UINavigationController
 
     init(navigationController: UINavigationController? = nil) {
@@ -17,15 +17,6 @@ final class FoldersCoordinator: Coordinator {
     }
 
     func start() {
-        showFolders()
     }
-
-    private func showFolders() {
-        let vc = FoldersViewController.instantiate()
-        
-        navigationController.pushViewController(vc, animated: false)
-    }
-
-    
 
 }

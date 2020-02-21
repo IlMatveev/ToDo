@@ -8,9 +8,19 @@
 
 import UIKit
 
-class AddFoldersViewController: UIViewController, Storyboarded {
-    @IBOutlet var folderTitle: UITextField!
-    @IBOutlet var toolbar: UIToolbar!
+final class AddFoldersViewController: UIViewController, Storyboarded {
+    struct Config {
+        var closeAddTapped: () -> Void
+    }
+
+    @IBOutlet private var folderTitle: UITextField!
+    @IBOutlet private var toolbar: UIToolbar!
+
+    private var configuration: Config?
+
+    func configure(with config: Config) {
+        configuration = config
+    }
 
     var currentFolder: Folder?
     
@@ -27,21 +37,21 @@ class AddFoldersViewController: UIViewController, Storyboarded {
 
     }
 
-    @IBAction func done(_ sender: UIBarButtonItem) {
+    @IBAction private func done(_ sender: UIBarButtonItem) {
         view.endEditing(true)
     }
 
-    @IBAction func cancelAction(_ sender: UIBarButtonItem) {
-        dismiss(animated: true, completion: nil)
+    @IBAction private func cancelTapped(_ sender: UIBarButtonItem) {
+        configuration?.closeAddTapped()
     }
 
-    @IBAction func saveAction(_ sender: UIBarButtonItem) {
+    @IBAction private func saveTapped(_ sender: UIBarButtonItem) {
         guard let title = folderTitle.text else { return }
 
         var folder = currentFolder ?? Folder()
         folder.name = title
         FolderService.shared.save(folder: folder) { _ in }
-        dismiss(animated: true, completion: nil)
+        configuration?.closeAddTapped()
     }
     
 }

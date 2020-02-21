@@ -49,25 +49,24 @@ class SignUpViewController: UIViewController, Storyboarded {
         notificationCenter.removeObserver(self, name: .kbWillChangeFrame, object: nil)
     }
 
-    @IBAction func signUpAction(_ sender: UIButton) {
-           if passwordOutlet.text == rePasswordOutlet.text {
-               guard
-                   let login = loginOutlet.text,
-                   let password = passwordOutlet.text
-               else { return }
+    @IBAction private func signUpTapped(_ sender: UIButton) {
+        if passwordOutlet.text == rePasswordOutlet.text {
+            guard
+                let login = loginOutlet.text,
+                let password = passwordOutlet.text
+                else { return }
 
-               let user = User(login: login, password: password)
+            let user = User(login: login, password: password)
 
-               userManager.addUser(user: user)
+            userManager.addUser(user: user)
 
-               self.navigationController?.popViewController(animated: true)
-               dismiss(animated: true, completion: nil)
-           } else {
-               checkOutlet.text = "Error, check the data!"
-           }
+            configuration?.signUpTapped()
+        } else {
+            checkOutlet.text = "Error, check the data!"
+        }
     }
 
-    @IBAction func doneAction(_ sender: UIBarButtonItem) {
+    @IBAction private func doneAction(_ sender: UIBarButtonItem) {
         view.endEditing(true)
     }
 

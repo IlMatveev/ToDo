@@ -11,6 +11,8 @@ import Foundation
 final class UserService {
     static let shared: UserService = .init()
 
+    var currentUser: User?
+
     private var users: [User] = [
         User(login: "1", password: "1")
     ]

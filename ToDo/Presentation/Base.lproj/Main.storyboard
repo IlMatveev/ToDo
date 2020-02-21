@@ -12,17 +12,17 @@
             <objects>
                 <viewController storyboardIdentifier="AddFoldersViewController" id="nai-82-800" customClass="AddFoldersViewController" customModule="ToDo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="EOs-NW-XQ5">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pqO-r4-PM0">
-                                <rect key="frame" x="20" y="76" width="38" height="21"/>
+                                <rect key="frame" x="20" y="20" width="38" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iEX-ZC-aPV">
-                                <rect key="frame" x="20" y="105" width="251.5" height="34"/>
+                                <rect key="frame" x="20" y="49" width="251.5" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
@@ -40,12 +40,12 @@
                     <navigationItem key="navigationItem" title="Add Folder" id="RP3-f9-KeX">
                         <barButtonItem key="leftBarButtonItem" style="plain" systemItem="cancel" id="dfn-Ka-pVv">
                             <connections>
-                                <action selector="cancelAction:" destination="nai-82-800" id="RZ3-Pw-AOO"/>
+                                <action selector="cancelTapped:" destination="nai-82-800" id="46g-kX-Sdx"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" style="plain" systemItem="save" id="QTD-x8-Rgp">
                             <connections>
-                                <action selector="saveAction:" destination="nai-82-800" id="Tfk-MJ-ZJD"/>
+                                <action selector="saveTapped:" destination="nai-82-800" id="oId-J2-Avh"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -68,14 +68,14 @@
                     </items>
                 </toolbar>
             </objects>
-            <point key="canvasLocation" x="5502" y="-585"/>
+            <point key="canvasLocation" x="3950" y="-544"/>
         </scene>
         <!--ToDo-->
         <scene sceneID="vIc-Md-enj">
             <objects>
                 <tableViewController storyboardIdentifier="TodoListViewController" id="pjI-dH-Um0" customClass="TodoListViewController" customModule="ToDo" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="54" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="9ZN-S6-c5e">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
@@ -124,7 +124,6 @@
                                     <outlet property="dateLabel" destination="LdB-Gi-hJk" id="FTk-I3-LfA"/>
                                     <outlet property="switchState" destination="whz-QB-b3y" id="sV8-v6-iAi"/>
                                     <outlet property="titleLabel" destination="ZYq-fc-YKa" id="Erl-8a-lH1"/>
-                                    <segue destination="HdX-5w-0Pz" kind="show" id="57Z-Ct-pXc"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="AddCell" id="CEl-SG-wwg" customClass="AddCell" customModule="ToDo" customModuleProvider="target">
@@ -156,42 +155,39 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="ToDo" id="IsQ-tP-Zo9"/>
-                    <connections>
-                        <segue destination="Ysx-uR-ptJ" kind="show" identifier="toAdd" id="eUH-Zl-X03"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tBJ-F2-J68" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5046" y="122"/>
+            <point key="canvasLocation" x="4641" y="122"/>
         </scene>
         <!--Add ToDo-->
         <scene sceneID="Lau-eZ-DVB">
             <objects>
                 <viewController storyboardIdentifier="AddTodoViewController" id="cIb-cb-mid" customClass="AddTodoViewController" customModule="ToDo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5KQ-zE-uCM">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Fto-iV-sxv" userLabel="Text Field">
-                                <rect key="frame" x="20" y="105" width="252.5" height="34"/>
+                                <rect key="frame" x="20" y="49" width="252.5" height="34"/>
                                 <gestureRecognizers/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Due date:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mbQ-Jg-xnH">
-                                <rect key="frame" x="20" y="147" width="74" height="21"/>
+                                <rect key="frame" x="20" y="91" width="74" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hbr-Y4-L6q">
-                                <rect key="frame" x="20" y="76" width="38" height="21"/>
+                                <rect key="frame" x="20" y="20" width="38" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PDr-xg-m9c">
-                                <rect key="frame" x="20" y="176" width="252.5" height="34"/>
+                                <rect key="frame" x="20" y="120" width="252.5" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
@@ -251,14 +247,14 @@
                     </connections>
                 </datePicker>
             </objects>
-            <point key="canvasLocation" x="6684" y="384"/>
+            <point key="canvasLocation" x="4641" y="-545"/>
         </scene>
         <!--Details-->
         <scene sceneID="Mnn-Uf-087">
             <objects>
                 <viewController storyboardIdentifier="TodoDetailsViewController" id="HdX-5w-0Pz" customClass="TodoDetailsViewController" customModule="ToDo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="psA-6Y-X2L">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fC9-Sg-n2V">
@@ -298,7 +294,6 @@
                         <barButtonItem key="rightBarButtonItem" style="plain" systemItem="edit" id="Mmz-pV-Jpt">
                             <connections>
                                 <action selector="editAction:" destination="HdX-5w-0Pz" id="jVo-uc-X3x"/>
-                                <segue destination="Ysx-uR-ptJ" kind="show" id="nsq-bg-TAb"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -310,7 +305,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gPV-n2-v7q" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5046" y="884"/>
+            <point key="canvasLocation" x="4641" y="798"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="yWd-97-jUl">
@@ -460,7 +455,7 @@
                                                     <color key="titleColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="signUpAction:" destination="G5y-vx-G7d" eventType="touchUpInside" id="YBK-qQ-Qv7"/>
+                                                    <action selector="signUpTapped:" destination="G5y-vx-G7d" eventType="touchUpInside" id="YBK-qQ-Qv7"/>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aOv-sG-iH3">
@@ -730,7 +725,6 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="folderTitle" destination="FVK-qx-qbH" id="hsv-yC-tPB"/>
-                                    <segue destination="pjI-dH-Um0" kind="show" id="Iea-T8-AqS"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -740,10 +734,14 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Folders" id="oHo-1N-P9O">
-                        <barButtonItem key="rightBarButtonItem" title="New Folder" style="plain" id="cna-U1-frn">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="7H6-4H-d68">
                             <connections>
-                                <action selector="toAddFolder:" destination="E3i-G0-n5v" id="zpn-MK-vxM"/>
-                                <segue destination="Dui-ar-ApK" kind="show" id="WfO-2e-zLk"/>
+                                <action selector="logOutTapped:" destination="E3i-G0-n5v" id="db9-RW-eE9"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="New folder" style="plain" id="cna-U1-frn">
+                            <connections>
+                                <action selector="newFolderTapped:" destination="E3i-G0-n5v" id="oNA-aA-vB3"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -752,53 +750,8 @@
             </objects>
             <point key="canvasLocation" x="3950" y="122"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="DBH-OE-g1g">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Ysx-uR-ptJ" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationItem key="navigationItem" id="t3e-oi-fPu"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="zuj-4x-bea">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="cIb-cb-mid" kind="relationship" relationship="rootViewController" id="ddr-uF-a7s"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ta6-35-Kyd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="5918" y="384"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="nRB-a1-o3y">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Dui-ar-ApK" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationItem key="navigationItem" id="IOs-2I-SvJ"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="LkY-mC-nq3">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="HPj-0L-b1R">
-                        <rect key="frame" x="0.0" y="-20" width="0.0" height="0.0"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </toolbar>
-                    <connections>
-                        <segue destination="nai-82-800" kind="relationship" relationship="rootViewController" id="uj4-fB-eYr"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="QVm-ix-by1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4774" y="-585"/>
-        </scene>
     </scenes>
     <resources>
         <image name="Todo" width="200" height="200"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="nsq-bg-TAb"/>
-    </inferredMetricsTieBreakers>
 </document>

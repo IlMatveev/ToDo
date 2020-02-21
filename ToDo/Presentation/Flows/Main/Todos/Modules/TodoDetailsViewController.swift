@@ -8,13 +8,23 @@
 
 import UIKit
 
-final class TodoDetailsViewController: UIViewController, TodoServiceDelegate {
+final class TodoDetailsViewController: UIViewController, TodoServiceDelegate, Storyboarded {
+    struct Config {
+        var editTapped: () -> Void
+    }
+
     private let todoSrv: TodoService = .shared
     private let notificationCenter: NotificationCenter = .default
 
     @IBOutlet private var stateOutlet: UISwitch!
     @IBOutlet private var titleOutlet: UILabel!
     @IBOutlet private var dateOutlet: UILabel!
+
+    private var configuration: Config?
+
+    func configure(with config: Config) {
+        configuration = config
+    }
 
     var currentItem: Todo? {
         didSet {
@@ -41,12 +51,11 @@ final class TodoDetailsViewController: UIViewController, TodoServiceDelegate {
         stateOutlet.isOn = item.isDone
     }
 
-    @IBAction func editAction(_ sender: UIBarButtonItem) {
-        performSegue(withIdentifier: "toEdit", sender: nil)
-
+    @IBAction private func editAction(_ sender: UIBarButtonItem) {
+        configuration?.editTapped()
     }
 
-    @IBAction func stateAction(_ sender: UISwitch) {
+    @IBAction private func stateAction(_ sender: UISwitch) {
         currentItem?.isDone = stateOutlet.isOn
         guard let item = currentItem else {return}
         todoSrv.save(item: item) { _ in }

@@ -12,12 +12,23 @@ extension NSNotification.Name {
     static let kbWillChangeFrame = UIResponder.keyboardWillChangeFrameNotification
 }
 
-class TodoListViewController: UITableViewController, TodoServiceDelegate {
+class TodoListViewController: UITableViewController, TodoServiceDelegate, Storyboarded {
     // MARK: - Dependencies
+    struct Config {
+        var addTapped: () -> Void
+        var cellTapped: () -> Void
+    }
+
+    var currentFolder: Folder?
+
     private let todoSrv: TodoService = .shared
     private var items: [Todo] = []
 
-    var currentFolder: Folder?
+    private var configuration: Config?
+
+    func configure(with config: Config) {
+        configuration = config
+    }
 
     // MARK: - Outlets
     // MARK: - Local Variables

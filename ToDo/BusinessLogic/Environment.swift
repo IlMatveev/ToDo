@@ -19,7 +19,6 @@ var Current: Environment = .init()
 
 extension Environment {
     static let mock: Environment = .init(
-        date: { Date.init(timeIntervalSince1970: 25254353345) },
-        repository: InMemoryRepository()
+        date: { Date.init(timeIntervalSince1970: 25254353345) }
     )
 }

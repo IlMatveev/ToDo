@@ -17,13 +17,23 @@ extension Optional {
     }
 }
 
-final class AddTodoViewController: UIViewController {
+final class AddTodoViewController: UIViewController, Storyboarded {
+    struct Config {
+        var closeAddTapped: () -> Void
+    }
+
     private let todoSrv: TodoService = .shared
 
     @IBOutlet private var textField: UITextField!
     @IBOutlet private var dateField: UITextField!
-    @IBOutlet var toolBar: UIToolbar!
-    @IBOutlet var datePicker: UIDatePicker!
+    @IBOutlet private var toolBar: UIToolbar!
+    @IBOutlet private var datePicker: UIDatePicker!
+
+    private var configuration: Config?
+
+    func configure(with config: Config) {
+        configuration = config
+    }
 
     var currentFolder: Folder?
     var currentItem: Todo?
@@ -43,19 +53,19 @@ final class AddTodoViewController: UIViewController {
         textField.inputAccessoryView = toolBar
     }
 
-    @IBAction func doneAction(_ sender: UIBarButtonItem) {
+    @IBAction private func doneAction(_ sender: UIBarButtonItem) {
         view.endEditing(true)
     }
 
-    @IBAction func datePickerAction(_ sender: UIDatePicker) {
+    @IBAction private func datePickerAction(_ sender: UIDatePicker) {
         dateField.text = DateFormatter.long.string(from: datePicker.date)
     }
 
-    @IBAction func cancelAction(_ sender: UIBarButtonItem) {
-        dismiss(animated: true, completion: nil)
+    @IBAction private func cancelAction(_ sender: UIBarButtonItem) {
+        configuration?.closeAddTapped()
     }
 
-    @IBAction func saveAction(_ sender: UIBarButtonItem) {
+    @IBAction private func saveAction(_ sender: UIBarButtonItem) {
         guard let title = textField.text else { return }
 
         var item = currentItem ?? Todo()
@@ -63,6 +73,6 @@ final class AddTodoViewController: UIViewController {
         item.title = title
         item.date = datePicker.date
         todoSrv.save(item: item) { _ in }
-        dismiss(animated: true, completion: nil)
+        configuration?.closeAddTapped()
     }
 }

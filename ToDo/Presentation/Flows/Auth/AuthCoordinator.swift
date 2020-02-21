@@ -54,8 +54,9 @@ final class AuthCoordinator: Coordinator {
     }
 
     private func openFolders() {
-        let vc = FoldersViewController.instantiate()
-        navigationController.pushViewController(vc, animated: true)
+        var coordinator: FoldersCoordinator?
+        coordinator = FoldersCoordinator(navigationController: navigationController)
+        coordinator?.start()
     }
 
 }
