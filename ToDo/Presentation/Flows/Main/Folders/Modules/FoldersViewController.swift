@@ -14,6 +14,7 @@ class FoldersViewController: UITableViewController, Storyboarded {
         var cellTapped: (Folder) -> Void
     }
 
+    private var currentUser: User?
     private var folders: [Folder] = []
 
     private var configuration: Config?
@@ -23,7 +24,11 @@ class FoldersViewController: UITableViewController, Storyboarded {
     }
 
     @IBAction func logOutTapped(_ sender: UIBarButtonItem) {
+        currentUser?.isLogin = false
+        guard let user = currentUser else { fatalError("Current user not defined")}
+        UserService.shared.updateUser(user: user)
     }
+
     @IBAction private func newFolderTapped(_ sender: UIBarButtonItem) {
         configuration?.newFolderTapped()
     }

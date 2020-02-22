@@ -10,7 +10,7 @@ import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
-    var coordinator: AuthCoordinator?
+    var coordinator: Coordinator?
     var window: UIWindow?
 
 

@@ -9,4 +9,19 @@
 import Foundation
 import UIKit
 
+import Foundation
+import UIKit
 
+final class AppCoordinator: Coordinator {
+    private var navigationController: UINavigationController
+
+    var childCoordinators: [Coordinator] = []
+
+    init(navigationController: UINavigationController? = nil) {
+        self.navigationController = navigationController ?? UINavigationController()
+    }
+
+    func start() {
+    }
+
+}

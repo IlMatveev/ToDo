@@ -11,7 +11,7 @@ import UIKit
 
 final class MainCoordinator: Coordinator {
     private var navigationController: UINavigationController
-
+    
     init(navigationController: UINavigationController? = nil) {
         self.navigationController = navigationController ?? UINavigationController()
     }

@@ -264,9 +264,9 @@
 		C7CB682D24007F7900F0C0A9 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				C7CB682B23FF3E7600F0C0A9 /* MainCoordinator.swift */,
 				C74B504023F69F90008C212B /* Folders */,
 				C74B503F23F69F87008C212B /* Todos */,
+				C7CB682B23FF3E7600F0C0A9 /* MainCoordinator.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";

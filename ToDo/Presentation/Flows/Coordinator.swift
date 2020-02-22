@@ -9,6 +9,6 @@
 import Foundation
 import UIKit
 
-protocol Coordinator {
+protocol Coordinator: class {
     func start()
 }
