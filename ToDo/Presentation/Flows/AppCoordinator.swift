@@ -9,9 +9,6 @@
 import Foundation
 import UIKit
 
-import Foundation
-import UIKit
-
 final class AppCoordinator: Coordinator {
     private var navigationController: UINavigationController
 
@@ -21,7 +18,26 @@ final class AppCoordinator: Coordinator {
         self.navigationController = navigationController ?? UINavigationController()
     }
 
+    func addCoordinator(coordinator: Coordinator) {
+        childCoordinators.append(coordinator)
+    }
+
+    func removeCoordinator(coordinator: Coordinator) {
+        guard let index = childCoordinators.firstIndex(where: {$0 === coordinator}) else {
+            fatalError("Coordinator not found")
+        }
+        childCoordinators.remove(at: index)
+    }
+
     func start() {
+    }
+
+    private func openAuth() {
+        
+    }
+
+    private func main() {
+
     }
 
 }

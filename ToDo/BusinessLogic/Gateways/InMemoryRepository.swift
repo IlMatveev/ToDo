@@ -10,7 +10,6 @@ import Foundation
 import Alamofire
 
 final class InMemoryRepository: Repository {
-
     private var data: [ObjectIdentifier: [String: [Any]]] = [:]
     private var sequences: [ObjectIdentifier: Int] = [:]
 
@@ -98,4 +97,6 @@ final class InMemoryRepository: Repository {
         data[ObjectIdentifier(T.self)] = [collection.path: all]
     }
 
+    func getUser(login: String, password: String, completion: @escaping (Result<User?, RepositoryError>) -> Void) {
+    }
 }

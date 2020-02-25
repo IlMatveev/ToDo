@@ -20,4 +20,6 @@ protocol Repository {
     func update<T: Entity>(item: T, in collection: T.Collection, completion: @escaping (Result<T, RepositoryError>) -> Void)
 
     func remove<T: Entity>(id: T.ID, from collection: T.Collection, completion: @escaping (Result<Void, RepositoryError>) -> Void)
+
+    func getUser(login: String, password: String, completion: @escaping (Result<User?, RepositoryError>) -> Void)
 }

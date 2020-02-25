@@ -29,7 +29,6 @@
 		C796401F23D036E7001E723B /* Folder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C796401E23D036E7001E723B /* Folder.swift */; };
 		C796402123D088DA001E723B /* FolderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C796402023D088DA001E723B /* FolderService.swift */; };
 		C796534F23ACCF6600288168 /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C796534E23ACCF6600288168 /* Todo.swift */; };
-		C7CB682C23FF3E7600F0C0A9 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CB682B23FF3E7600F0C0A9 /* MainCoordinator.swift */; };
 		C7CB682F2400802200F0C0A9 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CB682E2400802200F0C0A9 /* AppCoordinator.swift */; };
 		C7CFC1FC23946BB6002FB0EB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CFC1FB23946BB6002FB0EB /* AppDelegate.swift */; };
 		C7CFC1FE23946BB6002FB0EB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CFC1FD23946BB6002FB0EB /* SceneDelegate.swift */; };
@@ -69,7 +68,6 @@
 		C796401E23D036E7001E723B /* Folder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Folder.swift; sourceTree = "<group>"; };
 		C796402023D088DA001E723B /* FolderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderService.swift; sourceTree = "<group>"; };
 		C796534E23ACCF6600288168 /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
-		C7CB682B23FF3E7600F0C0A9 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		C7CB682E2400802200F0C0A9 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		C7CFC1F823946BB6002FB0EB /* ToDo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7CFC1FB23946BB6002FB0EB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -266,7 +264,6 @@
 			children = (
 				C74B504023F69F90008C212B /* Folders */,
 				C74B503F23F69F87008C212B /* Todos */,
-				C7CB682B23FF3E7600F0C0A9 /* MainCoordinator.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -447,7 +444,6 @@
 				C711AC8023F2A0E2006C31E2 /* Repository.swift in Sources */,
 				C7CFC1FE23946BB6002FB0EB /* SceneDelegate.swift in Sources */,
 				C7CB682F2400802200F0C0A9 /* AppCoordinator.swift in Sources */,
-				C7CB682C23FF3E7600F0C0A9 /* MainCoordinator.swift in Sources */,
 				C72F64A123A7824E005859A5 /* CustomCell.swift in Sources */,
 				C76CD4D723AFEABE00CE6F8C /* UserService.swift in Sources */,
 				C756C9CE23D46D3700E3A6A5 /* AddCell.swift in Sources */,

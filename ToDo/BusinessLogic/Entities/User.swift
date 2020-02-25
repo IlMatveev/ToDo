@@ -8,8 +8,14 @@
 
 import Foundation
 
-struct User {
+struct User: Codable, Entity {
+    var id: ID?
     var login: String
     var password: String
-    var isLogin: Bool = false
+}
+
+extension EntityCollection where E == User {
+    static var users: EntityCollection<User> {
+        return .init(path: "users/")
+    }
 }

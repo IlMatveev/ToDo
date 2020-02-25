@@ -61,16 +61,17 @@ class SignInViewController: UIViewController, Storyboarded {
             let password = passwordOutlet.text
             else { return }
 
-        var user = User(login: login, password: password)
-
-        let check = userManager.checkUser(user: user)
-
-        if check == true {
-            user.isLogin = true
-            UserService.shared.updateUser(user: user)
-            configuration?.signInTapped()
-        } else {
-            checkOutlet.text = "Incorrect login or password!"
+        UserService.shared.signIn(login: login, password: password) { result in
+            switch result {
+            case .success(let user):
+                if user != nil {
+                    self.configuration?.signInTapped()
+                } else {
+                    self.checkOutlet.text = "Incorrect login or password!"
+                }
+            case .failure(let error):
+                print(error)
+            }
         }
     }
 

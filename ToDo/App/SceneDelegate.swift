@@ -10,7 +10,7 @@ import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
-    var coordinator: Coordinator?
+    var coordinator: AppCoordinator?
     var window: UIWindow?
 
 
@@ -20,7 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         let navController = UINavigationController()
-        coordinator = AuthCoordinator(navigationController: navController)
+        coordinator = AppCoordinator(navigationController: navController)
         coordinator?.start()
 
         window = UIWindow(windowScene: windowsScene)

@@ -13,7 +13,7 @@ struct Folder: Codable, Entity {
     var name: String = ""
 }
 
-extension EntityCollection {
+extension EntityCollection where E == Folder {
     static var folders: EntityCollection<Folder> {
         return .init(path: "folders/")
     }

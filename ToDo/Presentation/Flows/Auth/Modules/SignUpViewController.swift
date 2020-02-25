@@ -42,7 +42,6 @@ class SignUpViewController: UIViewController, Storyboarded {
         loginOutlet.inputAccessoryView = toolBarOutlet
         passwordOutlet.inputAccessoryView = toolBarOutlet
         rePasswordOutlet.inputAccessoryView = toolBarOutlet
-
     }
 
     deinit {
@@ -58,9 +57,14 @@ class SignUpViewController: UIViewController, Storyboarded {
 
             let user = User(login: login, password: password)
 
-            userManager.addUser(user: user)
-
-            configuration?.signUpTapped()
+            UserService.shared.signUp(user: user, password: password) { result in
+                switch result {
+                case .success:
+                    self.configuration?.signUpTapped()
+                case .failure(let error):
+                    print(error)
+                }
+            }
         } else {
             checkOutlet.text = "Error, check the data!"
         }
