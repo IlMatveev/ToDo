@@ -10,5 +10,7 @@ import Foundation
 import UIKit
 
 protocol Coordinator: class {
-    func start()
+    var currentCoordinator: Coordinator? { get set }
+    
+//    func start()
 }

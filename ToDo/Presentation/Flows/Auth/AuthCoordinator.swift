@@ -10,7 +10,14 @@ import Foundation
 import UIKit
 
 final class AuthCoordinator: Coordinator {
-    private var navigationController: UINavigationController
+    struct Config {
+        var openFolders: () -> Void
+    }
+
+    private var configuration: Config?
+
+    var navigationController: UINavigationController
+    var currentCoordinator: Coordinator?
 
     init(navigationController: UINavigationController? = nil) {
         self.navigationController = navigationController ?? UINavigationController()
@@ -18,6 +25,10 @@ final class AuthCoordinator: Coordinator {
 
     func start() {
         showLogin()
+    }
+
+    func configure(with config: Config) {
+        configuration = config
     }
 
     private func showLogin() {
@@ -30,14 +41,14 @@ final class AuthCoordinator: Coordinator {
                 self?.showSignUp()
             }
         ))
-        navigationController.pushViewController(vc, animated: false)
+        navigationController.pushViewController(vc, animated: true)
     }
 
     private func showSignIn() {
         let vc = SignInViewController.instantiate()
         vc.configure(with: .init(
             signInTapped: { [weak self] in
-                self?.openFolders()
+                self?.configuration?.openFolders()
             }
         ))
         navigationController.pushViewController(vc, animated: true)
@@ -51,12 +62,6 @@ final class AuthCoordinator: Coordinator {
             }
         ))
         navigationController.pushViewController(vc, animated: true)
-    }
-
-    private func openFolders() {
-        var coordinator: FoldersCoordinator?
-        coordinator = FoldersCoordinator(navigationController: navigationController)
-        coordinator?.start()
     }
 
 }

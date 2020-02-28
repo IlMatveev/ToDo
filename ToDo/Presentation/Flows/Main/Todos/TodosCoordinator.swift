@@ -10,54 +10,70 @@ import Foundation
 import UIKit
 
 final class TodosCoordinator: Coordinator {
+    var currentCoordinator: Coordinator?
+
     private var navigationController: UINavigationController
 
     init(navigationController: UINavigationController? = nil) {
         self.navigationController = navigationController ?? UINavigationController()
     }
 
-    var currentFolder: Folder?
-
-    func start() {
-        showTodos()
+    func start(in folder: Folder) {
+        showTodos(in: folder)
     }
 
-    private func showTodos() {
-//        FoldersCoordinator.configure(with: .init(
-//            currentFolder: { [weak self] folder in
-//                self?.currentFolder = folder
-//            }
-//        ))
+    private func showTodos(in folder: Folder) {
         let vc = TodoListViewController.instantiate()
         vc.configure(with: .init(
             addTapped: { [weak self] in
-                self?.showAddTodo()
+                self?.showAddOrEdit(in: folder, with: nil)
             },
-            cellTapped: { [weak self] in
-                self?.showTodoDetails()
+            cellTapped: { [weak self] todo in
+                self?.showDetails(in: folder, about: todo)
             }
         ))
-        navigationController.pushViewController(vc, animated: true)
+        vc.currentFolder = folder
+
+        navigationController.present(vc, animated: true, completion: nil)
     }
 
-    private func showAddTodo() {
+    private func showAddOrEdit(in folder: Folder, with todo: Todo?) {
         let vc = AddTodoViewController.instantiate()
         vc.configure(with: .init(
             closeAddTapped: { [weak self] in
-                self?.showTodos()
+                self?.showTodos(in: folder)
             }
         ))
-        navigationController.pushViewController(vc, animated: true)
+        vc.currentFolder = folder
+        vc.currentItem = todo
+        
+        navigationController.present(vc, animated: true, completion: nil)
     }
 
-    private func showTodoDetails() {
+    private func showDetails(in folder: Folder, about todo: Todo) {
         let vc = TodoDetailsViewController.instantiate()
         vc.configure(with: .init(
             editTapped: { [weak self] in
-                self?.showTodos()
+                self?.showEdit(in: folder, todo: todo)
             }
         ))
+        vc.currentItem = todo
+        vc.currentFolder = folder
+
         navigationController.pushViewController(vc, animated: true)
+    }
+
+    private func showEdit(in folder: Folder, todo: Todo) {
+        let vc = AddTodoViewController.instantiate()
+        vc.configure(with: .init(
+            closeAddTapped: { [weak self] in
+                self?.showTodos(in: folder)
+            }
+        ))
+        vc.currentFolder = folder
+        vc.currentItem = todo
+
+        navigationController.present(vc, animated: true, completion: nil)
     }
 
 }

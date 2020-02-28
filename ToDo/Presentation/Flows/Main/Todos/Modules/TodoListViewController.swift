@@ -16,7 +16,7 @@ class TodoListViewController: UITableViewController, TodoServiceDelegate, Storyb
     // MARK: - Dependencies
     struct Config {
         var addTapped: () -> Void
-        var cellTapped: () -> Void
+        var cellTapped: (Todo) -> Void
     }
 
     var currentFolder: Folder?
@@ -50,7 +50,8 @@ class TodoListViewController: UITableViewController, TodoServiceDelegate, Storyb
     }
 
     @IBAction func toAdd(_ sender: UIButton) {
-        performSegue(withIdentifier: "toAdd", sender: nil)
+        guard let folder = currentFolder else { fatalError("Folder is not transfer") }
+        configuration?.addTapped()
     }
 
     // MARK: - Table view data source
@@ -99,6 +100,7 @@ class TodoListViewController: UITableViewController, TodoServiceDelegate, Storyb
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        configuration?.cellTapped(items[indexPath.row])
     }
 
     func updateData() {
@@ -111,22 +113,6 @@ class TodoListViewController: UITableViewController, TodoServiceDelegate, Storyb
             case .failure(let error):
                 print(error)
             }
-        }
-    }
-
-    // MARK: - Navigation
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if
-            let selectedCellIndexRow = tableView.indexPathForSelectedRow?.row,
-            let detailsController = segue.destination as? TodoDetailsViewController {
-            detailsController.currentItem = items[selectedCellIndexRow]
-        }
-        
-        if
-            let navigationController = segue.destination as? UINavigationController,
-            let addController = navigationController.topViewController as? AddTodoViewController {
-            addController.currentFolder = currentFolder
         }
     }
     

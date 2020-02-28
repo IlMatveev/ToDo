@@ -76,9 +76,11 @@ final class RestApiRepository: Repository {
     func getUser(login: String, password: String, completion: @escaping (Result<User?, RepositoryError>) -> Void) {
         session
             .request("\(backendUrl)\(EntityCollection.users.path)?login=\(login)&password=\(password)", method: .get)
-        .validate()
-        .responseDecodable(of: User?.self) { response in
-            completion(response.result.mapError(RepositoryError.init))
+            .validate()
+            .responseDecodable(of: [User].self) { response in
+                completion(response.result.mapError(RepositoryError.init).map({ data -> User? in
+                    return data.first { $0.login == login && $0.password == password }
+                }))
         }
     }
 

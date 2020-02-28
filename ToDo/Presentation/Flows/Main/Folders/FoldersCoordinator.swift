@@ -10,17 +10,14 @@ import Foundation
 import UIKit
 
 final class FoldersCoordinator: Coordinator {
-    struct FolderConfig {
-        var currentFolder: (Folder) -> Void
+    struct Config {
+        var openAuth: () -> Void
     }
 
-    private var folderConfiguration: FolderConfig?
+    private var configuration: Config?
 
-    func configure(with config: FolderConfig) {
-        folderConfiguration = config
-    }
-
-    private var navigationController: UINavigationController
+    var currentCoordinator: Coordinator?
+    var navigationController: UINavigationController
 
     init(navigationController: UINavigationController? = nil) {
         self.navigationController = navigationController ?? UINavigationController()
@@ -30,6 +27,10 @@ final class FoldersCoordinator: Coordinator {
         showFolders()
     }
 
+    func configure(with config: Config) {
+        configuration = config
+    }
+
     private func showFolders() {
         let vc = FoldersViewController.instantiate()
         vc.configure(with: .init(
@@ -37,9 +38,11 @@ final class FoldersCoordinator: Coordinator {
                 self?.showAddFolders()
             },
             cellTapped: { [weak self] folder in
-                self?.folderConfiguration?.currentFolder(folder)
-                self?.openTodos()
-            }
+                self?.openTodos(in: folder)
+            },
+            logOutTapped: { [weak self] in
+                self?.configuration?.openAuth()
+        }
         ))
         navigationController.pushViewController(vc, animated: true)
     }
@@ -51,13 +54,17 @@ final class FoldersCoordinator: Coordinator {
                 self?.showFolders()
             }
         ))
-        navigationController.pushViewController(vc, animated: true)
+        navigationController.present(vc, animated: true, completion: nil)
     }
 
-    private func openTodos() {
+    private func openTodos(in folder: Folder) {
         var coordinator: TodosCoordinator?
+
         coordinator = TodosCoordinator(navigationController: navigationController)
-        coordinator?.start()
+
+        currentCoordinator = coordinator
+
+        coordinator?.start(in: folder)
     }
 
 }

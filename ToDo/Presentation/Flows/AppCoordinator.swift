@@ -10,34 +10,53 @@ import Foundation
 import UIKit
 
 final class AppCoordinator: Coordinator {
-    private var navigationController: UINavigationController
+    var window: UIWindow
 
-    var childCoordinators: [Coordinator] = []
+    var currentCoordinator: Coordinator?
 
-    init(navigationController: UINavigationController? = nil) {
-        self.navigationController = navigationController ?? UINavigationController()
-    }
-
-    func addCoordinator(coordinator: Coordinator) {
-        childCoordinators.append(coordinator)
-    }
-
-    func removeCoordinator(coordinator: Coordinator) {
-        guard let index = childCoordinators.firstIndex(where: {$0 === coordinator}) else {
-            fatalError("Coordinator not found")
-        }
-        childCoordinators.remove(at: index)
+    init(window: UIWindow) {
+        self.window = window
     }
 
     func start() {
+        let currentUser = UserService.shared.currentUser
+        if currentUser != nil {
+            openFolders()
+        } else {
+            openAuth()
+        }
     }
 
     private func openAuth() {
+        let authCoord = AuthCoordinator()
+        let navController = authCoord.navigationController
         
+        window.rootViewController = navController
+
+        currentCoordinator = authCoord
+
+        authCoord.configure(with: .init(
+            openFolders: {
+                self.openFolders()
+            }
+        ))
+        authCoord.start()
     }
 
-    private func main() {
+    private func openFolders() {
+        let foldCoord = FoldersCoordinator()
+        let navController = foldCoord.navigationController
 
+        window.rootViewController = navController
+
+        currentCoordinator = foldCoord
+
+        foldCoord.configure(with: .init(
+            openAuth: {
+                self.openFolders()
+            }
+        ))
+        foldCoord.start()
     }
 
 }

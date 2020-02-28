@@ -26,6 +26,7 @@ final class TodoDetailsViewController: UIViewController, TodoServiceDelegate, St
         configuration = config
     }
 
+    var currentFolder: Folder?
     var currentItem: Todo? {
         didSet {
             renderItem()
