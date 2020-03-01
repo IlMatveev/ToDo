@@ -11,7 +11,15 @@ import Foundation
 final class UserService {
     static let shared: UserService = .init()
 
-    private(set) var currentUser: User?
+    var currentUser: Bool {
+        set {
+            UserDefaults.standard.set(newValue, forKey: "UserKey")
+            UserDefaults.standard.synchronize()
+        }
+        get {
+            return UserDefaults.standard.bool(forKey: "UserKey")
+        }
+    }
 
     private init() {
     }
@@ -20,8 +28,10 @@ final class UserService {
         Current.repository.getUser(login: login, password: password) { result in
             DispatchQueue.main.async {
                 completion(result.mapError { $0 })
-                self.currentUser = try? result.get()
-//                self.updateUserDefaults()
+                let currentUser: User? = try? result.get()
+                if currentUser != nil {
+                    self.currentUser = true
+                }
             }
         }
     }
@@ -35,11 +45,7 @@ final class UserService {
     }
 
     func logOut(_ completion: @escaping (Result<Void, Error>) -> Void) {
-        currentUser = nil
-    }
-
-    func updateUserDefaults() {
-        UserDefaults.standard.set(currentUser, forKey: "UserKey")
+        currentUser = false
     }
 
 }

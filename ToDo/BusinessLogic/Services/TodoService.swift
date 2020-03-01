@@ -8,8 +8,8 @@
 
 import Foundation
 
-protocol TodoServiceDelegate: class {
-    func update(subject: TodoService)
+protocol TodoObserver: class {
+    func todosChanged()
 }
 
 final class TodoService {
@@ -18,39 +18,40 @@ final class TodoService {
     private init() {
     }
 
-    private lazy var observers: [TodoServiceDelegate] = []
-
-    weak var delegate: TodoServiceDelegate?
-
-    func attach(_ observer: TodoServiceDelegate) {
-        observers.append(observer)
+    private struct WeakBox {
+        weak var value: TodoObserver?
     }
 
-    func detach(_ observer: TodoServiceDelegate) {
-        if let idx = observers.firstIndex(where: { $0 === observer }) {
-            observers.remove(at: idx)
+    private var observers: [WeakBox] = []
+
+    func notify() {
+        observers.forEach { observer in
+            observer.value?.todosChanged()
         }
     }
 
-    func notify() {
-        observers.forEach({ $0.update(subject: self)})
+    func addObserver(observer: TodoObserver) {
+        let currentObserver = WeakBox(value: observer)
+        observers.append(currentObserver)
+    }
+
+    func removeObserver(observer: TodoObserver) {
+        observers = observers.filter { $0.value !== observer }
     }
 
     func save(item: Todo, completion: @escaping (Result<Void, Error>) -> Void) {
         if item.id != nil {
             Current.repository.update(item: item, in: .todos) { result in
                 DispatchQueue.main.async {
-                    self.delegate?.update(subject: self)
-                    self.notify()
                     completion(result.mapError { $0 }.map({ $0 }))
+                    self.notify()
                 }
             }
         } else {
             Current.repository.save(item: item, to: .todos) { result in
                 DispatchQueue.main.async {
-                    self.delegate?.update(subject: self)
-                    self.notify()
                     completion(result.mapError { $0 }.map { _ in () })
+                    self.notify()
                 }
             }
         }
@@ -76,8 +77,8 @@ final class TodoService {
         guard let id = item.id else { return }
         Current.repository.remove(id: id, from: .todos) { result in
             DispatchQueue.main.async {
-                self.delegate?.update(subject: self)
                 completion(result.mapError { $0 })
+                self.notify()
             }
         }
     }

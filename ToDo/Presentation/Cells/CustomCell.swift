@@ -19,10 +19,8 @@ class CustomCell: UITableViewCell {
 
     @IBAction func switchAction(_ sender: UISwitch) {
         currentItem?.isDone = sender.isOn
-
-        if let item = currentItem {
-            todoSrv.save(item: item) { _ in }
-        }
+        guard let item = currentItem else {return}
+        todoSrv.save(item: item) { _ in }
     }
 
     func fill(with item: Todo) {

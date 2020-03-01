@@ -34,46 +34,30 @@ final class TodosCoordinator: Coordinator {
         ))
         vc.currentFolder = folder
 
-        navigationController.present(vc, animated: true, completion: nil)
+        navigationController.pushViewController(vc, animated: true)
     }
 
     private func showAddOrEdit(in folder: Folder, with todo: Todo?) {
         let vc = AddTodoViewController.instantiate()
-        vc.configure(with: .init(
-            closeAddTapped: { [weak self] in
-                self?.showTodos(in: folder)
-            }
-        ))
+ 
         vc.currentFolder = folder
         vc.currentItem = todo
-        
-        navigationController.present(vc, animated: true, completion: nil)
+
+        let navController = UINavigationController(rootViewController: vc)
+        navigationController.present(navController, animated: true, completion: nil)
     }
 
     private func showDetails(in folder: Folder, about todo: Todo) {
         let vc = TodoDetailsViewController.instantiate()
         vc.configure(with: .init(
             editTapped: { [weak self] in
-                self?.showEdit(in: folder, todo: todo)
+                self?.showAddOrEdit(in: folder, with: todo)
             }
         ))
         vc.currentItem = todo
         vc.currentFolder = folder
 
         navigationController.pushViewController(vc, animated: true)
-    }
-
-    private func showEdit(in folder: Folder, todo: Todo) {
-        let vc = AddTodoViewController.instantiate()
-        vc.configure(with: .init(
-            closeAddTapped: { [weak self] in
-                self?.showTodos(in: folder)
-            }
-        ))
-        vc.currentFolder = folder
-        vc.currentItem = todo
-
-        navigationController.present(vc, animated: true, completion: nil)
     }
 
 }

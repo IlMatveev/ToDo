@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class TodoDetailsViewController: UIViewController, TodoServiceDelegate, Storyboarded {
+final class TodoDetailsViewController: UIViewController, Storyboarded {
     struct Config {
         var editTapped: () -> Void
     }

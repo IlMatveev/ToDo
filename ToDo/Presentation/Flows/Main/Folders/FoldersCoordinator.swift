@@ -49,21 +49,14 @@ final class FoldersCoordinator: Coordinator {
 
     private func showAddFolders() {
         let vc = AddFoldersViewController.instantiate()
-        vc.configure(with: .init(
-            closeAddTapped: { [weak self] in
-                self?.showFolders()
-            }
-        ))
-        navigationController.present(vc, animated: true, completion: nil)
+        let navController = UINavigationController(rootViewController: vc)
+        navigationController.present(navController, animated: true, completion: nil)
     }
 
     private func openTodos(in folder: Folder) {
         var coordinator: TodosCoordinator?
-
         coordinator = TodosCoordinator(navigationController: navigationController)
-
         currentCoordinator = coordinator
-
         coordinator?.start(in: folder)
     }
 

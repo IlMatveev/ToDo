@@ -20,11 +20,9 @@ final class AppCoordinator: Coordinator {
 
     func start() {
         let currentUser = UserService.shared.currentUser
-        if currentUser != nil {
-            openFolders()
-        } else {
-            openAuth()
-        }
+        currentUser == true
+            ? openFolders()
+            : openAuth()
     }
 
     private func openAuth() {
@@ -53,7 +51,7 @@ final class AppCoordinator: Coordinator {
 
         foldCoord.configure(with: .init(
             openAuth: {
-                self.openFolders()
+                self.openAuth()
             }
         ))
         foldCoord.start()

@@ -18,22 +18,12 @@ extension Optional {
 }
 
 final class AddTodoViewController: UIViewController, Storyboarded {
-    struct Config {
-        var closeAddTapped: () -> Void
-    }
-
     private let todoSrv: TodoService = .shared
 
     @IBOutlet private var textField: UITextField!
     @IBOutlet private var dateField: UITextField!
     @IBOutlet private var toolBar: UIToolbar!
     @IBOutlet private var datePicker: UIDatePicker!
-
-    private var configuration: Config?
-
-    func configure(with config: Config) {
-        configuration = config
-    }
 
     var currentFolder: Folder?
     var currentItem: Todo?
@@ -62,7 +52,7 @@ final class AddTodoViewController: UIViewController, Storyboarded {
     }
 
     @IBAction private func cancelAction(_ sender: UIBarButtonItem) {
-        configuration?.closeAddTapped()
+        dismiss(animated: true, completion: nil)
     }
 
     @IBAction private func saveAction(_ sender: UIBarButtonItem) {
@@ -73,6 +63,6 @@ final class AddTodoViewController: UIViewController, Storyboarded {
         item.title = title
         item.date = datePicker.date
         todoSrv.save(item: item) { _ in }
-        configuration?.closeAddTapped()
+        dismiss(animated: true, completion: nil)
     }
 }

@@ -8,13 +8,14 @@
 
 import UIKit
 
-class FoldersViewController: UITableViewController, Storyboarded {
+class FoldersViewController: UITableViewController, FolderObserver, Storyboarded {
     struct Config {
         var newFolderTapped: () -> Void
         var cellTapped: (Folder) -> Void
         var logOutTapped: () -> Void
     }
 
+    private let fldSrv: FolderService = .shared
     private var currentUser: User?
     private var folders: [Folder] = []
 
@@ -22,6 +23,10 @@ class FoldersViewController: UITableViewController, Storyboarded {
 
     func configure(with config: Config) {
         configuration = config
+    }
+
+    func foldersChanged() {
+        updateData()
     }
 
     @IBAction func logOutTapped(_ sender: UIBarButtonItem) {
@@ -35,6 +40,8 @@ class FoldersViewController: UITableViewController, Storyboarded {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        fldSrv.addObserver(observer: self)
 
         updateData()
 

@@ -12,7 +12,8 @@ extension NSNotification.Name {
     static let kbWillChangeFrame = UIResponder.keyboardWillChangeFrameNotification
 }
 
-class TodoListViewController: UITableViewController, TodoServiceDelegate, Storyboarded {
+class TodoListViewController: UITableViewController, TodoObserver, Storyboarded {
+
     // MARK: - Dependencies
     struct Config {
         var addTapped: () -> Void
@@ -40,7 +41,7 @@ class TodoListViewController: UITableViewController, TodoServiceDelegate, Storyb
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        todoSrv.attach(self)
+        todoSrv.addObserver(observer: self)
 
         updateData()
     }
@@ -50,13 +51,12 @@ class TodoListViewController: UITableViewController, TodoServiceDelegate, Storyb
     }
 
     @IBAction func toAdd(_ sender: UIButton) {
-        guard let folder = currentFolder else { fatalError("Folder is not transfer") }
         configuration?.addTapped()
     }
 
     // MARK: - Table view data source
 
-    func update(subject: TodoService) {
+    func todosChanged() {
         updateData()
     }
 
