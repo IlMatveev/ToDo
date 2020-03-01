@@ -45,4 +45,5 @@ final class LoginViewController: UIViewController, Storyboarded {
     @IBAction private func signUpTapped(_ sender: UIButton) {
         configuration?.signUpTapped()
     }
+    
 }

@@ -21,8 +21,8 @@ class SignInViewController: UIViewController, Storyboarded {
     @IBOutlet private var loginOutlet: UITextField!
     @IBOutlet private var passwordOutlet: UITextField!
     @IBOutlet private var signInOutlet: UIButton!
-    @IBOutlet private var image: UIImageView!
-
+    @IBOutlet var image: UIView!
+    
     private var configuration: Config?
 
     func configure(with config: Config) {
@@ -38,7 +38,7 @@ class SignInViewController: UIViewController, Storyboarded {
 
         signInOutlet.layer.cornerRadius = 6
 
-        image.layer.cornerRadius = 8
+        image.layer.cornerRadius = 16
         image.layer.shadowRadius = 5
         image.layer.shadowOffset = .zero
         image.layer.shadowOpacity = 1

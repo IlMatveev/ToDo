@@ -81,7 +81,7 @@ final class RestApiRepository: Repository {
                 completion(response.result.mapError(RepositoryError.init).map({ data -> User? in
                     return data.first { $0.login == login && $0.password == password }
                 }))
-        }
+            }
     }
 
 }
