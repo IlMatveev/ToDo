@@ -65,11 +65,12 @@ final class RestApiRepository: Repository {
     }
 
     func remove<T: Entity>(id: T.ID, from collection: T.Collection, completion: @escaping (Result<Void, RepositoryError>) -> Void) {
+        let newId = id.rawValue
         session
-            .request("\(backendUrl)\(collection.path)\(id)", method: .delete)
+            .request("\(backendUrl)\(collection.path)\(newId)", method: .delete)
             .validate()
-            .responseDecodable(of: T.self) { response in
-                completion(response.result.map { data -> Void in () }.mapError(RepositoryError.init))
+            .responseData { response in
+                completion(response.result.mapError(RepositoryError.init).map({ _ in }))
             }
     }
 

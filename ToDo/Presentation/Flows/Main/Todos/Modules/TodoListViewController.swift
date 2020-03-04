@@ -41,6 +41,8 @@ class TodoListViewController: UITableViewController, TodoObserver, Storyboarded 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        title = currentFolder?.name
+
         todoSrv.addObserver(observer: self)
 
         updateData()

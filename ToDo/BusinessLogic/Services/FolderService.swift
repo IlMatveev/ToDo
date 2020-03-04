@@ -50,7 +50,7 @@ final class FolderService {
         } else {
             Current.repository.save(item: folder, to: .folders) { result in
                 DispatchQueue.main.async {
-                    completion(result.mapError { $0 }.map { _ in () })
+                    completion(result.mapError { $0 }.map({ _ in () }))
                     self.notify()
                 }
             }
