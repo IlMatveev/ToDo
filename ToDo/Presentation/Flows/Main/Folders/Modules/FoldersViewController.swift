@@ -21,23 +21,6 @@ class FoldersViewController: UITableViewController, FolderObserver, Storyboarded
 
     private var configuration: Config?
 
-    func configure(with config: Config) {
-        configuration = config
-    }
-
-    func foldersChanged() {
-        updateData()
-    }
-
-    @IBAction func logOutTapped(_ sender: UIBarButtonItem) {
-        UserService.shared.logOut { _ in }
-        configuration?.logOutTapped()
-    }
-
-    @IBAction private func newFolderTapped(_ sender: UIBarButtonItem) {
-        configuration?.newFolderTapped()
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -46,6 +29,35 @@ class FoldersViewController: UITableViewController, FolderObserver, Storyboarded
         updateData()
 
         self.navigationItem.hidesBackButton = true
+    }
+
+    @IBAction private func logOutTapped(_ sender: UIBarButtonItem) {
+        UserService.shared.logOut { _ in }
+        configuration?.logOutTapped()
+    }
+
+    @IBAction private func newFolderTapped(_ sender: UIBarButtonItem) {
+        configuration?.newFolderTapped()
+    }
+
+    private func updateData() {
+        FolderService.shared.getFolders { result in
+            switch result {
+            case .success(let folders):
+                self.folders = folders
+                self.tableView.reloadData()
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+
+    func configure(with config: Config) {
+        configuration = config
+    }
+
+    func foldersChanged() {
+        updateData()
     }
 
     // MARK: - Table view data source
@@ -82,18 +94,6 @@ class FoldersViewController: UITableViewController, FolderObserver, Storyboarded
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         configuration?.cellTapped(folders[indexPath.row])
-    }
-
-    private func updateData() {
-        FolderService.shared.getFolders { result in
-            switch result {
-            case .success(let folders):
-                self.folders = folders
-                self.tableView.reloadData()
-            case .failure(let error):
-                print(error)
-            }
-        }
     }
 
 }

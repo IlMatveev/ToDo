@@ -62,7 +62,9 @@ final class AddTodoViewController: UIViewController, Storyboarded {
         item.folderId = (currentFolder?.id).map { $0.rawValue }
         item.title = title
         item.date = datePicker.date
-        todoSrv.save(item: item) { _ in }
-        dismiss(animated: true, completion: nil)
+        todoSrv.save(item: item) { _ in
+            self.dismiss(animated: true, completion: nil)
+        }
     }
+    
 }

@@ -36,7 +36,7 @@ final class RestApiRepository: Repository {
 
     func getOne<T: Entity>(id: T.ID, from collection: T.Collection, completion: @escaping (Result<T, RepositoryError>) -> Void) {
         session
-            .request("\(backendUrl)\(collection.path)\(id)", method: .get)
+            .request("\(backendUrl)\(collection.path)\(id.rawValue)", method: .get)
             .validate()
             .responseDecodable(of: T.self) { response in
                 completion(response.result.mapError(RepositoryError.init))
@@ -57,7 +57,7 @@ final class RestApiRepository: Repository {
             fatalError("Not found id")
         }
         session
-            .request("\(backendUrl)\(collection.path)\(id)", method: .put, parameters: item)
+            .request("\(backendUrl)\(collection.path)\(id.rawValue)", method: .put, parameters: item)
             .validate()
             .responseDecodable(of: T.self) { response in
                 completion(response.result.mapError(RepositoryError.init))
@@ -65,9 +65,8 @@ final class RestApiRepository: Repository {
     }
 
     func remove<T: Entity>(id: T.ID, from collection: T.Collection, completion: @escaping (Result<Void, RepositoryError>) -> Void) {
-        let newId = id.rawValue
         session
-            .request("\(backendUrl)\(collection.path)\(newId)", method: .delete)
+            .request("\(backendUrl)\(collection.path)\(id.rawValue)", method: .delete)
             .validate()
             .responseData { response in
                 completion(response.result.mapError(RepositoryError.init).map({ _ in }))

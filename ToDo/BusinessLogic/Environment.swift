@@ -9,7 +9,7 @@
 import Foundation
 
 struct Environment {
-    var date: () -> Date = Date.init
+//    var date: () -> Date = Date.init
     var repository: Repository = RestApiRepository(backendUrl: "http://localhost:3000/")
 }
 
@@ -19,6 +19,6 @@ var Current: Environment = .init()
 
 extension Environment {
     static let mock: Environment = .init(
-        date: { Date.init(timeIntervalSince1970: 25254353345) }
+//        date: { Date.init(timeIntervalSince1970: 25254353345) }
     )
 }

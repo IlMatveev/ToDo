@@ -29,8 +29,9 @@ final class AddFoldersViewController: UIViewController, Storyboarded {
     @IBAction private func saveTapped(_ sender: UIBarButtonItem) {
         guard let title = folderTitle.text else { return }
         let folder = Folder(id: nil, name: title)
-        FolderService.shared.save(folder: folder) { _ in }
-        dismiss(animated: true, completion: nil)
+        FolderService.shared.save(folder: folder) { _ in
+            self.dismiss(animated: true, completion: nil)
+        }
     }
 
 }

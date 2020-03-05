@@ -14,17 +14,12 @@ final class TodoDetailsViewController: UIViewController, Storyboarded {
     }
 
     private let todoSrv: TodoService = .shared
-    private let notificationCenter: NotificationCenter = .default
 
     @IBOutlet private var stateOutlet: UISwitch!
     @IBOutlet private var titleOutlet: UILabel!
     @IBOutlet private var dateOutlet: UILabel!
 
     private var configuration: Config?
-
-    func configure(with config: Config) {
-        configuration = config
-    }
 
     var currentFolder: Folder?
     var currentItem: Todo? {
@@ -40,8 +35,8 @@ final class TodoDetailsViewController: UIViewController, Storyboarded {
         renderItem()
     }
 
-    func update(subject: TodoService) {
-        updateItem()
+    func configure(with config: Config) {
+        configuration = config
     }
 
     private func renderItem () {
@@ -60,31 +55,6 @@ final class TodoDetailsViewController: UIViewController, Storyboarded {
         currentItem?.isDone = stateOutlet.isOn
         guard let item = currentItem else {return}
         todoSrv.save(item: item) { _ in }
-    }
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard
-            let addNavigationController = segue.destination as? UINavigationController,
-            let addController = addNavigationController.viewControllers.first as? AddTodoViewController
-        else { return }
-
-        addController.currentItem = currentItem
-    }
-
-    @objc func updateItem() {
-        guard
-            let id = currentItem?.id,
-            let idF = currentItem?.folderId
-        else { return }
-
-        todoSrv.getItem(id: id, idF: Folder.ID(rawValue: idF)) { result in
-            switch result {
-            case .success(let item):
-                self.currentItem = item
-            case .failure(let error):
-                print(error)
-            }
-        }
     }
 
 }

@@ -27,10 +27,6 @@ class TodoListViewController: UITableViewController, TodoObserver, Storyboarded 
 
     private var configuration: Config?
 
-    func configure(with config: Config) {
-        configuration = config
-    }
-
     // MARK: - Outlets
     // MARK: - Local Variables
     // MARK: - Lifecycle
@@ -56,11 +52,15 @@ class TodoListViewController: UITableViewController, TodoObserver, Storyboarded 
         configuration?.addTapped()
     }
 
-    // MARK: - Table view data source
+    func configure(with config: Config) {
+        configuration = config
+    }
 
     func todosChanged() {
         updateData()
     }
+
+    // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 2
