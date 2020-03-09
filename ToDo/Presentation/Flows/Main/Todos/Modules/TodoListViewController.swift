@@ -24,15 +24,7 @@ class TodoListViewController: UITableViewController, TodoObserver, Storyboarded 
 
     private let todoSrv: TodoService = .shared
     private var items: [Todo] = []
-
     private var configuration: Config?
-
-    // MARK: - Outlets
-    // MARK: - Local Variables
-    // MARK: - Lifecycle
-    // MARK: - Actions
-    // MARK: - Methods
-    // MARK: - Rest думай сам
 
     override func viewDidLoad() {
         super.viewDidLoad()

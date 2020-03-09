@@ -9,7 +9,7 @@
 import Foundation
 
 struct Environment {
-//    var date: () -> Date = Date.init
+    var date: () -> Date = Date.init
     var repository: Repository = RestApiRepository(backendUrl: "http://localhost:3000/")
 }
 

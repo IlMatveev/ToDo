@@ -45,7 +45,7 @@ final class RestApiRepository: Repository {
 
     func save<T: Entity>(item: T, to collection: T.Collection, completion: @escaping (Result<T, RepositoryError>) -> Void) {
         session
-            .request("\(backendUrl)\(collection.path)", method: .post, parameters: item)
+            .request("\(backendUrl)\(collection.path)", method: .post, parameters: item, encoder: JSONParameterEncoder())
             .validate()
             .responseDecodable(of: T.self) { response in
                 completion(response.result.mapError(RepositoryError.init))
@@ -57,7 +57,7 @@ final class RestApiRepository: Repository {
             fatalError("Not found id")
         }
         session
-            .request("\(backendUrl)\(collection.path)\(id.rawValue)", method: .put, parameters: item)
+            .request("\(backendUrl)\(collection.path)\(id.rawValue)", method: .put, parameters: item, encoder: JSONParameterEncoder())
             .validate()
             .responseDecodable(of: T.self) { response in
                 completion(response.result.mapError(RepositoryError.init))
