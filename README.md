@@ -9,3 +9,6 @@ ToDo is client-server app written in Swift using the MVC architecture with flow 
 <p align="center"><img src="https://github.com/IlMatveev/ToDo/blob/master/Screenshot_3.png"></p>
 <p align="center"><img src="https://github.com/IlMatveev/ToDo/blob/master/Screenshot_4.png"></p>
 <p align="center"><img src="https://github.com/IlMatveev/ToDo/blob/master/Screenshot_5.png"></p>
+<p align="center"><img src="https://github.com/IlMatveev/ToDo/blob/master/Screenshot_6.png"></p>
+<p align="center"><img src="https://github.com/IlMatveev/ToDo/blob/master/Screenshot_7.png"></p>
+<p align="center"><img src="https://github.com/IlMatveev/ToDo/blob/master/Screenshot_8.png"></p>
